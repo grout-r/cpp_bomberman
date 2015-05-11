@@ -5,7 +5,7 @@
 ## Login   <roman@epitech.net>
 ## 
 ## Started on  Wed May  6 15:21:44 2015 grout_r
-## Last update Thu May  7 14:57:28 2015 grout_r
+## Last update Mon May 11 14:40:53 2015 grout_r
 ##
 
 NAME		=		bomberman
@@ -20,7 +20,7 @@ CXXFLAGS	=		-Wall -Wextra -Werror -I./$(INCLUDES) -I./libgdl/includes/
 
 GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
-SRCS		=		src/main.cpp \
+SRCS		=		tp/main.cpp \
 
 OBJS		=		$(SRCS:.cpp=.o)
 
