@@ -1,26 +1,18 @@
-##
-## Makefile for bomber in /home/roman/Documents/dev/cpp_bomberman
-## 
-## Made by grout_r
-## Login   <roman@epitech.net>
-## 
-## Started on  Wed May  6 15:21:44 2015 grout_r
-## Last update Mon May 11 14:40:53 2015 grout_r
-##
-
 NAME		=		bomberman
 
 CC		=		clang++
 
 RM		=		rm -f
 
-INCLUDES	=		includes
+INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/
 
-CXXFLAGS	=		-Wall -Wextra -Werror -I./$(INCLUDES) -I./libgdl/includes/
+CXXFLAGS	=		-Wall -Wextra -Werror $(INCLUDES) 
 
 GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
-SRCS		=		tp/main.cpp \
+SRCS		=		core/src/main.cpp \
+				core/src/GameEngine.cpp \
+				screen/Screen.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)
 
