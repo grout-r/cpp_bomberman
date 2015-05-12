@@ -5,11 +5,11 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:11:14 2015 Jordan Verove
-// Last update Tue May 12 13:16:50 2015 Jordan Verove
+// Last update Tue May 12 13:26:50 2015 Jordan Verove
 //
 
-#ifndef PLAYER_HPP_
-# define PLAYER_HPP_
+#ifndef PLAYER_HH_
+# define PLAYER_HH_
 
 #include "AObject.hpp"
 
@@ -18,4 +18,4 @@ class Player :	public AObject
   
 };
 
-#endif /* !PLAYER_HPP_ */
+#endif /* !PLAYER_HH_ */
