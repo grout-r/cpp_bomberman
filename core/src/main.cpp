@@ -1,5 +1,5 @@
 #include	"GameEngine.hh"
-
+/*
 int			main()
 {
   GameEngine		engine;
@@ -15,4 +15,4 @@ int			main()
     }
   engine.gameOver();
   return  (0);
-}
+  }*/
