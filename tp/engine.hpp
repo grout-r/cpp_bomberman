@@ -24,8 +24,8 @@ public:
     glEnable(GL_DEPTH_TEST);
 
     // On cree un shader, petit programme permettant de dessiner nos objets a l'ecran
-    if (!_shader.load("./Shaders/basic.fp", GL_FRAGMENT_SHADER) // le fragment shader secharge de dessiner les pixels
-	|| !_shader.load("./Shaders/basic.vp", GL_VERTEX_SHADER) // le vertexshader s'occupe de projeter les points sur l'ecran
+    if (!_shader.load("./tp/Shaders/basic.fp", GL_FRAGMENT_SHADER) // le fragment shader secharge de dessiner les pixels
+	|| !_shader.load("./tp/Shaders/basic.vp", GL_VERTEX_SHADER) // le vertexshader s'occupe de projeter les points sur l'ecran
 	|| !_shader.build()) // il faut ensuite compiler son shader
       {
 	std::cout << "compilation des shaders" << std::endl;
@@ -60,7 +60,7 @@ public:
     // Si la touche ECHAP est appuyee ou si l'utilisateur ferme la fenetre, on quitte leprogramme
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
     return false;
-// Mise a jour des inputs et de l'horloge de jeu
+w// Mise a jour des inputs et de l'horloge de jeu
  _context.updateClock(_clock);
  _context.updateInputs(_input);
  // Mise a jour des differents objets

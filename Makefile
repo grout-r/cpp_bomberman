@@ -12,7 +12,8 @@ GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -
 
 SRCS		=		core/src/main.cpp \
 				core/src/GameEngine.cpp \
-				screen/Screen.cpp
+				core/src/Exception.cpp \
+				screen/Screen.cpp 
 
 OBJS		=		$(SRCS:.cpp=.o)
 

@@ -1,4 +1,4 @@
-#include <Game.hh>
+#include <BasicShader.hh>
 #include <Clock.hh>
 #include <Input.hh>
 #include <SdlContext.hh>
@@ -88,7 +88,7 @@ public:
   {
     _speed = 10.0f;
     // On charge la texture qui sera affichee sur chaque face du cube
-    if (_texture.load("./assets/marvin.fbm/Main_texture_diffuse2.tga") == false)
+    if (_texture.load("./tp/assets/marvin.fbm/Main_texture_diffuse2.tga") == false)
       {
 	std::cerr << "Cannot load the cube texture" << std::endl;
 	return (false);
