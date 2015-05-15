@@ -1,9 +1,8 @@
 #include	"GameEngine.hh"
-/*
+
 int			main()
 {
   GameEngine		engine;
-
   if (engine.initialize() == false)
     return (-1);
   while (engine.update() != false)
@@ -15,4 +14,4 @@ int			main()
     }
   engine.gameOver();
   return  (0);
-  }*/
+  }

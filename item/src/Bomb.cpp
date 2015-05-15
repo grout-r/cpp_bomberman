@@ -35,3 +35,12 @@ std::pair<int, int>	Bomb::getPos() const
 {
   return (this->pos);
 }
+
+bool		Bomb::initalize()
+{
+  return (true);
+}
+
+void		Bomb::update()
+{
+}

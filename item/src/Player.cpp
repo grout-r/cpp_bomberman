@@ -1,13 +1,3 @@
-//
-// Player.cpp for bomberman in /home/verove_j/rendu/cpp_bomberman/core/src
-// 
-// Made by Jordan Verove
-// Login   <verove_j@epitech.net>
-// 
-// Started on  Tue May 12 13:14:59 2015 Jordan Verove
-// Last update Fri May 15 12:43:29 2015 Jordan Verove
-//
-
 #include "Player.hh"
 #include "Bomb.hh"
 
@@ -107,13 +97,11 @@ void		Player::setBombColor(t_color color)
   this->bomb_color = color;
 }
 
-int		main()
+bool		Player::initalize()
 {
-  Player	j1;
-  Player	j2;
-  Player	j3;
-  
-  //  std::cout << j1.getBombNb() << std::endl;
-  j1.putBomb();
-  return (0);
+  return true;
+}
+
+void		Player::update()
+{
 }

@@ -2,7 +2,6 @@
 # define PLAYER_HH_
 
 #include "AObject.hh"
-//#include "Bomb.hh"
 
 typedef enum			e_where
   {
@@ -46,6 +45,27 @@ public:
   t_color			getBombColor() const;
   void				setBombColor(t_color color);
   void				putBomb();
+=======
+  int			getPosX() const;
+  void			setPosX(int x);
+  int			getPosY() const;
+  void			setPosY(int y);
+  int			getBombNb() const;
+  void			setBombNb(int nb);
+  int			getBombPower() const;
+  void			setBombPower(int power);
+  int			getPSpeed() const;
+  void			setPSpeed(int speed);
+  t_where		getOrientation() const;
+  void			setOrientation(t_where direction);
+  int			getPlayerId() const;
+  t_color		getBombColor() const;
+  void			setBombColor(t_color color);
+  void			putBomb();
+
+public:
+  bool                  initalize();
+  void                  update();
 };
 
 #endif /* !PLAYER_HH_ */

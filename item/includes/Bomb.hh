@@ -21,6 +21,9 @@ public:
 
   std::pair<int, int>	getPos() const;
   bool			explose();
+public:
+  bool			initalize();
+  void			update();
 };
 
 #endif /* !BOMB_HH */
