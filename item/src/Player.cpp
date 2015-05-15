@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:14:59 2015 Jordan Verove
-// Last update Fri May 15 11:20:51 2015 Jordan Verove
+// Last update Fri May 15 12:43:29 2015 Jordan Verove
 //
 
 #include "Player.hh"
@@ -17,8 +17,7 @@ Player::Player() :
   static int	id = 0;
 
   this->player_id = id;
-  this->pos_x = 10;
-  this->pos_y = 2;
+  this->pos = std::make_pair(10, 2);
   //putOnMap(map);
   id += 1;
 }
@@ -39,27 +38,18 @@ void		Player::putBomb()
 
   bomb = new Bomb(this);
   (void) bomb;
-  //delete bomb;
+  delete bomb;
 }
 
-int		Player::getPosX() const
+std::pair<int, int>		Player::getPos() const
 {
-  return (this->pos_x);
+  return (this->pos);
 }
 
-void		Player::setPosX(int x)
+void		Player::setPos(std::pair<int, int> pos)
 {
-  this->pos_x = x;
-}
-
-int		Player::getPosY() const
-{
-  return (this->pos_y);
-}
-
-void		Player::setPosY(int y)
-{
-  this->pos_y = y;
+  //  this->pos = std::make_pair(pos.first, pos.second);
+  this->pos = pos;
 }
 
 int		Player::getBombNb() const
@@ -116,7 +106,7 @@ void		Player::setBombColor(t_color color)
 {
   this->bomb_color = color;
 }
-/*
+
 int		main()
 {
   Player	j1;
@@ -127,4 +117,3 @@ int		main()
   j1.putBomb();
   return (0);
 }
-*/

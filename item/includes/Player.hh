@@ -1,13 +1,3 @@
-//
-// Player.hh for bomberman in /home/verove_j/rendu/cpp_bomberman/core/includes
-// 
-// Made by Jordan Verove
-// Login   <verove_j@epitech.net>
-// 
-// Started on  Tue May 12 13:11:14 2015 Jordan Verove
-// Last update Wed May 13 11:49:23 2015 Jordan Verove
-//
-
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 
@@ -31,8 +21,7 @@ typedef enum			e_color
 class Player :	public AObject
 {
 private:
-  int			pos_x;
-  int			pos_y;
+  std::pair<int, int>	pos;
   int			bomb_nb;
   int			bomb_power;
   int			p_speed;
@@ -43,22 +32,20 @@ private:
 public:
   Player();
   ~Player();
-  int			getPosX() const;
-  void			setPosX(int x);
-  int			getPosY() const;
-  void			setPosY(int y);
-  int			getBombNb() const;
-  void			setBombNb(int nb);
-  int			getBombPower() const;
-  void			setBombPower(int power);
-  int			getPSpeed() const;
-  void			setPSpeed(int speed);
-  t_where		getOrientation() const;
-  void			setOrientation(t_where direction);
-  int			getPlayerId() const;
-  t_color		getBombColor() const;
-  void			setBombColor(t_color color);
-  void			putBomb();
+  std::pair<int, int>			getPos() const;
+  void				setPos(std::pair<int, int>);
+  int				getBombNb() const;
+  void				setBombNb(int nb);
+  int				getBombPower() const;
+  void				setBombPower(int power);
+  int				getPSpeed() const;
+  void				setPSpeed(int speed);
+  t_where			getOrientation() const;
+  void				setOrientation(t_where direction);
+  int				getPlayerId() const;
+  t_color			getBombColor() const;
+  void				setBombColor(t_color color);
+  void				putBomb();
 };
 
 #endif /* !PLAYER_HH_ */
