@@ -4,7 +4,7 @@ CC		=		clang++
 
 RM		=		rm -f
 
-INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -I/item/includes/
+INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -Iitem/includes/
 
 CXXFLAGS	=		-Wall -Wextra -Werror $(INCLUDES) 
 
@@ -16,6 +16,7 @@ SRCS		=		core/src/main.cpp \
 				screen/Screen.cpp \
 				item/src/Player.cpp \
 				item/src/Bomb.cpp \
+				item/src/AObject.cpp \
 
 OBJS		=		$(SRCS:.cpp=.o)
 

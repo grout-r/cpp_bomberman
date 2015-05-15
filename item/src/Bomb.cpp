@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:17:09 2015 Jordan Verove
-// Last update Fri May 15 11:17:21 2015 Jordan Verove
+// Last update Fri May 15 12:00:46 2015 Jordan Verove
 //
 
 #include "Bomb.hh"
@@ -37,5 +37,5 @@ Bomb::~Bomb()
 
 bool		Bomb::explose()
 {
-  
+  return (true);
 }
