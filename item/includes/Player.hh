@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:11:14 2015 Jordan Verove
-// Last update Wed May 13 11:49:23 2015 Jordan Verove
+// Last update Fri May 15 12:26:08 2015 grout_r
 //
 
 #ifndef PLAYER_HH_
@@ -59,6 +59,11 @@ public:
   t_color		getBombColor() const;
   void			setBombColor(t_color color);
   void			putBomb();
+
+public:
+  bool                  initalize();
+  void                  update();
+
 };
 
 #endif /* !PLAYER_HH_ */

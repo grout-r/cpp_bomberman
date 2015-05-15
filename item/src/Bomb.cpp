@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:17:09 2015 Jordan Verove
-// Last update Fri May 15 12:16:25 2015 Jordan Verove
+// Last update Fri May 15 12:23:28 2015 grout_r
 //
 
 #include "Bomb.hh"
@@ -39,4 +39,14 @@ bool		Bomb::explose()
   if ((diff = difftime(now, (this->timer) + 2)) == 0)
     return (true);
   return (false);
+}
+
+bool		Bomb::initalize()
+{
+  return (true);
+}
+
+void		Bomb::update()
+{
+
 }

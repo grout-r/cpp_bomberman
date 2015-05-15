@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:15:43 2015 Jordan Verove
-// Last update Fri May 15 12:00:33 2015 Jordan Verove
+// Last update Fri May 15 12:23:25 2015 grout_r
 //
 
 #ifndef BOMB_HH_
@@ -30,6 +30,9 @@ public:
   Bomb(Player * const player);
   ~Bomb();
   bool			explose();
+public:
+  bool			initalize();
+  void			update();
 };
 
 #endif /* !BOMB_HH */

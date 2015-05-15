@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:14:59 2015 Jordan Verove
-// Last update Fri May 15 11:20:51 2015 Jordan Verove
+// Last update Fri May 15 12:32:40 2015 grout_r
 //
 
 #include "Player.hh"
@@ -116,6 +116,16 @@ void		Player::setBombColor(t_color color)
 {
   this->bomb_color = color;
 }
+
+bool		Player::initalize()
+{
+  return true;
+}
+
+void		Player::update()
+{
+}
+
 /*
 int		main()
 {

@@ -34,7 +34,7 @@ public:
   // La fonction update sert a gerer le comportement de l'objet
   virtual void update(gdl::Clock const &clock, gdl::Input &input)
   { 
-    (void)(clock); 
+    (void)(clock);
     (void)(input);    
   }
   // La fonction draw sert a dessiner l'objet
@@ -68,7 +68,7 @@ protected:
   glm::vec3 _position;
   glm::vec3 _rotation;
   glm::vec3 _scale;
-};
+ };
 
 //Nous allons donc faire à présent notre classe Cube héritant de AObject :
 
