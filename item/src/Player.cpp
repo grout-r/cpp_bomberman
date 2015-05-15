@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:14:59 2015 Jordan Verove
-// Last update Fri May 15 10:44:36 2015 Jordan Verove
+// Last update Fri May 15 11:20:51 2015 Jordan Verove
 //
 
 #include "Player.hh"
@@ -116,7 +116,7 @@ void		Player::setBombColor(t_color color)
 {
   this->bomb_color = color;
 }
-
+/*
 int		main()
 {
   Player	j1;
@@ -127,3 +127,4 @@ int		main()
   j1.putBomb();
   return (0);
 }
+*/
