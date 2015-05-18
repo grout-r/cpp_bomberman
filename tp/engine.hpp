@@ -60,7 +60,7 @@ public:
     // Si la touche ECHAP est appuyee ou si l'utilisateur ferme la fenetre, on quitte leprogramme
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
     return false;
-w// Mise a jour des inputs et de l'horloge de jeu
+// Mise a jour des inputs et de l'horloge de jeu
  _context.updateClock(_clock);
  _context.updateInputs(_input);
  // Mise a jour des differents objets

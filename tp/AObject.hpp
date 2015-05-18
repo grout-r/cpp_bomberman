@@ -14,7 +14,6 @@
 # ifndef AOBJ
 # define AOBJ
 
-// La classe abstraite representant un objet avec sa position, sa rotation et son echelle
 class AObject
 {
 public:
@@ -88,13 +87,13 @@ public:
   {
     _speed = 10.0f;
     // On charge la texture qui sera affichee sur chaque face du cube
-    if (_texture.load("./tp/assets/marvin.fbm/Main_texture_diffuse2.tga") == false)
+    if (_texture.load("./assets/wall.tga") == false)
       {
 	std::cerr << "Cannot load the cube texture" << std::endl;
 	return (false);
       }
     // on set la color d'une premiere face
-    _geometry.setColor(glm::vec4(1, 0, 0, 1));
+    // _geometry.setColor(glm::vec4(1, 0, 0, 1));
     // tout les pushVertex qui suivent seront de cette couleur
     // On y push les vertices d une premiere face
     _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
@@ -107,7 +106,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
     // ETC ETC
-    _geometry.setColor(glm::vec4(1, 1, 0, 1));
+    // _geometry.setColor(glm::vec4(1, 1, 0, 1));
     _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
     _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
     _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
@@ -116,7 +115,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 0.0f));
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-    _geometry.setColor(glm::vec4(0, 1, 1, 1));
+    // _geometry.setColor(glm::vec4(0, 1, 1, 1));
     _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
     _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
     _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
@@ -125,7 +124,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 0.0f));
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-    _geometry.setColor(glm::vec4(1, 0, 1, 1));
+    // _geometry.setColor(glm::vec4(1, 0, 1, 1));
     _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));
     _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
     _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
@@ -134,7 +133,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 0.0f));
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-    _geometry.setColor(glm::vec4(0, 1, 0, 1));
+    //_geometry.setColor(glm::vec4(0, 1, 0, 1));
     _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
     _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
     _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
@@ -143,7 +142,7 @@ public:
     _geometry.pushUv(glm::vec2(1.0f, 0.0f));
     _geometry.pushUv(glm::vec2(1.0f, 1.0f));
     _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-    _geometry.setColor(glm::vec4(0, 0, 1, 1));
+    // _geometry.setColor(glm::vec4(0, 0, 1, 1));
     _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
     _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
     _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));

@@ -2,7 +2,7 @@
 
 #include <unistd.h>
 
-Bomb::Bomb(Player * const player)
+Bomb::Bomb(Player *player)
 {
   std::cout << "bomb posée en :" << std::endl;
   this->player_id = player->getPlayerId();

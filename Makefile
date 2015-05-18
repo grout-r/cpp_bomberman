@@ -1,12 +1,12 @@
 NAME		=		bomberman
 
-CC		=		clang++
+CC		=		clang++ -g3
 
 RM		=		rm -f
 
 INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -Iitem/includes/
 
-CXXFLAGS	=		-Wall -Wextra -Werror $(INCLUDES) 
+CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror 
 
 GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
@@ -16,7 +16,10 @@ SRCS		=		core/src/main.cpp \
 				screen/Screen.cpp \
 				item/src/Player.cpp \
 				item/src/Bomb.cpp \
+				item/src/Wall.cpp \
 				item/src/AObject.cpp \
+
+#SRCS		=		tp/main.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)
 

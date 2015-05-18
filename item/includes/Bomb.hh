@@ -6,17 +6,26 @@
 #include "AObject.hh"
 #include "Player.hh"
 
+class Player;
+
+// typedef enum e_color 
+//   {
+//     ORANGE,
+//     BLUE
+//   }	     t_color ;
+
 class Bomb :	public AObject
 {
 private:
   int			player_id;
   std::pair<int, int>	pos;
   int			bomb_power;
-  t_color		color;
+  //j'ai mis un int sinon ca compile pas ca m'a soulé
+  int			color;
   time_t		timer;
 
 public:
-  Bomb(Player * const player);
+  Bomb(Player  *player);
   ~Bomb();
 
   std::pair<int, int>	getPos() const;

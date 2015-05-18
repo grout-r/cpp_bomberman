@@ -1,21 +1,33 @@
-//
-// Wall.hh for bomberman in /home/verove_j/rendu/cpp_bomberman/core/includes
-// 
-// Made by Jordan Verove
-// Login   <verove_j@epitech.net>
-// 
-// Started on  Tue May 12 13:27:42 2015 Jordan Verove
-// Last update Tue May 12 13:28:49 2015 Jordan Verove
-//
 
 #ifndef WALL_HH_
 # define WALL_HH_
 
-#include "AObject.hpp"
+# include <BasicShader.hh>
+# include <Clock.hh>
+# include <Input.hh>
+# include <SdlContext.hh>
+# include <Geometry.hh>
+# include <Texture.hh>
+# include <BasicShader.hh>
+# include <Model.hh>
+# include <OpenGL.hh>
+# include <glm/glm.hpp>
+# include <glm/gtc/matrix_transform.hpp>
+# include <iostream>
+
+# include "AObject.hh"
+# include "Exception.hh"
 
 class Wall :	public AObject
 {
 
+public:
+  Wall();
+  ~Wall();
+
+public:
+  bool		initialize();
+  void		update();
 };
 
 #endif /* !WALL_HH_ */

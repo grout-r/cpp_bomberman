@@ -1,5 +1,4 @@
 #include "Player.hh"
-#include "Bomb.hh"
 
 Player::Player() :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
@@ -97,9 +96,25 @@ void		Player::setBombColor(t_color color)
   this->bomb_color = color;
 }
 
-bool		Player::initalize()
+bool		Player::initialize()
 {
-  return true;
+  try
+    {
+      if (!_playerModel.load("./assets/beep/player.fbx") ||
+	  !_texture.load("./assets/player.tga"))
+	throw (Error("Error while loading player ressources"));
+      return (true);
+    }
+  catch (Error &e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
+  return (false);
+}
+
+void		Player::draw(gdl::BasicShader& shader)
+{
+  _playerModel.draw(shader, calcTransformation(), 0);
 }
 
 void		Player::update()

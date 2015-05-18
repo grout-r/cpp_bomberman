@@ -2,19 +2,22 @@
 # define PLAYER_HH_
 
 #include "AObject.hh"
+#include "Model.hh"
+#include "Bomb.hh"
+#include "Exception.hh"
 
 typedef enum			e_where
   {
     NORTH,
     SOUTH,
     EAST,
-    WEST,
+    WEST
   }				t_where;
 
 typedef enum			e_color
   {
     ORANGE,
-    BLUE,
+    BLUE
   }				t_color;
 
 class Player :	public AObject
@@ -27,6 +30,9 @@ private:
   t_color		bomb_color;
   t_where		orientation;
   int			player_id;
+
+private:
+  gdl::Model		_playerModel;
 
 public:
   Player();
@@ -45,27 +51,11 @@ public:
   t_color			getBombColor() const;
   void				setBombColor(t_color color);
   void				putBomb();
-=======
-  int			getPosX() const;
-  void			setPosX(int x);
-  int			getPosY() const;
-  void			setPosY(int y);
-  int			getBombNb() const;
-  void			setBombNb(int nb);
-  int			getBombPower() const;
-  void			setBombPower(int power);
-  int			getPSpeed() const;
-  void			setPSpeed(int speed);
-  t_where		getOrientation() const;
-  void			setOrientation(t_where direction);
-  int			getPlayerId() const;
-  t_color		getBombColor() const;
-  void			setBombColor(t_color color);
-  void			putBomb();
 
 public:
-  bool                  initalize();
+  bool                  initialize();
   void                  update();
+  void			draw(gdl::BasicShader& shader);
 };
 
 #endif /* !PLAYER_HH_ */

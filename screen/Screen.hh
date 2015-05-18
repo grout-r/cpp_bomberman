@@ -14,6 +14,26 @@
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
 # include <vector>
+# include <map>
+
+# include "AObject.hh"
+
+typedef enum			e_input
+  {
+    MOVE_RIGHT,
+    MOVE_LEFT,
+    MOVE_UP,
+    MOVE_DOWN,
+    PLACE_BOMB,
+    MENU,
+    EXIT
+  }				t_input;
+
+typedef	struct			s_event
+{
+  e_input			input;
+  int				pid;
+}				t_event;
 
 class				Screen
 {
@@ -25,10 +45,14 @@ private:
   glm::mat4			_camProjection;
   glm::mat4			_camTransformation;
 
+private:
+  std::vector <std::pair<int, std::pair<t_input, int> > >	_input_mapping;	
 public:
   Screen();
   ~Screen();
   bool				init();
+  void				updateInputs(std::vector<t_event>*);
+  void			        updateScreen(std::vector<AObject*>&);
 };
 
 #endif

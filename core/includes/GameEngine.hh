@@ -9,6 +9,7 @@
 # include <iostream>
 
 # include "Screen.hh"
+# include "AObject.hh"
 
 class						GameEngine : public gdl::Game 
 {
@@ -16,7 +17,8 @@ private:
   
 private:
   Screen					_screen;
-
+  std::vector<t_event>				_events;
+  std::vector<AObject*>				_map;	
 public:
   GameEngine();
   ~GameEngine();

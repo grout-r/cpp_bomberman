@@ -22,14 +22,18 @@ protected:
   glm::vec3			_position;
   glm::vec3			_rotation;
   glm::vec3			_scale;
-
+  gdl::Texture			_texture;
+  gdl::Geometry			_geometry;
 public:
   AObject();
   virtual ~AObject();
 
+protected:
+  glm::mat4				calcTransformation();
+
 public:
   virtual bool			initialize();
-  virtual void			update(gdl::Clock const &clock, gdl::Input &input);
+  virtual void			draw(gdl::BasicShader&);
 };
 
 #endif //!AOBJ_HPP
