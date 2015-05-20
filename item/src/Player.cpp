@@ -1,13 +1,12 @@
 #include "Player.hh"
 
-Player::Player() :
+Player::Player(int x, int y) :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
 {
   static int	id = 0;
 
   this->player_id = id;
-  this->pos = std::make_pair(10, 2);
-  //putOnMap(map);
+  this->pos = std::make_pair(x, y);
   id += 1;
 }
 
@@ -15,11 +14,6 @@ Player::~Player()
 {
   std::cout << "Player " << this->player_id << " is dead" << std::endl;
 }
-
-/*void		Player::putOnMap(Map &map)
-  {
-  std::cout << this->player_id << std::endl;
-}*/
 
 void		Player::putBomb()
 {
@@ -37,7 +31,6 @@ std::pair<int, int>		Player::getPos() const
 
 void		Player::setPos(std::pair<int, int> pos)
 {
-  //  this->pos = std::make_pair(pos.first, pos.second);
   this->pos = pos;
 }
 
