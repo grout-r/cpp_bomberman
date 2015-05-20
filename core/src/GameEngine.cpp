@@ -15,7 +15,7 @@ bool					GameEngine::initialize()
 {
   if (_screen.init() == false)
     return (false);  
-  Player *a = new Player;
+  Player *a = new Player(2, 2);
   a->initialize();
   _map.push_back(a);
   return (true);
