@@ -1,6 +1,4 @@
 #include "GameEngine.hh"
-#include "Wall.hh"
-#include "Player.hh"
 
 GameEngine::GameEngine()
 {
@@ -19,10 +17,8 @@ GameEngine::~GameEngine()
 bool					GameEngine::initialize()
 {
   if (_screen.init() == false)
-    return (false);  
-  Player *a = new Player(2, 2);
-  a->initialize();
-  _map.push_back(a);
+    return (false);
+  newPlayer();
   return (true);
 }
 
@@ -62,4 +58,12 @@ void					GameEngine::movePlayer(int pid, t_input input)
   (void)pid;
   (void)input;
   
+}
+
+void					GameEngine::newPlayer()
+{
+  Player *Michel = new Player;
+  Michel->initialize();
+  _map.push_back(Michel);
+  _playerPool.push_back(Michel);
 }

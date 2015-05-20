@@ -10,6 +10,8 @@
 
 # include "Screen.hh"
 # include "AObject.hh"
+# include "Wall.hh"
+# include "Player.hh"
 
 class GameEngine;
 
@@ -24,7 +26,7 @@ private:
   std::vector<t_event>				_events;
   std::vector<AObject*>				_map;
   std::map<t_input, inputFuncptr>		_funcptrBind;
-
+  std::vector<Player*>				_playerPool;
 public:
   GameEngine();
   ~GameEngine();
