@@ -79,16 +79,6 @@ void		Player::setPSpeed(int speed)
   this->p_speed = speed;
 }
 
-t_where		Player::getOrientation() const
-{
-  return (this->orientation);
-}
-
-void		Player::setOrientation(t_where direction)
-{
-  this->orientation = direction;
-}
-
 int		Player::getPlayerId() const
 {
   return (this->player_id);

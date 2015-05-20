@@ -43,8 +43,6 @@ public:
   void				setBombPower(int power);
   int				getPSpeed() const;
   void				setPSpeed(int speed);
-  t_where			getOrientation() const;
-  void				setOrientation(t_where direction);
   int				getPlayerId() const;
   t_color			getBombColor() const;
   void				setBombColor(t_color color);
