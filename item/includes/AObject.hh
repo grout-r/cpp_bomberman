@@ -33,7 +33,7 @@ protected:
 
 public:
   virtual bool			initialize();
-  virtual void			draw(gdl::BasicShader&);
+  virtual void			draw(gdl::BasicShader&, gdl::Clock&);
 };
 
 #endif //!AOBJ_HPP

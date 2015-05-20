@@ -1,13 +1,23 @@
 #include "Player.hh"
 
-Player::Player(int x, int y) :
+Player::Player(int x, int y, int humanId) :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
 {
   static int	id = 0;
 
+  this->humanId = humanId;
   this->player_id = id;
   this->pos = std::make_pair(x, y);
   id += 1;
+  _movePlayerBind[MOVE_RIGHT] = glm::vec3(10, 0, 0);
+  _movePlayerBind[MOVE_LEFT] = glm::vec3(-10, 0, 0);
+  _movePlayerBind[MOVE_UP] = glm::vec3(0, 0, 10);
+  _movePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, -10);
+  _rotatePlayerBind[MOVE_RIGHT] = glm::vec3(0, 90, 0);
+  _rotatePlayerBind[MOVE_LEFT] = glm::vec3(0, -90, 0);
+  _rotatePlayerBind[MOVE_UP] = glm::vec3(0, 0, 0);
+  _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 180, 0);
+  _frameCounter = 0;
 }
 
 Player::~Player()
@@ -22,6 +32,11 @@ void		Player::putBomb()
   bomb = new Bomb(this);
   (void) bomb;
   delete bomb;
+}
+
+int				Player::getHumanId()
+{
+  return (this->humanId);
 }
 
 std::pair<int, int>		Player::getPos() const
@@ -91,6 +106,7 @@ void		Player::setBombColor(t_color color)
 
 bool		Player::initialize()
 {
+  _scale = glm::vec3(0.2, 0.2, 0.2);
   try
     {
       if (!_playerModel.load("./assets/player.fbx") ||
@@ -105,11 +121,30 @@ bool		Player::initialize()
   return (false);
 }
 
-void		Player::draw(gdl::BasicShader& shader)
+void		Player::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
-  _playerModel.draw(shader, calcTransformation(), 0);
+  std::cout << _frameCounter << std::endl;
+  if (_frameCounter != 0)
+    {
+      if (_frameCounter == _playerModel.getAnimationFrameNumber(0))
+	_frameCounter = 0;
+      else
+	_frameCounter++;
+    }
+  _playerModel.draw(shader, calcTransformation(), clock.getElapsed());
 }
 
 void		Player::update()
 {
+}
+
+void		Player::move(t_input input)
+{
+  if (_frameCounter == 0)
+    {
+      _playerModel.setCurrentAnim(0, false);
+      _frameCounter++;
+    }
+  _position += _movePlayerBind[input];
+  _rotation = _rotatePlayerBind[input];
 }

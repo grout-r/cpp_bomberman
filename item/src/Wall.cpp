@@ -11,6 +11,7 @@ Wall::~Wall()
 
 bool			Wall::initialize()
 {
+  _scale = glm::vec3(100, 100 ,100);
   try
     {
       if (_texture.load("./assets/wall.tga") == false)

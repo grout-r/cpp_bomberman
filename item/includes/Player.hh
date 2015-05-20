@@ -1,18 +1,13 @@
 #ifndef PLAYER_HH_
 # define PLAYER_HH_
 
-#include "AObject.hh"
-#include "Model.hh"
-#include "Bomb.hh"
-#include "Exception.hh"
+# include <map>
 
-typedef enum			e_where
-  {
-    NORTH,
-    SOUTH,
-    EAST,
-    WEST
-  }				t_where;
+# include "AObject.hh"
+# include "Model.hh"
+# include "Bomb.hh"
+# include "Exception.hh"
+# include "Screen.hh"
 
 typedef enum			e_color
   {
@@ -28,14 +23,17 @@ private:
   int			bomb_power;
   int			p_speed;
   t_color		bomb_color;
-  t_where		orientation;
   int			player_id;
-
+  int			humanId;
 private:
   gdl::Model		_playerModel;
+  int			_frameCounter;
 
+private:
+  std::map<t_input, glm::vec3>		_movePlayerBind;
+  std::map<t_input, glm::vec3>		_rotatePlayerBind;
 public:
-  Player(int x, int y);
+  Player(int x, int y, int humanId = 0);
   ~Player();
   std::pair<int, int>		getPos() const;
   void				setPos(std::pair<int, int>);
@@ -50,12 +48,14 @@ public:
   int				getPlayerId() const;
   t_color			getBombColor() const;
   void				setBombColor(t_color color);
+  int				getHumanId();
   void				putBomb();
 
 public:
   bool				initialize();
   void				update();
-  void				draw(gdl::BasicShader& shader);
+  void				draw(gdl::BasicShader& shader, gdl::Clock &);
+  void				move(t_input input);
 };
 
 #endif /* !PLAYER_HH_ */

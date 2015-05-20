@@ -16,10 +16,10 @@ AObject::~AObject()
 glm::mat4				AObject::calcTransformation()
 {
   glm::mat4 transform(1);
+  transform = glm::translate(transform, _position);
   transform = glm::rotate(transform, _rotation.x, glm::vec3(1, 0, 0));
   transform = glm::rotate(transform, _rotation.y, glm::vec3(0, 1, 0));
   transform = glm::rotate(transform, _rotation.z, glm::vec3(0, 0, 1));
-  transform = glm::translate(transform, _position);
   transform = glm::scale(transform, _scale);
   return (transform);
 }
@@ -30,9 +30,9 @@ bool				AObject::initialize()
   return (true);
 }
 
-void				AObject::draw(gdl::BasicShader& shader)
+void				AObject::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
-  (void)shader;
+  (void)clock;
   _texture.bind();
   _geometry.draw(shader, calcTransformation(), GL_QUADS); 
 }

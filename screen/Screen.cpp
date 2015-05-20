@@ -95,7 +95,7 @@ void					Screen::updateScreen(std::vector<AObject*> &map)
   _shader.bind();
   for (size_t i = 0; map.size() != i; i++)
     {
-      map[i]->draw(_shader);
+      map[i]->draw(_shader, _clock);
     }
   _context.flush();
 }
