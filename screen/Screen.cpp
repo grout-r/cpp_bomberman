@@ -24,6 +24,14 @@ Screen::Screen()
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_9, std::make_pair(CAM_YPLUS, 0)));
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_3, std::make_pair(CAM_YMINUS, 0)));
 
+  _moveCamMapping[CAM_XPLUS] = glm::vec3(100, 0, 0);
+  _moveCamMapping[CAM_XMINUS] = glm::vec3(-100, 0, 0);
+  _moveCamMapping[CAM_YPLUS] = glm::vec3(0, 100, 0);
+  _moveCamMapping[CAM_YMINUS] = glm::vec3(0, -100, 0);
+  _moveCamMapping[CAM_ZPLUS] = glm::vec3(0, 0, -100);
+  _moveCamMapping[CAM_ZMINUS] = glm::vec3(0, 0, 100); 
+
+  _camPosition = glm::vec3(0, 500, 1300);
 }
 
 Screen::~Screen()
@@ -41,9 +49,9 @@ bool					Screen::init()
 	  || !_shader.load("./tp/Shaders/basic.vp", GL_VERTEX_SHADER) 
 	  || !_shader.build())
 	throw Error("Can't compile shaders.");
-      _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 1500.0f);
+      _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
       _camTransformation =
-	glm::lookAt(glm::vec3(0, 500, 1300), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::lookAt(_camPosition, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
       _shader.bind();
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
@@ -90,4 +98,16 @@ void					Screen::updateScreen(std::vector<AObject*> &map)
       map[i]->draw(_shader);
     }
   _context.flush();
+}
+
+void					Screen::moveCam(t_input input)
+{
+  _camPosition += _moveCamMapping[input];
+
+    _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
+  _camTransformation = 
+    glm::lookAt(_camPosition, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+  _shader.bind();
+  _shader.setUniform("view", _camTransformation);
+  _shader.setUniform("projection", _camProjection);
 }

@@ -15,6 +15,7 @@
 # include <iostream>
 # include <vector>
 # include <map>
+# include "glm/ext.hpp"
 
 # include "AObject.hh"
 
@@ -52,14 +53,18 @@ private:
   glm::mat4			_camProjection;
   glm::mat4			_camTransformation;
 
+  glm::vec3			_camPosition;
 private:
   std::vector <std::pair<int, std::pair<t_input, int> > >	_input_mapping;	
+  std::map<e_input, glm::vec3>					_moveCamMapping;
+
 public:
   Screen();
   ~Screen();
   bool				init();
   void				updateInputs(std::vector<t_event>*);
   void			        updateScreen(std::vector<AObject*>&);
+  void				moveCam(t_input);
 };
 
 #endif

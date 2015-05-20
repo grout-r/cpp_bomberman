@@ -36,3 +36,8 @@ void				AObject::draw(gdl::BasicShader& shader)
   _texture.bind();
   _geometry.draw(shader, calcTransformation(), GL_QUADS); 
 }
+
+// void				AObject::move()
+// {
+  
+// }
