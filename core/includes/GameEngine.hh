@@ -13,7 +13,7 @@
 
 class GameEngine;
 
-typedef void (GameEngine::*inputFuncptr)(int player);
+typedef void (GameEngine::*inputFuncptr)(int player, t_input input);
 
 class						GameEngine : public gdl::Game 
 {
@@ -34,6 +34,13 @@ public:
   bool						update();
   void						draw();
   bool						gameOver();
+  
+public:
+  void						newPlayer();
+
+public:
+  void						moveCam(int, t_input);
+  void						movePlayer(int, t_input);
 };
 
 # endif
