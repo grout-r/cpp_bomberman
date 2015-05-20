@@ -1,5 +1,7 @@
 #include	"GameEngine.hh"
-#include	"Wall.hh"	 
+#include	"Wall.hh"
+#include	"Map.hh"
+	 
 int			main()
 {
   GameEngine		engine;

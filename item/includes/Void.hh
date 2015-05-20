@@ -1,7 +1,7 @@
 #ifndef VOID_HH
 # define VOID_HH
 
-#include "AObject.hpp"
+#include "AObject.hh"
 
 class Void :	public AObject
 {
