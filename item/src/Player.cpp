@@ -100,7 +100,7 @@ bool		Player::initialize()
 {
   try
     {
-      if (!_playerModel.load("./assets/beep/player.fbx") ||
+      if (!_playerModel.load("./assets/player.fbx") ||
 	  !_texture.load("./assets/player.tga"))
 	throw (Error("Error while loading player ressources"));
       return (true);

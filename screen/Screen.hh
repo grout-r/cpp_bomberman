@@ -26,7 +26,14 @@ typedef enum			e_input
     MOVE_DOWN,
     PLACE_BOMB,
     MENU,
-    EXIT
+    EXIT,
+    CAM_XPLUS,
+    CAM_XMINUS,
+    CAM_YPLUS,
+    CAM_YMINUS,
+    CAM_ZPLUS,
+    CAM_ZMINUS,
+    
   }				t_input;
 
 typedef	struct			s_event

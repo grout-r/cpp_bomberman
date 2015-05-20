@@ -4,6 +4,7 @@
 
 GameEngine::GameEngine()
 {
+  
 }
 
 GameEngine::~GameEngine()
@@ -28,8 +29,7 @@ bool					GameEngine::update()
   // std::cout << _events.size() << std::endl;
   for (size_t i = 0; _events.size() != i; i++)
     {
-      std::cout << _events[i].input << " (. Y .) " << _events[i].pid << std::endl;
-      //sleep(1);
+      
     }
   _screen.updateScreen(_map);
   return (true);

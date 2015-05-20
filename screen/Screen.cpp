@@ -3,17 +3,27 @@
 
 Screen::Screen()
 {
-  _input_mapping.push_back( std::make_pair((int)SDLK_ESCAPE, std::make_pair(MENU, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_ESCAPE, std::make_pair(MENU, 0)));
+
   _input_mapping.push_back( std::make_pair((int)SDLK_UP, std::make_pair(MOVE_UP, 1)));
   _input_mapping.push_back( std::make_pair((int)SDLK_DOWN, std::make_pair(MOVE_DOWN, 1)));
   _input_mapping.push_back( std::make_pair((int)SDLK_LEFT, std::make_pair(MOVE_LEFT, 1)));
   _input_mapping.push_back( std::make_pair((int)SDLK_RIGHT, std::make_pair(MOVE_RIGHT, 1)));
   _input_mapping.push_back( std::make_pair((int)SDLK_RSHIFT, std::make_pair(PLACE_BOMB, 1)));
+
   _input_mapping.push_back( std::make_pair((int)SDLK_z, std::make_pair(MOVE_UP, 2)));
   _input_mapping.push_back( std::make_pair((int)SDLK_s, std::make_pair(MOVE_DOWN, 2)));
   _input_mapping.push_back( std::make_pair((int)SDLK_q, std::make_pair(MOVE_LEFT, 2)));
   _input_mapping.push_back( std::make_pair((int)SDLK_d, std::make_pair(MOVE_RIGHT, 2)));
   _input_mapping.push_back( std::make_pair((int)SDLK_a, std::make_pair(PLACE_BOMB, 2)));
+
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_6, std::make_pair(CAM_XPLUS, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_4, std::make_pair(CAM_XMINUS, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_8, std::make_pair(CAM_ZPLUS, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_2, std::make_pair(CAM_ZMINUS, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_9, std::make_pair(CAM_YPLUS, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_KP_3, std::make_pair(CAM_YMINUS, 0)));
+
 }
 
 Screen::~Screen()
@@ -31,9 +41,9 @@ bool					Screen::init()
 	  || !_shader.load("./tp/Shaders/basic.vp", GL_VERTEX_SHADER) 
 	  || !_shader.build())
 	throw Error("Can't compile shaders.");
-      _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+      _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 1500.0f);
       _camTransformation =
-	glm::lookAt(glm::vec3(0, 0, 200), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::lookAt(glm::vec3(0, 500, 1300), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
       _shader.bind();
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
