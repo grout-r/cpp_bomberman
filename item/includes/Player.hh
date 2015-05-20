@@ -35,9 +35,9 @@ private:
   gdl::Model		_playerModel;
 
 public:
-  Player();
+  Player(int x, int y);
   ~Player();
-  std::pair<int, int>			getPos() const;
+  std::pair<int, int>		getPos() const;
   void				setPos(std::pair<int, int>);
   int				getBombNb() const;
   void				setBombNb(int nb);
@@ -53,9 +53,9 @@ public:
   void				putBomb();
 
 public:
-  bool                  initialize();
-  void                  update();
-  void			draw(gdl::BasicShader& shader);
+  bool				initialize();
+  void				update();
+  void				draw(gdl::BasicShader& shader);
 };
 
 #endif /* !PLAYER_HH_ */
