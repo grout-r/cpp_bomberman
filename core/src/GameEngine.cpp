@@ -12,6 +12,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_LEFT] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_UP] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
+  _map = new Map;
 }
 
 GameEngine::~GameEngine()
@@ -22,10 +23,8 @@ bool					GameEngine::initialize()
 {
   if (_screen.init() == false)
     return (false);
-  newPlayer();
-  Wall *a = new Wall;
-  a->initialize();
-  _map.push_back(a);
+  _map->init();
+  _map->newPlayer(1);
   return (true);
 }
 
@@ -62,20 +61,9 @@ void					GameEngine::moveCam(int pid, t_input input)
 
 void					GameEngine::movePlayer(int pid, t_input input)
 {
-  for (size_t i = 0; i != _playerPool.size(); i++)
-    {
-      if (_playerPool[i]->getHumanId()== pid)
-	{
-	  _playerPool[i]->move(input);
-	  break;
-	}
-    }
-}
-
-void					GameEngine::newPlayer()
-{
-  Player *Michel = new Player(0, 0, 1);
-  Michel->initialize();
-  _map.push_back(Michel);
-  _playerPool.push_back(Michel);
+  Player				*tmp;
+  
+  tmp = _map->getHumanById(pid);
+  if (tmp != NULL)
+    tmp->move(input);
 }

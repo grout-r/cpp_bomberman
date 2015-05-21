@@ -1,9 +1,9 @@
 #include "Map.hh"
 
 Map::Map() :
-  x_size(5), y_size(5)
+  x_size(20), y_size(20)
 {
-  initMap();
+
 }
 
 Map::~Map()
@@ -11,38 +11,38 @@ Map::~Map()
 
 }
 
-void				Map::initMap()
+void				Map::init()
 {
   bool		      		wall;
 
   wall = false;
   _map.resize(y_size);
-  for (int y = 0; y != y_size; y++)
+  for (int x = 0; x != x_size; x++)
     {
       if (wall == false)
 	{
-	  _map[y].resize(x_size);
-	  for (int x = 0; x != x_size; x++)
+	  _map[x].resize(y_size);
+	  for (int y = 0; y != y_size; y++)
 	    {
-	      _map[y][x] = new Void;
-	      std::cout << "0" << std::endl;
+	      _map[x][y] = new Void(std::make_pair(x, y));
+	      _map[x][y]->initialize();
 	    }
 	  wall = true;
 	}
       else
 	{
-	  _map[y].resize(x_size);
-	  for (int x = 0; x != x_size; x++)
+	  _map[x].resize(y_size);
+	  for (int y = 0; y != y_size; y++)
 	    {
-	      if (x % 2 == 0)
+	      if (y % 2 == 0)
 		{
-		  _map[y][x] = new Void;
-		  std::cout << "0" << std::endl;	      
+		  _map[x][y] = new Void(std::make_pair(x, y));
+		  _map[x][y]->initialize();
 		}
 	      else
 		{
-		  _map[y][x] = new Wall;
-		  std::cout << "1" << std::endl;
+		  _map[x][y] = new Wall(std::make_pair(x, y));
+		  _map[x][y]->initialize();
 		}
 	    }
 	  wall = false;
@@ -50,3 +50,45 @@ void				Map::initMap()
     }
 }
 
+void						Map::draw(gdl::BasicShader &shader, 
+							  gdl::Clock clock)
+{
+  for (size_t i = 0; i != _map.size(); i++)
+    {
+      for (size_t j = 0; j != _map[i].size(); j++)
+	{
+	  _map[i][j]->draw(shader, clock);
+	}
+    }
+}
+
+void						Map::newPlayer(int human)
+{
+  Player *Michel;
+
+  for (size_t i = 0; i != _map.size(); i++)
+    {
+      for (size_t j = 0; j != _map[i].size(); j++)
+	{
+	  if (_map[i][j]->what() == VOID)
+	    {
+	      Michel = new Player(std::make_pair(i, j), human);
+	      Michel->initialize();
+	      delete _map[i][j];
+	      _map[i][j] = Michel;
+	      _player.push_back(Michel);
+	      return ;
+	    }
+	}
+    }
+}
+
+Player*						Map::getHumanById(int id)
+{
+  for (size_t i = 0; i != _player.size(); i++)
+    {
+      if (_player[i]->getHumanId() == id)
+	return _player[i];
+    }
+  return (NULL);
+}

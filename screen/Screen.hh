@@ -18,30 +18,10 @@
 # include "glm/ext.hpp"
 
 # include "AObject.hh"
+# include "Map.hh"
+# include "Definition.hh"
 
-typedef enum			e_input
-  {
-    MOVE_RIGHT,
-    MOVE_LEFT,
-    MOVE_UP,
-    MOVE_DOWN,
-    PLACE_BOMB,
-    MENU,
-    EXIT,
-    CAM_XPLUS,
-    CAM_XMINUS,
-    CAM_YPLUS,
-    CAM_YMINUS,
-    CAM_ZPLUS,
-    CAM_ZMINUS,
-    
-  }				t_input;
-
-typedef	struct			s_event
-{
-  e_input			input;
-  int				pid;
-}				t_event;
+class Map;
 
 class				Screen
 {
@@ -63,7 +43,7 @@ public:
   ~Screen();
   bool				init();
   void				updateInputs(std::vector<t_event>*);
-  void			        updateScreen(std::vector<AObject*>&);
+  void			        updateScreen(Map*);
   void				moveCam(t_input);
 };
 

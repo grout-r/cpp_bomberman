@@ -1,13 +1,13 @@
 #include "Player.hh"
 
-Player::Player(int x, int y, int humanId) :
+Player::Player(std::pair<int, int> pos, int humanId) :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
 {
   static int	id = 0;
 
   this->humanId = humanId;
   this->player_id = id;
-  this->pos = std::make_pair(x, y);
+  this->pos = pos;
   id += 1;
   _movePlayerBind[MOVE_RIGHT] = glm::vec3(10, 0, 0);
   _movePlayerBind[MOVE_LEFT] = glm::vec3(-10, 0, 0);
@@ -18,6 +18,7 @@ Player::Player(int x, int y, int humanId) :
   _rotatePlayerBind[MOVE_UP] = glm::vec3(0, 0, 0);
   _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 180, 0);
   _frameCounter = 0;
+  _what = PLAYER;
 }
 
 Player::~Player()
@@ -27,11 +28,6 @@ Player::~Player()
 
 void		Player::putBomb()
 {
-  Bomb		*bomb;
-
-  bomb = new Bomb(this);
-  (void) bomb;
-  delete bomb;
 }
 
 int				Player::getHumanId()
@@ -113,7 +109,6 @@ bool		Player::initialize()
 
 void		Player::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
-  std::cout << _frameCounter << std::endl;
   if (_frameCounter != 0)
     {
       if (_frameCounter == _playerModel.getAnimationFrameNumber(0))

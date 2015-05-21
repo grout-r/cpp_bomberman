@@ -12,6 +12,8 @@
 # include "AObject.hh"
 # include "Wall.hh"
 # include "Player.hh"
+# include "Map.hh"
+# include "Definition.hh"
 
 class GameEngine;
 
@@ -24,9 +26,9 @@ private:
 private:
   Screen					_screen;
   std::vector<t_event>				_events;
-  std::vector<AObject*>				_map;
   std::map<t_input, inputFuncptr>		_funcptrBind;
-  std::vector<Player*>				_playerPool;
+  Map						*_map;
+
 public:
   GameEngine();
   ~GameEngine();
@@ -36,9 +38,6 @@ public:
   bool						update();
   void						draw();
   bool						gameOver();
-  
-public:
-  void						newPlayer();
 
 public:
   void						moveCam(int, t_input);

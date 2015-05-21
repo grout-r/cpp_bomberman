@@ -37,7 +37,7 @@ void				AObject::draw(gdl::BasicShader& shader, gdl::Clock &clock)
   _geometry.draw(shader, calcTransformation(), GL_QUADS); 
 }
 
-// void				AObject::move()
-// {
-  
-// }
+t_what				AObject::what()
+{
+  return (_what);
+}

@@ -8,6 +8,8 @@
 # include "Bomb.hh"
 # include "Exception.hh"
 # include "Screen.hh"
+# include "Definition.hh"
+# include "Map.hh"
 
 typedef enum			e_color
   {
@@ -33,7 +35,7 @@ private:
   std::map<t_input, glm::vec3>		_movePlayerBind;
   std::map<t_input, glm::vec3>		_rotatePlayerBind;
 public:
-  Player(int x, int y, int humanId = 0);
+  Player(std::pair<int, int>, int humanId = 0);
   ~Player();
   std::pair<int, int>		getPos() const;
   void				setPos(std::pair<int, int>);

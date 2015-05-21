@@ -15,6 +15,9 @@
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
+#include "glm/ext.hpp"
+
+# include "Definition.hh"
 
 class				AObject
 {
@@ -24,6 +27,10 @@ protected:
   glm::vec3			_scale;
   gdl::Texture			_texture;
   gdl::Geometry			_geometry;
+  
+protected:
+  t_what			_what;
+
 public:
   AObject();
   virtual ~AObject();
@@ -34,6 +41,9 @@ protected:
 public:
   virtual bool			initialize();
   virtual void			draw(gdl::BasicShader&, gdl::Clock&);
+  
+public:
+  t_what			what();
 };
 
 #endif //!AOBJ_HPP

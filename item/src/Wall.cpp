@@ -1,12 +1,15 @@
 
 #include "Wall.hh"
 
-Wall::Wall()
+Wall::Wall(std::pair<int, int> pos)
 {
+  _what = WALL;
+  _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
 }
 
 Wall::~Wall()
 {
+  
 }
 
 bool			Wall::initialize()
@@ -74,12 +77,12 @@ bool			Wall::initialize()
     }
   catch (Error e)
     {
-      std::cout << e.what() << std::endl;
+      std::cerr << e.what() << std::endl;
     }
   return (false);
 }
 
-void			Wall::update()
+
+void				update()
 {
-  
 }

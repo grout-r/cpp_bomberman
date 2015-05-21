@@ -3,9 +3,10 @@
 
 #include "AObject.hpp"
 
-class Bomb :	public AObject
+class Bonus :	public AObject
 {
-
+public:
+  Bonus();
 };
 
-#endif /* !BOMB_HH_ */
+#endif /* !BONUS_HH_ */

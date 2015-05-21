@@ -11,6 +11,7 @@ Bomb::Bomb(Player *player)
   this->color = player->getBombColor();
   time(&(this->timer));
   std::cout << this->pos.first << ";" << this->pos.second << std::endl;
+  _what = BOMB;
 }
 
 Bomb::~Bomb()

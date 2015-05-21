@@ -18,7 +18,8 @@ SRCS		=		core/src/main.cpp \
 				item/src/Bomb.cpp \
 				item/src/Wall.cpp \
 				item/src/AObject.cpp \
-				item/src/Map.cpp 	
+				item/src/Map.cpp \
+				item/src/Void.cpp
 #SRCS		=		tp/main.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)

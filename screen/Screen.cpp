@@ -89,14 +89,11 @@ void					Screen::updateInputs(std::vector<t_event> *events)
     }
 }
 
-void					Screen::updateScreen(std::vector<AObject*> &map)
+void					Screen::updateScreen(Map *map)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _shader.bind();
-  for (size_t i = 0; map.size() != i; i++)
-    {
-      map[i]->draw(_shader, _clock);
-    }
+  map->draw(_shader, _clock);
   _context.flush();
 }
 
