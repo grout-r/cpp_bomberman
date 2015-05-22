@@ -28,7 +28,6 @@ public:
   Bomb(Player  *player);
   ~Bomb();
 
-  std::pair<int, int>	getPos() const;
   bool			explose();
 public:
   bool			initalize();

@@ -69,8 +69,14 @@ void					GameEngine::lockCam(int pid, t_input input)
 void					GameEngine::movePlayer(int pid, t_input input)
 {
   Player				*tmp;
-  
+  std::pair<int, int>			newPos;
+
   tmp = _map->getHumanById(pid);
   if (tmp != NULL)
-    tmp->move(input);
+    {
+      newPos = tmp->getNewPos(input);
+      if (_map->getItemAtPos(newPos)->what() == VOID ||
+	  _map->getItemAtPos(newPos)->what() == PLAYER )
+	tmp->move(input);
+    }
 }

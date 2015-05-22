@@ -44,6 +44,7 @@ public:
   
 public:
   t_what			what();
+  std::pair<int, int>		getPos() const;
 };
 
 #endif //!AOBJ_HPP

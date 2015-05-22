@@ -34,6 +34,7 @@ public:
 							  gdl::Clock clock);
   Player					*getHumanById(int id);
   std::pair<int, int>				getSize();
+  AObject					*getItemAtPos(std::pair<int, int>);
 };
 
 #endif /* !MAP_HH_ */

@@ -96,3 +96,8 @@ std::pair<int, int>				Map::getSize()
 {
   return (_size);
 }
+
+AObject*					Map::getItemAtPos(std::pair<int, int> pos)
+{
+  return (_map[pos.first][pos.second]);
+}

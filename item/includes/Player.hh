@@ -20,7 +20,6 @@ typedef enum			e_color
 class Player :	public AObject
 {
 private:
-  std::pair<int, int>	pos;
   int			bomb_nb;
   int			bomb_power;
   int			p_speed;
@@ -37,8 +36,6 @@ private:
 public:
   Player(std::pair<int, int>, int humanId = 0);
   ~Player();
-  std::pair<int, int>		getPos() const;
-  void				setPos(std::pair<int, int>);
   int				getBombNb() const;
   void				setBombNb(int nb);
   int				getBombPower() const;
@@ -56,6 +53,7 @@ public:
   void				update();
   void				draw(gdl::BasicShader& shader, gdl::Clock &);
   void				move(t_input input);
+  std::pair<int, int>		getNewPos(t_input input);
 };
 
 #endif /* !PLAYER_HH_ */
