@@ -21,8 +21,7 @@ private:
   std::vector<Player*>				_player;
   std::vector<Wall*>				_wall;
   std::vector<Void*>				_void;
-  int						x_size;
-  int						y_size;
+  std::pair<int, int>				_size;
 
 public:
   Map();
@@ -34,6 +33,7 @@ public:
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock clock);
   Player					*getHumanById(int id);
+  std::pair<int, int>				getSize();
 };
 
 #endif /* !MAP_HH_ */

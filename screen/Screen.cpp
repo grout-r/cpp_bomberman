@@ -3,6 +3,7 @@
 
 Screen::Screen()
 {
+  _lockCam = true;
   _input_mapping.push_back( std::make_pair((int)SDLK_ESCAPE, std::make_pair(MENU, 0)));
 
   _input_mapping.push_back( std::make_pair((int)SDLK_UP, std::make_pair(MOVE_UP, 1)));
@@ -23,6 +24,9 @@ Screen::Screen()
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_2, std::make_pair(CAM_ZMINUS, 0)));
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_9, std::make_pair(CAM_YPLUS, 0)));
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_3, std::make_pair(CAM_YMINUS, 0)));
+
+  _input_mapping.push_back( std::make_pair((int)SDLK_l, std::make_pair(CAM_LOCK, 0)));
+
 
   _moveCamMapping[CAM_XPLUS] = glm::vec3(100, 0, 0);
   _moveCamMapping[CAM_XMINUS] = glm::vec3(-100, 0, 0);
@@ -95,16 +99,40 @@ void					Screen::updateScreen(Map *map)
   _shader.bind();
   map->draw(_shader, _clock);
   _context.flush();
+  if (_lockCam == true)
+    updateCam(map);
+}
+
+void					Screen::updateCam(Map *map)
+{
+  std::pair<int, int> size = map->getSize();
+
+  _camTarget = glm::vec3((size.first/2)*100, 0, (size.second/2)*100);
+  _camPosition = glm::vec3((size.first/2)*100 , size.first * size.second * 3,
+			   (size.second + (size.second / 2)) * 100);
+  _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
+  _camTransformation = 
+    glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
+  _shader.bind();
+  _shader.setUniform("view", _camTransformation);
+  _shader.setUniform("projection", _camProjection);
 }
 
 void					Screen::moveCam(t_input input)
 {
-  _camPosition += _moveCamMapping[input];
+  if (_lockCam == false)
+    {
+      _camPosition += _moveCamMapping[input];
+      _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
+      _camTransformation = 
+	glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
+      _shader.bind();
+      _shader.setUniform("view", _camTransformation);
+      _shader.setUniform("projection", _camProjection);
+    }
+}
 
-    _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
-  _camTransformation = 
-    glm::lookAt(_camPosition, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-  _shader.bind();
-  _shader.setUniform("view", _camTransformation);
-  _shader.setUniform("projection", _camProjection);
+void					Screen::lockCam()
+{
+  _lockCam = !_lockCam;
 }

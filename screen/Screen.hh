@@ -32,11 +32,17 @@ private:
   gdl::BasicShader		_shader;
   glm::mat4			_camProjection;
   glm::mat4			_camTransformation;
-
   glm::vec3			_camPosition;
+  glm::vec3			_camTarget;
 private:
   std::vector <std::pair<int, std::pair<t_input, int> > >	_input_mapping;	
   std::map<e_input, glm::vec3>					_moveCamMapping;
+
+private:
+  bool				_lockCam;
+  
+private:
+  void				updateCam(Map *);
 
 public:
   Screen();
@@ -45,6 +51,7 @@ public:
   void				updateInputs(std::vector<t_event>*);
   void			        updateScreen(Map*);
   void				moveCam(t_input);
+  void				lockCam();
 };
 
 #endif

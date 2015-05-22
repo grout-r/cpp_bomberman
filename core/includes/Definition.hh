@@ -16,7 +16,7 @@ typedef enum			e_input
     CAM_YMINUS,
     CAM_ZPLUS,
     CAM_ZMINUS,
-    
+    CAM_LOCK
   }				t_input;
 
 typedef	struct			s_event

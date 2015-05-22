@@ -1,9 +1,8 @@
 #include "Map.hh"
 
-Map::Map() :
-  x_size(20), y_size(20)
+Map::Map()
 {
-
+  _size = std::make_pair(20, 20);
 }
 
 Map::~Map()
@@ -16,13 +15,13 @@ void				Map::init()
   bool		      		wall;
 
   wall = false;
-  _map.resize(y_size);
-  for (int x = 0; x != x_size; x++)
+  _map.resize(_size.first);
+  for (int x = 0; x != _size.first; x++)
     {
       if (wall == false)
 	{
-	  _map[x].resize(y_size);
-	  for (int y = 0; y != y_size; y++)
+	  _map[x].resize(_size.second);
+	  for (int y = 0; y != _size.second; y++)
 	    {
 	      _map[x][y] = new Void(std::make_pair(x, y));
 	      _map[x][y]->initialize();
@@ -31,8 +30,8 @@ void				Map::init()
 	}
       else
 	{
-	  _map[x].resize(y_size);
-	  for (int y = 0; y != y_size; y++)
+	  _map[x].resize(_size.second);
+	  for (int y = 0; y != _size.second; y++)
 	    {
 	      if (y % 2 == 0)
 		{
@@ -91,4 +90,9 @@ Player*						Map::getHumanById(int id)
 	return _player[i];
     }
   return (NULL);
+}
+
+std::pair<int, int>				Map::getSize()
+{
+  return (_size);
 }

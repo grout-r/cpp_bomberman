@@ -12,6 +12,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_LEFT] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_UP] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
+  _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _map = new Map;
 }
 
@@ -38,13 +39,12 @@ bool					GameEngine::update()
       if (_funcptrBind.count(_events[i].input))
 	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
-  _screen.updateScreen(_map);
-  return (true);
+   return (true);
 }
 
 void					GameEngine::draw()
 {
-  
+  _screen.updateScreen(_map);
 }
 
 bool					GameEngine::gameOver()
@@ -57,6 +57,13 @@ void					GameEngine::moveCam(int pid, t_input input)
   (void)pid;
   (void)input;
   _screen.moveCam(input);
+}
+
+void					GameEngine::lockCam(int pid, t_input input)
+{
+  (void)pid;
+  (void)input;
+  _screen.lockCam();
 }
 
 void					GameEngine::movePlayer(int pid, t_input input)
