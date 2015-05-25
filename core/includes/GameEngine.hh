@@ -43,6 +43,7 @@ public:
   void						moveCam(int, t_input);
   void						movePlayer(int, t_input);
   void						lockCam(int, t_input);
+  void						placeBomb(int, t_input);
 };
 
 # endif

@@ -82,6 +82,22 @@ void						Map::newPlayer(int human)
     }
 }
 
+void						Map::newBomb(Player *player,
+							     std::pair<int, int> pos)
+{
+  Bomb	*Michel;
+
+  if (_map[pos.first][pos.second]->what() == VOID)
+    {
+      Michel = new Bomb (player, pos);
+      Michel->initialize();
+      delete _map[pos.first][pos.second];
+      _map[pos.first][pos.second] = Michel;
+      _bomb.push_back(Michel);
+      return ;
+    }
+}
+
 Player*						Map::getHumanById(int id)
 {
   for (size_t i = 0; i != _player.size(); i++)

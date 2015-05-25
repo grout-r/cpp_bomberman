@@ -13,6 +13,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_UP] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
+  _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
   _map = new Map;
 }
 
@@ -26,6 +27,7 @@ bool					GameEngine::initialize()
     return (false);
   _map->init();
   _map->newPlayer(1);
+  
   return (true);
 }
 
@@ -75,8 +77,17 @@ void					GameEngine::movePlayer(int pid, t_input input)
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
-      if (_map->getItemAtPos(newPos)->what() == VOID ||
-	  _map->getItemAtPos(newPos)->what() == PLAYER )
+      std::cout << "x: " << newPos.first << " y: " << newPos.second << std::endl;
+      if (_map->getItemAtPos(newPos)->what() == VOID 
+	|| _map->getItemAtPos(newPos)->what() == BOMB )
 	tmp->move(input);
     }
+}
+
+void					GameEngine::placeBomb(int pid, t_input input)
+{
+  (void)input;
+  Player *tmp = _map->getHumanById(pid);
+  std::pair<int, int> pos =  tmp->getPos();
+  _map->newBomb(tmp, pos);
 }

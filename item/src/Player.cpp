@@ -11,12 +11,12 @@ Player::Player(std::pair<int, int> pos, int humanId) :
   id += 1;
   _movePlayerBind[MOVE_RIGHT] = glm::vec3(10, 0, 0);
   _movePlayerBind[MOVE_LEFT] = glm::vec3(-10, 0, 0);
-  _movePlayerBind[MOVE_UP] = glm::vec3(0, 0, 10);
-  _movePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, -10);
+  _movePlayerBind[MOVE_UP] = glm::vec3(0, 0, -10);
+  _movePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, 10);
   _rotatePlayerBind[MOVE_RIGHT] = glm::vec3(0, 90, 0);
   _rotatePlayerBind[MOVE_LEFT] = glm::vec3(0, -90, 0);
-  _rotatePlayerBind[MOVE_UP] = glm::vec3(0, 0, 0);
-  _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 180, 0);
+  _rotatePlayerBind[MOVE_UP] = glm::vec3(0, 180, 0);
+  _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, 0);
   _frameCounter = 0;
   _what = PLAYER;
 }
@@ -84,6 +84,7 @@ void		Player::setBombColor(t_color color)
 bool		Player::initialize()
 {
   _scale = glm::vec3(0.2, 0.2, 0.2);
+  _position = glm::vec3(150 , 0, 50);
   try
     {
       if (!_playerModel.load("./assets/player.fbx") ||

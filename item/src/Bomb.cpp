@@ -1,10 +1,10 @@
+
 #include "Bomb.hh"
 
-#include <unistd.h>
-
-Bomb::Bomb(Player *player)
+Bomb::Bomb(Player *player, std::pair<int, int> pos)
 {
   std::cout << "bomb posée en :" << std::endl;
+  _position = glm::vec3(pos.first * 100, 0, pos.second * 100);
   this->player_id = player->getPlayerId();
   this->pos = player->getPos();
   this->bomb_power = player->getBombPower();
@@ -34,7 +34,22 @@ bool		Bomb::explose()
 
 bool		Bomb::initalize()
 {
-  return (true);
+  try
+    {
+      if (!_bombModel.load("./assets/bomb.obj"))
+	throw (Error("cannot load assets for bomb model"));
+      return (true);
+    }
+  catch (Error e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
+  return (false);
+}
+
+void		Bomb::draw(gdl::BasicShader& shader, gdl::Clock & clock)
+{
+  _bombModel.draw(shader, calcTransformation(), clock.getElapsed());
 }
 
 void		Bomb::update()

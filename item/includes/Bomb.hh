@@ -2,6 +2,7 @@
 # define BOMB_HH_
 
 #include <time.h>
+#include <unistd.h>
 
 #include "AObject.hh"
 #include "Player.hh"
@@ -24,14 +25,19 @@ private:
   int			color;
   time_t		timer;
 
+private:
+  gdl::Model		_bombModel;
+  
+
 public:
-  Bomb(Player  *player);
+  Bomb(Player  *player, std::pair<int, int> pos);
   ~Bomb();
 
   bool			explose();
 public:
   bool			initalize();
   void			update();
+  void			draw(gdl::BasicShader&, gdl::Clock &);
 };
 
 #endif /* !BOMB_HH */
