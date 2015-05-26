@@ -21,11 +21,20 @@ private:
   std::vector<Player*>				_player;
   std::vector<Wall*>				_wall;
   std::vector<Void*>				_void;
-  int						x_size;
-  int						y_size;
+  std::pair<int, int>				_size;
+
+  bool						up(std::pair<int, int> pos);
+  bool						down(std::pair<int, int> pos);
+  bool						right(std::pair<int, int> pos);
+  bool						left(std::pair<int, int> pos);
+  void						fillMap();
+  bool						digMap(std::pair<int, int> pos);
+  std::vector<bool>				check_hut(std::pair<int, int> hut);
+  void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>));
+  void						genRandMap();
 
 public:
-  Map();
+  Map(std::pair<int, int> = std::make_pair(20, 20));
   ~Map();
 
 public:
