@@ -32,7 +32,7 @@ bool		Bomb::explose()
   return (false);
 }
 
-bool		Bomb::initalize()
+bool		Bomb::initialize()
 {
   try
     {

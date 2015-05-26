@@ -35,7 +35,7 @@ public:
 
   bool			explose();
 public:
-  bool			initalize();
+  bool			initialize();
   void			update();
   void			draw(gdl::BasicShader&, gdl::Clock &);
 };

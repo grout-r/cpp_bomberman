@@ -1,12 +1,3 @@
-# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 31.07.2010 23:31:12
-
-mtllib bomberman.mtl
-
-#
-# object Sphere08
-#
-
 v  93.9428 10.4486 41.5265
 v  93.9428 10.0565 38.9282
 v  93.4962 9.9899 38.5960
