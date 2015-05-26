@@ -82,7 +82,6 @@ bool			Wall::initialize()
   return (false);
 }
 
-
 void				update()
 {
 }

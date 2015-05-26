@@ -28,10 +28,10 @@ Player::~Player()
 
 void		Player::putBomb()
 {
-  
+
 }
 
-int				Player::getHumanId()
+int	        Player::getHumanId()
 {
   return (this->humanId);
 }

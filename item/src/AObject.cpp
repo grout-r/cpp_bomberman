@@ -46,3 +46,8 @@ std::pair<int, int>		AObject::getPos() const
 {
   return (std::make_pair(_position.x / 100 , _position.z / 100));
 }
+
+glm::vec3			AObject::getVecPos()
+{
+  return (_position);
+}

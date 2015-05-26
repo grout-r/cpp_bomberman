@@ -46,6 +46,7 @@ bool					Screen::init()
 {
   try
     {
+
       if (!_context.start(800, 600, "Bomberbitch"))
 	throw Error("Can't initialize context.");
       glEnable(GL_DEPTH_TEST);
@@ -105,11 +106,12 @@ void					Screen::updateScreen(Map *map)
 
 void					Screen::updateCam(Map *map)
 {
-  std::pair<int, int> size = map->getSize();
-
-  _camTarget = glm::vec3((size.first/2)*100, 0, (size.second/2)*100);
-  _camPosition = glm::vec3((size.first/2)*100 , size.first * size.second * 3,
-			   (size.second + (size.second / 2)) * 100);
+  //std::pair<int, int> size = map->getSize();
+  glm::vec3 player = map->getHumanById(1)->getVecPos();
+ 
+  
+  _camTarget = player;
+  _camPosition = glm::vec3(player.x , 800, player.z + 500);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
   _camTransformation = 
     glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
@@ -123,6 +125,7 @@ void					Screen::moveCam(t_input input)
   if (_lockCam == false)
     {
       _camPosition += _moveCamMapping[input];
+      _camTarget += _moveCamMapping[input];
       _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
       _camTransformation = 
 	glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));

@@ -79,7 +79,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
       newPos = tmp->getNewPos(input);
       std::cout << "x: " << newPos.first << " y: " << newPos.second << std::endl;
       if (_map->getItemAtPos(newPos)->what() == VOID 
-	|| _map->getItemAtPos(newPos)->what() == BOMB )
+	|| _map->getItemAtPos(newPos)->what() == BOMB)
 	tmp->move(input);
     }
 }

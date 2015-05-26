@@ -45,6 +45,7 @@ public:
 public:
   t_what			what();
   std::pair<int, int>		getPos() const;
+  glm::vec3			getVecPos();
 };
 
 #endif //!AOBJ_HPP
