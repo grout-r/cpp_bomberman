@@ -43,6 +43,9 @@ public:
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock clock);
   Player					*getHumanById(int id);
+  std::pair<int, int>				getSize();
+  AObject					*getItemAtPos(std::pair<int, int>);
+  void						newBomb(Player *, std::pair<int, int> pos);
 };
 
 #endif /* !MAP_HH_ */

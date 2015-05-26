@@ -17,55 +17,16 @@ Map::Map(std::pair<int, int> size)
   genRandMap();
 }
 
+Map::Map()
+{
+  _size = std::make_pair(20, 20);
+}
+
 Map::~Map()
 {
-
+  
 }
-
-void				Map::init()
-{
-  bool		      		wall;
-
-  if (1 == 1)
-    genRandMap();
-  else
-    {
-      wall = false;
-      _map.resize(_size.second);
-      for (int x = 0; x != _size.first; x++)
-	{
-	  if (wall == false)
-	    {
-	      _map[x].resize(_size.second);
-	      for (int y = 0; y != _size.first; y++)
-		{
-		  _map[x][y] = new Void(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}
-	      wall = true;
-	    }
-	  else
-	    {
-	      _map[x].resize(_size.second);
-	      for (int y = 0; y != _size.first; y++)
-		{
-		  if (y % 2 == 0)
-		    {
-		      _map[x][y] = new Void(std::make_pair(x, y));
-		      _map[x][y]->initialize();
-		    }
-		  else
-		    {
-		      _map[x][y] = new Wall(std::make_pair(x, y));
-		      _map[x][y]->initialize();
-		    }
-		}
-	      wall = false;
-	    }
-	}
-    }
-}
-
+ 
 void				Map::fillMap()
 {
   _map.resize(_size.second);
@@ -234,6 +195,22 @@ void						Map::newPlayer(int human)
     }
 }
 
+void						Map::newBomb(Player *player,
+							     std::pair<int, int> pos)
+{
+  Bomb	*Michel;
+
+  if (_map[pos.first][pos.second]->what() == VOID)
+    {
+      Michel = new Bomb (player, pos);
+      Michel->initialize();
+      delete _map[pos.first][pos.second];
+      _map[pos.first][pos.second] = Michel;
+      _bomb.push_back(Michel);
+      return ;
+    }
+}
+
 Player*						Map::getHumanById(int id)
 {
   for (size_t i = 0; i != _player.size(); i++)
@@ -242,4 +219,14 @@ Player*						Map::getHumanById(int id)
 	return _player[i];
     }
   return (NULL);
+}
+
+std::pair<int, int>				Map::getSize()
+{
+  return (_size);
+}
+
+AObject*					Map::getItemAtPos(std::pair<int, int> pos)
+{
+  return (_map[pos.first][pos.second]);
 }

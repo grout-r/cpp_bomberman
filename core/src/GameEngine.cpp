@@ -12,6 +12,8 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_LEFT] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_UP] = &GameEngine::movePlayer;
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
+  _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
+  _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
   _map = new Map;
 }
 
@@ -25,6 +27,7 @@ bool					GameEngine::initialize()
     return (false);
   _map->init();
   _map->newPlayer(1);
+  
   return (true);
 }
 
@@ -38,13 +41,12 @@ bool					GameEngine::update()
       if (_funcptrBind.count(_events[i].input))
 	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
-  _screen.updateScreen(_map);
-  return (true);
+   return (true);
 }
 
 void					GameEngine::draw()
 {
-  
+  _screen.updateScreen(_map);
 }
 
 bool					GameEngine::gameOver()
@@ -59,11 +61,33 @@ void					GameEngine::moveCam(int pid, t_input input)
   _screen.moveCam(input);
 }
 
+void					GameEngine::lockCam(int pid, t_input input)
+{
+  (void)pid;
+  (void)input;
+  _screen.lockCam();
+}
+
 void					GameEngine::movePlayer(int pid, t_input input)
 {
   Player				*tmp;
-  
+  std::pair<int, int>			newPos;
+
   tmp = _map->getHumanById(pid);
   if (tmp != NULL)
-    tmp->move(input);
+    {
+      newPos = tmp->getNewPos(input);
+      std::cout << "x: " << newPos.first << " y: " << newPos.second << std::endl;
+      if (_map->getItemAtPos(newPos)->what() == VOID 
+	|| _map->getItemAtPos(newPos)->what() == BOMB )
+	tmp->move(input);
+    }
+}
+
+void					GameEngine::placeBomb(int pid, t_input input)
+{
+  (void)input;
+  Player *tmp = _map->getHumanById(pid);
+  std::pair<int, int> pos =  tmp->getPos();
+  _map->newBomb(tmp, pos);
 }

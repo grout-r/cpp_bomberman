@@ -41,3 +41,8 @@ t_what				AObject::what()
 {
   return (_what);
 }
+
+std::pair<int, int>		AObject::getPos() const
+{
+  return (std::make_pair(_position.x / 100 , _position.z / 100));
+}
