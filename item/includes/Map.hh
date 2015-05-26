@@ -38,7 +38,7 @@ public:
   ~Map();
 
 public:
-  void						init();
+  // void						init();
   void						newPlayer(int human);
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock clock);

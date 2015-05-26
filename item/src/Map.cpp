@@ -17,11 +17,6 @@ Map::Map(std::pair<int, int> size)
   genRandMap();
 }
 
-Map::Map()
-{
-  _size = std::make_pair(20, 20);
-}
-
 Map::~Map()
 {
   
@@ -137,7 +132,7 @@ void				Map::genRandMap()
   for (int x = 0; x != _size.first; x++)
     for (int y = 0; y != _size.second; y++)
       {
-	std::cout << x << ", " << y << std::endl;
+	std::cout << x << ", " << y << ", " << _map[x][y]->what() << std::endl;
 	_map[x][y]->initialize();
       }
   std::cout << "tg grout" << std::endl;
