@@ -35,6 +35,7 @@ public:
 
   bool			explose();
 public:
+  int			getBombPower() const;
   bool			initialize();
   void			update();
   void			draw(gdl::BasicShader&, gdl::Clock &);

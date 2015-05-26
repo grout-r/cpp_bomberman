@@ -55,3 +55,7 @@ void		Bomb::draw(gdl::BasicShader& shader, gdl::Clock & clock)
 void		Bomb::update()
 {
 }
+
+int		Bomb::getBombPower() const{
+  return (this->bomb_power);
+}

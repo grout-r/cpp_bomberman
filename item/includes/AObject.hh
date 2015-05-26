@@ -15,7 +15,7 @@
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
-#include "glm/ext.hpp"
+# include "glm/ext.hpp"
 
 # include "Definition.hh"
 
@@ -36,7 +36,7 @@ public:
   virtual ~AObject();
 
 protected:
-  glm::mat4				calcTransformation();
+  glm::mat4			calcTransformation();
 
 public:
   virtual bool			initialize();

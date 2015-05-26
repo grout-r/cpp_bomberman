@@ -1,7 +1,7 @@
 #ifndef BONUS_HH
 # define BONUS_HH
 
-#include "AObject.hpp"
+#include "AObject.hh"
 
 class Bonus :	public AObject
 {
