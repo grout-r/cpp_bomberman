@@ -14,7 +14,6 @@ Map::Map(std::pair<int, int> size)
     _size.second = size.second + 3;
   else
     _size.second = size.second + 2;
-  genRandMap();
 }
 
 Map::~Map()
