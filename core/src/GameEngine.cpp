@@ -26,11 +26,10 @@ bool					GameEngine::initialize()
   if (_screen.init() == false)
     return (false);
   _map->genRandMap();
-  _map->newPlayer(1);
-  
+  _map->newPlayer(1);  
   return (true);
 }
-
+ 
 bool					GameEngine::update()
 {
   _screen.updateInputs(&_events);
@@ -77,9 +76,11 @@ void					GameEngine::movePlayer(int pid, t_input input)
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
-      std::cout << "x: " << newPos.first << " y: " << newPos.second << std::endl;
-      if (_map->getItemAtPos(newPos)->what() == VOID 
-	|| _map->getItemAtPos(newPos)->what() == BOMB)
+      std::cout << "player move " <<"x: " << newPos.first << " y: " << 
+	newPos.second << " is " << _map->getItemAtPos(newPos)->what() <<std::
+	endl;
+      // if (_map->getItemAtPos(newPos)->what() == VOID 
+      // 	|| _map->getItemAtPos(newPos)->what() == BOMB)
 	tmp->move(input);
     }
 }

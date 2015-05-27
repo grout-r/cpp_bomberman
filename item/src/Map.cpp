@@ -6,14 +6,12 @@ Map::Map(std::pair<int, int> size)
 {
   std::srand(std::time(0));
 
-  if ((size.first % 2) == 0)
-    _size.first = size.first + 3;
-  else
-    _size.first= size.first + 2;
-  if ((size.second % 2) == 0)
-    _size.second = size.second + 3;
-  else
-    _size.second = size.second + 2;
+  _size.first= size.first + 2;
+  _size.second = size.second + 2;
+  if ((_size.first % 2) == 0)
+    _size.first= size.first + 1;
+  if ((_size.second % 2) == 0)
+    _size.second = size.second + 1;
 }
 
 Map::~Map()
@@ -30,6 +28,7 @@ void				Map::fillMap()
       for (int x = 0; x != _size.first; x++)
 	{
 	  _map[y][x] = new Wall(std::make_pair(x, y));
+	  //_map[y][x]->initialize();
 	}
     }
 }
@@ -127,14 +126,14 @@ void				Map::genRandMap()
 {
   fillMap();
   digMap(std::make_pair(1, 1));
-  std::cout << "tg grout" << std::endl;
-  for (int x = 0; x != _size.first; x++)
-    for (int y = 0; y != _size.second; y++)
+  for (size_t x = 0; x != _map.size(); x++)
+    for (size_t y = 0; y != _map[x].size(); y++)
       {
+	if (_map[x][y]->what() != VOID && _map[x][y]->what() != WALL)
+	  std::cout << "error" <<_map[x][y]->what() << std::endl;
 	std::cout << x << ", " << y << ", " << _map[x][y]->what() << std::endl;
 	_map[x][y]->initialize();
       }
-  std::cout << "tg grout" << std::endl;
 }
 
 /*
@@ -171,7 +170,7 @@ void						Map::draw(gdl::BasicShader &shader,
 void						Map::newPlayer(int human)
 {
   Player *Michel;
-
+  
   for (size_t i = 0; i != _map.size(); i++)
     {
       for (size_t j = 0; j != _map[i].size(); j++)
@@ -179,8 +178,7 @@ void						Map::newPlayer(int human)
 	  if (_map[i][j]->what() == VOID)
 	    {
 	      Michel = new Player(std::make_pair(i, j), human);
-	      Michel->initialize();
-	      delete _map[i][j];
+  	      Michel->initialize();
 	      _map[i][j] = Michel;
 	      _player.push_back(Michel);
 	      return ;

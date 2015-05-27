@@ -3,9 +3,9 @@
 Player::Player(std::pair<int, int> pos, int humanId) :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
 {
-  (void)pos;
   static int	id = 0;
-
+  
+  _position = glm::vec3(pos.first * 100, 0 , pos.second * 100);
   this->humanId = humanId;
   this->player_id = id;
   id += 1;
@@ -19,6 +19,7 @@ Player::Player(std::pair<int, int> pos, int humanId) :
   _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, 0);
   _frameCounter = 0;
   _what = PLAYER;
+  _scale = glm::vec3(0.2, 0.2, 0.2);
 }
 
 Player::~Player()
@@ -83,8 +84,6 @@ void		Player::setBombColor(t_color color)
 
 bool		Player::initialize()
 {
-  _scale = glm::vec3(0.2, 0.2, 0.2);
-  _position = glm::vec3(150 , 0, 50);
   try
     {
       if (!_playerModel.load("./assets/player.fbx") ||
