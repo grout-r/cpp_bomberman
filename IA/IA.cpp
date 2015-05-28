@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 15:20:07 2015 julien gazzola
+// Last update Thu May 28 16:45:15 2015 julien gazzola
 //
 
 # include <vector>
@@ -34,10 +34,15 @@ e_input		IA::FindBonus(Map &map, Player *player){
 }
 
 e_input		IA::doAction(Map &map, Player *player){
+  std::vector<std::pair<AObject*, int> >	tab;
+
+  tab = CreateTable(map, player);
   if (CheckBomb(map, player) != 0)
     return (CheckFreeCase(map, player));
   else
     return (FindBonus(map, player));
+  std::cout << "caca" << std::endl;
+  return (MOVE_RIGHT);
 }
 
 e_input       	IA::CheckFreeCase(Map &map, Player *player){
@@ -71,27 +76,30 @@ e_input		IA::Move(Map &map, Player *player){
 }
 
 std::vector<std::pair<AObject*, int> >		IA::CreateTable(Map &map, Player *player){
-    std::vector<std::pair<AObject*, int> >	_tab;
+    std::vector<std::pair<AObject*, int> >	tab;
     std::pair<AObject*, int>			pairToAdd;
     std::pair<int, int>				posPlayer;
     std::pair<int, int>				tmp;
     AObject					*obj;
 
     posPlayer = player->getPos();
-    tmp = posPlayer;
+    tmp.first = posPlayer.first - 2;
+    tmp.second = posPlayer.second - 2;
     if (posPlayer.first - 2 >= 0){
       if (posPlayer.second - 2 >= 0){
-	_tab.resize(5);
-	for (unsigned int i = 0; i != _tab.size(); ++i){
+	for (unsigned int y = 0; y != 5; ++y){
+	  for (unsigned int x = 0; x != 5; ++x){
+	    obj = map.getItemAtPos(tmp);
+	    pairToAdd.second = obj->getSmell();
+	    tab.push_back(pairToAdd);
+	    ++tmp.first;
+	  }
 	  tmp.first = posPlayer.first - 2;
-	  tmp.second = posPlayer.second - 2;
-	  obj = map.getItemAtPos(tmp);
-	  pairToAdd.second = obj->getSmell();
-	  _tab[i] = pairToAdd;
+	  ++tmp.second;
 	}
       }
     }
-    return (_tab);
+    return (tab);
 }
 
 int			IA::CheckBomb(Map &map, Player *player){
