@@ -40,6 +40,7 @@ bool					GameEngine::update()
       if (_funcptrBind.count(_events[i].input))
 	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
+  _map->update();
    return (true);
 }
 

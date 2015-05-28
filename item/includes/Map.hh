@@ -37,6 +37,9 @@ public:
   ~Map();
   void						genRandMap();
 
+private:
+  void						fireSomeHut(std::pair<int, int>);
+
 public:
   // void						init();
   void						newPlayer(int human);
@@ -46,6 +49,7 @@ public:
   std::pair<int, int>				getSize();
   AObject					*getItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);
+  void						update();
 };
 
 #endif /* !MAP_HH_ */
