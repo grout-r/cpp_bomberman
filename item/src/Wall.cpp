@@ -3,6 +3,7 @@
 
 Wall::Wall(std::pair<int, int> pos)
 {
+  this->_smell = -2;
   _what = WALL;
   _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
 }
@@ -84,4 +85,8 @@ bool			Wall::initialize()
 
 void				update()
 {
+}
+
+int				Wall::getSmell() const{
+  return (this->_smell);
 }

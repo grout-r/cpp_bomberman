@@ -9,6 +9,7 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
   this->pos = player->getPos();
   this->bomb_power = player->getBombPower();
   this->color = player->getBombColor();
+  this->_smell = -10;
   time(&(this->timer));
   std::cout << this->pos.first << ";" << this->pos.second << std::endl;
   _what = BOMB;
@@ -58,4 +59,8 @@ void		Bomb::update()
 
 int		Bomb::getBombPower() const{
   return (this->bomb_power);
+}
+
+int		Bomb::getSmell() const{
+  return (this->_smell);
 }

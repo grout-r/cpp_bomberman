@@ -5,12 +5,20 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:18:59 2015 Jordan Verove
-// Last update Thu May 21 11:41:52 2015 grout_r
+// Last update Thu May 28 12:28:19 2015 julien gazzola
 //
 
 #include "AObject.hh"
 
 Bonus::Bonus()
 {
+  this->_smell = 10;
   _what = BONUS;
+}
+
+Bonus::~Bonus(){
+}
+
+int	Bonus::getSmell() const{
+  return (this->_smell);
 }

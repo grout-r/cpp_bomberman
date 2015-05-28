@@ -26,6 +26,7 @@ private:
   t_color		bomb_color;
   int			player_id;
   int			humanId;
+  int			_smell;
 private:
   gdl::Model		_playerModel;
   int			_frameCounter;
@@ -54,6 +55,7 @@ public:
   void				draw(gdl::BasicShader& shader, gdl::Clock &);
   void				move(t_input input);
   std::pair<int, int>		getNewPos(t_input input);
+  int				getSmell() const;
 };
 
 #endif /* !PLAYER_HH_ */

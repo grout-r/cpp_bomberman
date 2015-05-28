@@ -24,6 +24,7 @@ private:
   //j'ai mis un int sinon ca compile pas ca m'a soulé
   int			color;
   time_t		timer;
+  int   		_smell;
 
 private:
   gdl::Model		_bombModel;
@@ -35,6 +36,7 @@ public:
 
   bool			explose();
 public:
+  int			getSmell() const;
   int			getBombPower() const;
   bool			initialize();
   void			update();
