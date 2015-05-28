@@ -6,13 +6,9 @@
 
 class Void :	public AObject
 {
-private:
-  int		_smell;
-
 public:
   Void(std::pair<int, int>);
   bool		initialize();
-  int		getSmell() const;
 };
 
 #endif /* !VOID_HH_ */

@@ -132,7 +132,3 @@ void		Player::move(t_input input)
   _position += _movePlayerBind[input];
   _rotation = _rotatePlayerBind[input];
 }
-
-int			Player::getSmell() const{
-  return (this->_smell);
-}

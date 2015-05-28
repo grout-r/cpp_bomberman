@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 14:11:46 2015 julien gazzola
+// Last update Thu May 28 15:20:07 2015 julien gazzola
 //
 
 # include <vector>
@@ -69,12 +69,13 @@ e_input		IA::Move(Map &map, Player *player){
   (void) player;
   return (MOVE_RIGHT);
 }
-/*
-std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *player){
-    std::vector<std::pair<AObject*, e_smell> >	_tab;
-    std::pair<e_smell, AObject*>		pairToAdd;
+
+std::vector<std::pair<AObject*, int> >		IA::CreateTable(Map &map, Player *player){
+    std::vector<std::pair<AObject*, int> >	_tab;
+    std::pair<AObject*, int>			pairToAdd;
     std::pair<int, int>				posPlayer;
     std::pair<int, int>				tmp;
+    AObject					*obj;
 
     posPlayer = player->getPos();
     tmp = posPlayer;
@@ -84,14 +85,14 @@ std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *pla
 	for (unsigned int i = 0; i != _tab.size(); ++i){
 	  tmp.first = posPlayer.first - 2;
 	  tmp.second = posPlayer.second - 2;
-	  pairToAdd.first = map.getItemAtPos(tmp);
-	  pairToAdd.second = ;
+	  obj = map.getItemAtPos(tmp);
+	  pairToAdd.second = obj->getSmell();
 	  _tab[i] = pairToAdd;
 	}
       }
     }
     return (_tab);
-    }*/
+}
 
 int			IA::CheckBomb(Map &map, Player *player){
   std::pair<int, int>  	posPlayer;

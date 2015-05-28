@@ -79,7 +79,3 @@ bool			Wall::initialize()
 void				update()
 {
 }
-
-int				Wall::getSmell() const{
-  return (this->_smell);
-}
