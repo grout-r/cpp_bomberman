@@ -2,7 +2,7 @@
 # define MAP_HH_
 
 # include <utility>
-#include "glm/ext.hpp"
+# include "glm/ext.hpp"
 
 # include "AObject.hh"
 # include "Bomb.hh"
@@ -41,7 +41,7 @@ private:
   void						fireSomeHut(std::pair<int, int>);
 
 public:
-  // void						init();
+  void						init();
   void						newPlayer(int human);
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock clock);

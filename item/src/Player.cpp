@@ -3,7 +3,9 @@
 Player::Player(std::pair<int, int> pos, int humanId) :
   bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
 {
-  static int	id = 0;  
+  static int	id = 0;
+  
+  this->_smell = 4;
   _position = glm::vec3(pos.first * 100, 0 , pos.second * 100);
   this->humanId = humanId;
   this->player_id = id;
@@ -129,4 +131,8 @@ void		Player::move(t_input input)
     }
   _position += _movePlayerBind[input];
   _rotation = _rotatePlayerBind[input];
+}
+
+int			Player::getSmell() const{
+  return (this->_smell);
 }
