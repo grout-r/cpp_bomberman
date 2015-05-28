@@ -3,6 +3,9 @@
 
 Bomb::Bomb(Player *player, std::pair<int, int> pos)
 {
+  _floor = new Void(pos);
+  _floor->initialize();
+  _scale = glm::vec3(0.3, 0.3, 0.3);
   std::cout << "bomb posée en :" << std::endl;
   _position = glm::vec3(pos.first * 100, 0, pos.second * 100);
   this->player_id = player->getPlayerId();
@@ -17,8 +20,7 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
 
 Bomb::~Bomb()
 {
-  if (this->explose() == true)
-    std::cout << "BOOOM!!!!!!!!!!!!!" << std::endl;
+  std::cout << "BOOOM!!!!!!!!!!!!!" << std::endl;
 }
 
 bool		Bomb::explose()
@@ -26,10 +28,12 @@ bool		Bomb::explose()
   double	diff;
   time_t	now;
 
-  sleep(3);
   time(&now);
   if ((diff = difftime(now, (this->timer) + 3)) == 0)
-    return (true);
+    {
+      std::cout << "bomb explose" << std::endl;
+      return (true);
+    }
   return (false);
 }
 
@@ -37,7 +41,7 @@ bool		Bomb::initialize()
 {
   try
     {
-      if (!_bombModel.load("./assets/bomb.obj"))
+      if (!_bombModel.load("./assets/bomb.fbx"))
 	throw (Error("cannot load assets for bomb model"));
       return (true);
     }
@@ -51,6 +55,7 @@ bool		Bomb::initialize()
 void		Bomb::draw(gdl::BasicShader& shader, gdl::Clock & clock)
 {
   _bombModel.draw(shader, calcTransformation(), clock.getElapsed());
+  _floor->draw(shader, clock);
 }
 
 void		Bomb::update()

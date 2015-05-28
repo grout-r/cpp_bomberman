@@ -6,6 +6,7 @@
 
 #include "AObject.hh"
 #include "Player.hh"
+#include "Void.hh"
 
 class Player;
 
@@ -28,7 +29,7 @@ private:
 
 private:
   gdl::Model		_bombModel;
-  
+  Void			*_floor;
 
 public:
   Bomb(Player  *player, std::pair<int, int> pos);
