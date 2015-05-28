@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 09:55:35 2015 julien gazzola
-// Last update Thu May 28 12:07:03 2015 julien gazzola
+// Last update Thu May 28 13:27:51 2015 julien gazzola
 //
 
 #ifndef IA_HH_
@@ -35,7 +35,7 @@ public:
   int     	CheckBonus(Map &map, Player *player);
   e_action     	CheckPlayer(Map &map, Player *player);
   e_action	Move(Map &map, Player *player);
-  std::vector<std::pair<AObject*, e_smell> > CreateTable(Map &map, Player *player);
+  //  std::vector<std::pair<AObject*, e_smell> > CreateTable(Map &map, Player *player);
 };
 
 #endif // !IA_HH_

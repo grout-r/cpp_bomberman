@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 12:00:47 2015 julien gazzola
+// Last update Thu May 28 13:27:24 2015 julien gazzola
 //
 
 # include <vector>
@@ -69,7 +69,7 @@ e_action	IA::Move(Map &map, Player *player){
   (void) player;
   return (GO_NORTH);
 }
-
+/*
 std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *player){
     std::vector<std::pair<AObject*, e_smell> >	_tab;
     std::pair<e_smell, AObject*>		pairToAdd;
@@ -91,7 +91,7 @@ std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *pla
       }
     }
     return (_tab);
-}
+    }*/
 
 int			IA::CheckBomb(Map &map, Player *player){
   std::pair<int, int>  	posPlayer;
