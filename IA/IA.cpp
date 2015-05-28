@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 14:03:58 2015 grout_r
+// Last update Thu May 28 14:11:46 2015 julien gazzola
 //
 
 # include <vector>
@@ -26,24 +26,24 @@ IA::~IA(){
 }
 
 
-e_action	IA::FindBonus(Map &map, Player *player){
+e_input		IA::FindBonus(Map &map, Player *player){
   if (CheckBonus(map, player) != 0)
     return (Move(map, player));
   else
     return (CheckPlayer(map, player));
 }
 
-e_action	IA::doAction(Map &map, Player *player){
+e_input		IA::doAction(Map &map, Player *player){
   if (CheckBomb(map, player) != 0)
     return (CheckFreeCase(map, player));
   else
     return (FindBonus(map, player));
 }
- 
-e_action       	IA::CheckFreeCase(Map &map, Player *player){
+
+e_input       	IA::CheckFreeCase(Map &map, Player *player){
   (void) map;
   (void) player;
-  return (GO_NORTH);
+  return (MOVE_RIGHT);
 }
 
 int       	IA::CheckBonus(Map &map, Player *player){
@@ -52,7 +52,7 @@ int       	IA::CheckBonus(Map &map, Player *player){
   return (1);
 }
 
-e_action       	IA::CheckPlayer(Map &map, Player *player){
+e_input       	IA::CheckPlayer(Map &map, Player *player){
   (void) map;
   (void) player;
   /*
@@ -61,13 +61,13 @@ e_action       	IA::CheckPlayer(Map &map, Player *player){
     else
        return ();
    */
-  return (GO_NORTH);
+  return (MOVE_RIGHT);
 }
 
-e_action	IA::Move(Map &map, Player *player){
+e_input		IA::Move(Map &map, Player *player){
   (void) map;
   (void) player;
-  return (GO_NORTH);
+  return (MOVE_RIGHT);
 }
 /*
 std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *player){
