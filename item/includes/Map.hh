@@ -50,6 +50,7 @@ public:
   AObject					*getItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);
   void						update();
+  std::vector<Player*>*				getPlayerSet();
 };
 
 #endif /* !MAP_HH_ */

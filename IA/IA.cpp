@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 13:27:24 2015 julien gazzola
+// Last update Thu May 28 14:03:58 2015 grout_r
 //
 
 # include <vector>
@@ -33,7 +33,7 @@ e_action	IA::FindBonus(Map &map, Player *player){
     return (CheckPlayer(map, player));
 }
 
-e_action	IA::DoAction(Map &map, Player *player){
+e_action	IA::doAction(Map &map, Player *player){
   if (CheckBomb(map, player) != 0)
     return (CheckFreeCase(map, player));
   else
@@ -146,9 +146,4 @@ int			IA::CheckBomb(Map &map, Player *player){
       }
   }
   return (0);
-}
-
-int	main(){
-  IA	ia;
-
 }

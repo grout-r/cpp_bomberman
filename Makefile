@@ -4,7 +4,7 @@ CC		=		clang++ -g3
 
 RM		=		rm -f
 
-INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -Iitem/includes/
+INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -Iitem/includes/ -IIA
 
 CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror 
 
@@ -19,7 +19,9 @@ SRCS		=		core/src/main.cpp \
 				item/src/Wall.cpp \
 				item/src/AObject.cpp \
 				item/src/Map.cpp \
-				item/src/Void.cpp
+				item/src/Void.cpp \
+				IA/IA.cpp
+
 #SRCS		=		tp/main.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)

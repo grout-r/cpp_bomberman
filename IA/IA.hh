@@ -5,21 +5,13 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 09:55:35 2015 julien gazzola
-// Last update Thu May 28 13:27:51 2015 julien gazzola
+// Last update Thu May 28 14:03:34 2015 grout_r
 //
 
 #ifndef IA_HH_
 # define IA_HH_
 
-enum e_action
-  {
-    GO_NORTH,
-    GO_SOUTH,
-    GO_EAST,
-    GO_WEST,
-    PUT_BOMB,
-    STAY
-  };
+# include "Definition.hh"
 
 class IA
 {
@@ -28,7 +20,9 @@ public:
   ~IA();
 
 public:
-  e_action	DoAction(Map &map, Player *player);
+  e_action	doAction(Map &map, Player *player);
+
+private:
   e_action	FindBonus(Map &map, Player *player);
   int     	CheckBomb(Map &map, Player *player);
   e_action     	CheckFreeCase(Map &map, Player *player);

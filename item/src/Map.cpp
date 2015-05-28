@@ -316,3 +316,8 @@ void						Map::update()
 	}
     }
 }
+
+std::vector<Player*>*			       Map::getPlayerSet()
+{
+  return (&_player);
+}

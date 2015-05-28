@@ -15,6 +15,7 @@ GameEngine::GameEngine()
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
   _map = new Map(std::make_pair(20, 20));
+  _iaManager = new IA;
 }
 
 GameEngine::~GameEngine()
@@ -25,7 +26,7 @@ bool					GameEngine::initialize()
 {
   if (_screen.init() == false)
     return (false);
-  _map->genRandMap();
+  _map->init();
   _map->newPlayer(1);  
   return (true);
 }
@@ -40,8 +41,23 @@ bool					GameEngine::update()
       if (_funcptrBind.count(_events[i].input))
 	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
+  this->updateIA();
   _map->update();
    return (true);
+}
+
+void					GameEngine::updateIA()
+{
+  std::vector<Player*>			*playerSet;
+
+  playerSet = _map->getPlayerSet();
+  for (size_t i = 0; i != playerSet->size(); i++)
+    {
+      if ( (*playerSet)[i]->getHumanId() == 0 ) 
+	{
+	  _iaManager->doAction(*_map, (*playerSet)[i]);
+	}
+    } 
 }
 
 void					GameEngine::draw()
@@ -82,7 +98,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
 	endl;
       // if (_map->getItemAtPos(newPos)->what() == VOID 
       // 	|| _map->getItemAtPos(newPos)->what() == BOMB)
-	tmp->move(input);
+      tmp->move(input);
     }
 }
 
