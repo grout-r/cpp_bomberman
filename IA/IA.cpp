@@ -5,7 +5,7 @@
 // Login   <gazzol_j@epitech.net>
 // 
 // Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 14:11:46 2015 julien gazzola
+// Last update Thu May 28 14:17:29 2015 grout_r
 //
 
 # include <vector>
@@ -26,21 +26,21 @@ IA::~IA(){
 }
 
 
-e_input		IA::FindBonus(Map &map, Player *player){
+t_input		IA::FindBonus(Map &map, Player *player){
   if (CheckBonus(map, player) != 0)
     return (Move(map, player));
   else
     return (CheckPlayer(map, player));
 }
 
-e_input		IA::doAction(Map &map, Player *player){
+t_input		IA::doAction(Map &map, Player *player){
   if (CheckBomb(map, player) != 0)
     return (CheckFreeCase(map, player));
   else
     return (FindBonus(map, player));
 }
 
-e_input       	IA::CheckFreeCase(Map &map, Player *player){
+t_input       	IA::CheckFreeCase(Map &map, Player *player){
   (void) map;
   (void) player;
   return (MOVE_RIGHT);
@@ -52,7 +52,7 @@ int       	IA::CheckBonus(Map &map, Player *player){
   return (1);
 }
 
-e_input       	IA::CheckPlayer(Map &map, Player *player){
+t_input       	IA::CheckPlayer(Map &map, Player *player){
   (void) map;
   (void) player;
   /*
@@ -64,7 +64,7 @@ e_input       	IA::CheckPlayer(Map &map, Player *player){
   return (MOVE_RIGHT);
 }
 
-e_input		IA::Move(Map &map, Player *player){
+t_input		IA::Move(Map &map, Player *player){
   (void) map;
   (void) player;
   return (MOVE_RIGHT);

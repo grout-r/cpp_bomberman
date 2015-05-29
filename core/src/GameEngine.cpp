@@ -49,13 +49,15 @@ bool					GameEngine::update()
 void					GameEngine::updateIA()
 {
   std::vector<Player*>			*playerSet;
+  t_input				input;
 
   playerSet = _map->getPlayerSet();
   for (size_t i = 0; i != playerSet->size(); i++)
     {
       if ( (*playerSet)[i]->getHumanId() == 0 ) 
 	{
-	  _iaManager->doAction(*_map, (*playerSet)[i]);
+	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
+	  (*playerSet)[i]->move(input);
 	}
     } 
 }
