@@ -30,7 +30,3 @@ bool			Void::initialize()
     }
   return (false);
 }
-
-int			Void::getSmell() const{
-  return (this->_smell);
-}

@@ -248,7 +248,8 @@ void						Map::newPlayer(int human)
 	{
 	  if (_map[i][j]->what() == VOID)
 	    {
-	      Michel = new Player(std::make_pair(i, j), human);
+	      //Michel = new Player(std::make_pair(i, j), human);
+	       Michel = new Player(std::make_pair(5, 5), human);
   	      Michel->initialize();
 	      _map[i][j] = Michel;
 	      _player.push_back(Michel);

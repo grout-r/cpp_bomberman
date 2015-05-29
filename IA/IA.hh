@@ -1,12 +1,3 @@
-//
-// IA.hh for IA_bomber in /home/gazzol_j/rendu/cpp_bomberman/IA
-// 
-// Made by julien gazzola
-// Login   <gazzol_j@epitech.net>
-// 
-// Started on  Tue May 12 09:55:35 2015 julien gazzola
-// Last update Thu May 28 14:17:41 2015 grout_r
-//
 
 #ifndef IA_HH_
 # define IA_HH_
@@ -30,6 +21,9 @@ private:
   t_input     	CheckPlayer(Map &map, Player *player);
   t_input	Move(Map &map, Player *player);
   //  std::vector<std::pair<AObject*, e_smell> > CreateTable(Map &map, Player *player);
+  e_input     	CheckPlayer(Map &map, Player *player);
+  e_input	Move(Map &map, Player *player);
+  std::vector<std::pair<AObject*, int> >       	CreateTable(Map &map, Player *player);
 };
 
 #endif // !IA_HH_

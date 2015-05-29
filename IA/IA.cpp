@@ -1,12 +1,3 @@
-//
-// IA.cpp for IA_bomber in /home/gazzol_j/rendu/cpp_bomberman/IA
-// 
-// Made by julien gazzola
-// Login   <gazzol_j@epitech.net>
-// 
-// Started on  Tue May 12 13:32:12 2015 julien gazzola
-// Last update Thu May 28 14:17:29 2015 grout_r
-//
 
 # include <vector>
 # include "Definition.hh"
@@ -34,10 +25,15 @@ t_input		IA::FindBonus(Map &map, Player *player){
 }
 
 t_input		IA::doAction(Map &map, Player *player){
+  std::vector<std::pair<AObject*, int> >	tab;
+
+  tab = CreateTable(map, player);
   if (CheckBomb(map, player) != 0)
     return (CheckFreeCase(map, player));
   else
     return (FindBonus(map, player));
+  std::cout << "caca" << std::endl;
+  return (MOVE_RIGHT);
 }
 
 t_input       	IA::CheckFreeCase(Map &map, Player *player){
@@ -69,29 +65,33 @@ t_input		IA::Move(Map &map, Player *player){
   (void) player;
   return (MOVE_RIGHT);
 }
-/*
-std::vector<std::pair<AObject*, e_smell> >	IA::CreateTable(Map &map, Player *player){
-    std::vector<std::pair<AObject*, e_smell> >	_tab;
-    std::pair<e_smell, AObject*>		pairToAdd;
+
+std::vector<std::pair<AObject*, int> >		IA::CreateTable(Map &map, Player *player){
+    std::vector<std::pair<AObject*, int> >	tab;
+    std::pair<AObject*, int>			pairToAdd;
     std::pair<int, int>				posPlayer;
     std::pair<int, int>				tmp;
+    AObject					*obj;
 
     posPlayer = player->getPos();
-    tmp = posPlayer;
+    tmp.first = posPlayer.first - 2;
+    tmp.second = posPlayer.second - 2;
     if (posPlayer.first - 2 >= 0){
       if (posPlayer.second - 2 >= 0){
-	_tab.resize(5);
-	for (unsigned int i = 0; i != _tab.size(); ++i){
+	for (unsigned int y = 0; y != 5; ++y){
+	  for (unsigned int x = 0; x != 5; ++x){
+	    obj = map.getItemAtPos(tmp);
+	    pairToAdd.second = obj->getSmell();
+	    tab.push_back(pairToAdd);
+	    ++tmp.first;
+	  }
 	  tmp.first = posPlayer.first - 2;
-	  tmp.second = posPlayer.second - 2;
-	  pairToAdd.first = map.getItemAtPos(tmp);
-	  pairToAdd.second = ;
-	  _tab[i] = pairToAdd;
+	  ++tmp.second;
 	}
       }
     }
-    return (_tab);
-    }*/
+    return (tab);
+}
 
 int			IA::CheckBomb(Map &map, Player *player){
   std::pair<int, int>  	posPlayer;

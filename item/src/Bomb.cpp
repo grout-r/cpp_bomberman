@@ -65,7 +65,3 @@ void		Bomb::update()
 int		Bomb::getBombPower() const{
   return (this->bomb_power);
 }
-
-int		Bomb::getSmell() const{
-  return (this->_smell);
-}

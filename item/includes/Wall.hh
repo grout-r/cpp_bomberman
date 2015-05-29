@@ -20,9 +20,6 @@
 
 class Wall :	public AObject
 {
-private:
-  int		_smell;
-
 public:
   Wall(std::pair<int, int>);
   ~Wall();
@@ -30,7 +27,6 @@ public:
 public:
   bool		initialize();
   void		update();
-  int		getSmell() const;
 };
 
 #endif /* !WALL_HH_ */

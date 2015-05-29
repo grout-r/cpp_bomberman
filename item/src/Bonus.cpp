@@ -5,7 +5,7 @@
 // Login   <verove_j@epitech.net>
 // 
 // Started on  Tue May 12 13:18:59 2015 Jordan Verove
-// Last update Thu May 28 12:28:19 2015 julien gazzola
+// Last update Thu May 28 15:07:22 2015 julien gazzola
 //
 
 #include "AObject.hh"
@@ -17,8 +17,4 @@ Bonus::Bonus()
 }
 
 Bonus::~Bonus(){
-}
-
-int	Bonus::getSmell() const{
-  return (this->_smell);
 }

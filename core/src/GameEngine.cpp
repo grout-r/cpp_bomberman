@@ -27,7 +27,9 @@ bool					GameEngine::initialize()
   if (_screen.init() == false)
     return (false);
   _map->init();
-  _map->newPlayer(1);  
+  _map->newPlayer(0);  
+  //  _map->newPlayer(2);  
+  // _map->newPlayer(0);  
   return (true);
 }
  
@@ -43,7 +45,7 @@ bool					GameEngine::update()
     }
   this->updateIA();
   _map->update();
-   return (true);
+  return (true);
 }
 
 void					GameEngine::updateIA()
@@ -58,8 +60,12 @@ void					GameEngine::updateIA()
 	{
 	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
 	  (*playerSet)[i]->move(input);
+	  std::cout << "JAPPELLE MON IA" << std::endl;
+	  _iaManager->doAction(*_map, (*playerSet)[i]);
+	  std::cout << "FIN DE LIA" << std::endl;
 	}
     } 
+  std::cout << "PU DE IA A EXEC" << std::endl;
 }
 
 void					GameEngine::draw()
