@@ -96,6 +96,7 @@ std::vector<std::pair<AObject*, int> >		IA::CreateTable(Map &map, Player *player
 int			IA::CheckBomb(Map &map, Player *player){
   int			i = 0;
 
+  
   if ((i = checkBottom(map, player)) == 1)
     return (1);
   if ((i = checkUp(map, player)) == 1)
