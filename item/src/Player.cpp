@@ -5,6 +5,7 @@ Player::Player(std::pair<int, int> pos, int humanId) :
 {
   static int	id = 0;
   
+  this->_smell = 4;
   _position = glm::vec3(pos.first * 100, 0 , pos.second * 100);
   this->humanId = humanId;
   this->player_id = id;

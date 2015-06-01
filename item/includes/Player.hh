@@ -26,6 +26,7 @@ private:
   t_color		bomb_color;
   int			player_id;
   int			humanId;
+
 private:
   gdl::Model		_playerModel;
   int			_frameCounter;

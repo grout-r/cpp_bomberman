@@ -20,7 +20,6 @@
 
 class Wall :	public AObject
 {
-
 public:
   Wall(std::pair<int, int>);
   ~Wall();

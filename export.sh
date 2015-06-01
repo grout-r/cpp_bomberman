@@ -1,2 +1,3 @@
 #! /bin/sh
-export LD_LIBRARY_PATH=$PWD/libgdl/libs/
+
+echo "export LD_LIBRARY_PATH=$PWD/libgdl/libs/"

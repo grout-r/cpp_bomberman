@@ -7,6 +7,7 @@ class Bonus :	public AObject
 {
 public:
   Bonus();
+  ~Bonus();
 };
 
 #endif /* !BONUS_HH_ */

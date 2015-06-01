@@ -216,7 +216,8 @@ void						Map::newPlayer(int human)
 	{
 	  if (_map[i][j]->what() == VOID)
 	    {
-	      Michel = new Player(std::make_pair(i, j), human);
+	      //Michel = new Player(std::make_pair(i, j), human);
+	       Michel = new Player(std::make_pair(5, 5), human);
   	      Michel->initialize();
 	      _map[i][j] = Michel;
 	      _player.push_back(Michel);
@@ -260,4 +261,32 @@ std::pair<int, int>				Map::getSize()
 AObject*					Map::getItemAtPos(std::pair<int, int> pos)
 {
   return (_map[pos.first][pos.second]);
+}
+
+void						Map::fireSomeHut(std::pair<int, int> pos)
+{
+  (void)pos;  
+}
+
+void						Map::update()
+{
+  std::pair<int, int>				pos;
+  
+  for (size_t i = 0; i != _bomb.size(); i++)
+    {
+      if (_bomb[i]->explose() == true)
+	{
+	  pos = _bomb[i]->getPos();
+	  delete _map[pos.first][pos.second];
+	  _map[pos.first][pos.second] = new Void(pos);
+	  _map[pos.first][pos.second]->initialize();
+	  //_bomb.erase(_bomb.begin() + i - 1);
+	  fireSomeHut(pos);
+	}
+    }
+}
+
+std::vector<Player*>*			       Map::getPlayerSet()
+{
+  return (&_player);
 }

@@ -2,6 +2,7 @@
 
 Void::Void(std::pair<int, int> pos)
 {
+  this->_smell = 0;
   _what = VOID;
   _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
 }
@@ -29,4 +30,3 @@ bool			Void::initialize()
     }
   return (false);
 }
-

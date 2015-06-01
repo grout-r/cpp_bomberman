@@ -27,6 +27,7 @@ protected:
   glm::vec3			_scale;
   gdl::Texture			_texture;
   gdl::Geometry			_geometry;
+  int				_smell;
   
 protected:
   t_what			_what;
@@ -44,6 +45,7 @@ public:
   
 public:
   t_what			what();
+  int				getSmell() const;
   std::pair<int, int>		getPos() const;
   glm::vec3			getVecPos();
 };

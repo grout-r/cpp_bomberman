@@ -14,6 +14,7 @@
 # include "Player.hh"
 # include "Map.hh"
 # include "Definition.hh"
+# include "IA.hh"
 
 class GameEngine;
 
@@ -28,6 +29,7 @@ private:
   std::vector<t_event>				_events;
   std::map<t_input, inputFuncptr>		_funcptrBind;
   Map						*_map;
+  IA						*_iaManager;
 
 public:
   GameEngine();
@@ -44,6 +46,7 @@ public:
   void						movePlayer(int, t_input);
   void						lockCam(int, t_input);
   void						placeBomb(int, t_input);
+  void						updateIA();
 };
 
 # endif
