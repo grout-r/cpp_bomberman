@@ -14,7 +14,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
-  _map = new Map(std::make_pair(20, 20));
+  _map = new Map(std::make_pair(10, 10));
 }
 
 GameEngine::~GameEngine()
@@ -26,6 +26,7 @@ bool					GameEngine::initialize()
   if (_screen.init() == false)
     return (false);
   _map->genRandMap();
+  //_map->init();
   _map->newPlayer(1);  
   return (true);
 }

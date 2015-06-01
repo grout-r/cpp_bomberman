@@ -1,6 +1,6 @@
 NAME		=		bomberman
 
-CC		=		clang++ -g3
+CC		=		g++ -g3
 
 RM		=		rm -f
 
