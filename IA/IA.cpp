@@ -94,56 +94,15 @@ std::vector<std::pair<AObject*, int> >		IA::CreateTable(Map &map, Player *player
 }
 
 int			IA::CheckBomb(Map &map, Player *player){
-  std::pair<int, int>  	posPlayer;
-  AObject		*tmp;
-  std::pair<int, int>	tmp2;
-  int			xPlayer;
-  int			yPlayer;
-  int			count = 0;
-  Bomb			*bomb;
+  int			i = 0;
 
-  bomb = NULL;
-  posPlayer = player->getPos();
-  xPlayer = posPlayer.first;
-  yPlayer = posPlayer.second;
-  tmp2 = map.getSize();
-  for (; posPlayer.second != tmp2.second; ++posPlayer.second){
-    ++count;
-    tmp = map.getItemAtPos(posPlayer);
-    if (tmp->what() == BOMB){
-       if (bomb->getBombPower() >= count)
-	  return (1);
-      }
-  }
-  posPlayer.first = xPlayer;
-  posPlayer.second = yPlayer;
-
-  for (; posPlayer.second != 0; --posPlayer.second){
-    tmp = map.getItemAtPos(posPlayer);
-    if (tmp->what() == BOMB){
-	if (bomb->getBombPower() >= count)
-	  return (1);
-      }
-  }
-  posPlayer.first = xPlayer;
-  posPlayer.second = yPlayer;
-
-  for (; posPlayer.first != tmp2.first; ++posPlayer.first){
-    tmp = map.getItemAtPos(posPlayer);
-    if (tmp->what() == BOMB){
-	if (bomb->getBombPower() >= count)
-	  return (1);
-      }
-  }
-  posPlayer.first = xPlayer;
-  posPlayer.second = yPlayer;
-
-  for (; posPlayer.first != 0; ++posPlayer.first){
-    tmp = map.getItemAtPos(posPlayer);
-    if (tmp->what() == BOMB){
-	if (bomb->getBombPower() >= count)
-	  return (1);
-      }
-  }
+  if ((i = checkBottom(map, player)) == 1)
+    return (1);
+  if ((i = checkUp(map, player)) == 1)
+    return (1);
+  if ((i = checkRight(map, player)) == 1)
+    return (1);
+  if ((i = checkLeft(map, player)) == 1)
+    return (1);
   return (0);
 }

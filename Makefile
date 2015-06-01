@@ -20,7 +20,8 @@ SRCS		=		core/src/main.cpp \
 				item/src/AObject.cpp \
 				item/src/Map.cpp \
 				item/src/Void.cpp \
-				IA/IA.cpp
+				IA/IA.cpp \
+				IA/Check.cpp
 
 #SRCS		=		tp/main.cpp
 

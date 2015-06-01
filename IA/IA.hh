@@ -20,9 +20,10 @@ private:
   int     	CheckBonus(Map &map, Player *player);
   t_input     	CheckPlayer(Map &map, Player *player);
   t_input	Move(Map &map, Player *player);
-  //  std::vector<std::pair<AObject*, e_smell> > CreateTable(Map &map, Player *player);
-  e_input     	CheckPlayer(Map &map, Player *player);
-  e_input	Move(Map &map, Player *player);
+  int		checkUp(Map &map, Player *player);
+  int		checkBottom(Map &map, Player *player);
+  int		checkLeft(Map &map, Player *player);
+  int		checkRight(Map &map, Player *player);
   std::vector<std::pair<AObject*, int> >       	CreateTable(Map &map, Player *player);
 };
 
