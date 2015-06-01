@@ -17,6 +17,7 @@ class Map
 {
 private:
   std::vector<std::vector<AObject*> >		_map;
+  std::vector<std::vector<int> >		_int_map;
   std::vector<Bomb*>				_bomb;
   std::vector<Player*>				_player;
   std::vector<Wall*>				_wall;

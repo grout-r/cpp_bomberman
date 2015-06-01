@@ -71,37 +71,45 @@ void				Map::init()
 	    }
 	  wall = false;
 	}
-    }/*
-  for (int x = 0; x != _size.first; x++)
-    {
-      for (int y = 0; y != _size.second; y++)
-	{
-	  if (y == _size.second - 1)
-	    {
-	      _map[x][y] = new Wall(std::make_pair(x, y));
-	      _map[x][y]->initialize();
-	    }
-	  if (x == _size.first)
-	    {
-	      _map[x][y] = new Wall(std::make_pair(x, y));
-              _map[x][y]->initialize();
-	    }
-	}
-	}*/
+    }
 }
  
 void				Map::fillMap()
 {
-  _map.resize(_size.second);
-  for (int y = 0; y != _size.second; y++)
+  static bool			last_fill = false;
+
+  if (last_fill == true)
     {
-      _map[y].resize(_size.first);
-      for (int x = 0; x != _size.first; x++)
+      _map.resize(_size.second);
+      for (int y = 0; y != _size.second; y++)
 	{
-	  _map[y][x] = new Wall(std::make_pair(x, y));
-	  //_map[y][x]->initialize();
+	  _map[y].resize(_size.first);
+	  for (int x = 0; x != _size.first; x++)
+	    {
+	      if (_int_map[y][x] == 0)
+		{
+		  _map[y][x] = new Wall(std::make_pair(x, y));
+		  _map[y][x]->initialize();
+		}	      
+	      else
+		{
+		  _map[y][x] = new Void(std::make_pair(x, y));
+		  _map[y][x]->initialize();
+		}
+	    }
 	}
     }
+  else
+    {
+      _int_map.resize(_size.second);
+      for (int y = 0; y != _size.second; y++)
+	{
+	  _int_map[y].resize(_size.first);
+	  for (int x = 0; x != _size.first; x++)
+	    _int_map[y][x] = 0;
+	}
+    }
+  last_fill = true;
 }
 
 std::vector<bool>		Map::check_hut(std::pair<int, int> hut)
@@ -109,13 +117,13 @@ std::vector<bool>		Map::check_hut(std::pair<int, int> hut)
   bool				tmp[] = {false, false, false, false};
   std::vector<bool>		tab(tmp, tmp + sizeof(tmp) / sizeof(tmp[0]));
   
-  if (hut.first > 2 && (_map[hut.first - 2][hut.second]->what() == WALL))
+  if (hut.first > 2 && (_int_map[hut.first - 2][hut.second] == 0))
     tab[0] = 1;
-  if (hut.first < (_size.first - 2) && (_map[hut.first + 2][hut.second]->what() == WALL))
+  if (hut.first < (_size.first - 2) && (_int_map[hut.first + 2][hut.second] == 0))
     tab[1] = 1;
-  if (hut.second > 2 && (_map[hut.first][hut.second - 2]->what() == WALL))
+  if (hut.second > 2 && (_int_map[hut.first][hut.second - 2] == 0))
     tab[2] = 1;
-  if (hut.second < (_size.second - 2) && (_map[hut.first][hut.second + 2]->what() == WALL))
+  if (hut.second < (_size.second - 2) && (_int_map[hut.first][hut.second + 2] == 0))
     tab[3] = 1;
   return (tab);
 }
@@ -130,45 +138,33 @@ void				Map::initDirection(bool (Map::*function_ptr[])(std::pair<int, int>))
 
 bool				Map::up(std::pair<int, int> pos)
 {
-  delete _map[pos.first][pos.second];
-  _map[pos.first][pos.second] = new Void(pos);
-  delete _map[pos.first - 1][pos.second];
-  _map[pos.first - 1][pos.second] = new Void(std::make_pair(pos.first - 1, pos.second));
-  delete _map[pos.first - 2][pos.second];
-  _map[pos.first - 2][pos.second] = new Void(std::make_pair(pos.first - 2,pos.second));
+  _int_map[pos.first][pos.second] = 1;
+  _int_map[pos.first - 1][pos.second] = 1;
+  _int_map[pos.first - 2][pos.second] = 1;
   return (digMap(std::make_pair(pos.first - 2, pos.second)));
 }
 
 bool				Map::down(std::pair<int, int> pos)
 {
-  delete _map[pos.first][pos.second];
-  _map[pos.first][pos.second] = new Void(pos);
-  delete _map[pos.first + 1][pos.second];
-  _map[pos.first + 1][pos.second] = new Void(std::make_pair(pos.first + 1, pos.second));
-  delete _map[pos.first + 2][pos.second];
-  _map[pos.first + 2][pos.second] = new Void(std::make_pair(pos.first + 2,pos.second));
+  _int_map[pos.first][pos.second] = 1;
+  _int_map[pos.first + 1][pos.second] = 1;
+  _int_map[pos.first + 2][pos.second] = 1;
   return (digMap(std::make_pair(pos.first + 2, pos.second)));
 }
 
 bool				Map::left(std::pair<int, int> pos)
 {
-  delete _map[pos.first][pos.second];
-  _map[pos.first][pos.second] = new Void(pos);
-  delete _map[pos.first][pos.second - 1];
-  _map[pos.first][pos.second - 1] = new Void(std::make_pair(pos.first, pos.second - 1));
-  delete _map[pos.first][pos.second - 2];
-  _map[pos.first][pos.second - 2] = new Void(std::make_pair(pos.first, pos.second - 2));
+  _int_map[pos.first][pos.second] = 1;
+  _int_map[pos.first][pos.second - 1] = 1;
+  _int_map[pos.first][pos.second - 2] = 1;
   return (digMap(std::make_pair(pos.first, pos.second - 2)));
 }
 
 bool				Map::right(std::pair<int, int> pos)
 {
-  delete _map[pos.first][pos.second];
-  _map[pos.first][pos.second] = new Void(pos);
-  delete _map[pos.first][pos.second + 1];
-  _map[pos.first][pos.second + 1] = new Void(std::make_pair(pos.first, pos.second + 1));
-  delete _map[pos.first][pos.second + 2];
-  _map[pos.first][pos.second + 2] = new Void(std::make_pair(pos.first, pos.second + 2));
+  _int_map[pos.first][pos.second] = 1;
+  _int_map[pos.first][pos.second + 1] = 1;
+  _int_map[pos.first][pos.second + 2] = 1;
   return (digMap(std::make_pair(pos.first, pos.second + 2)));
 }
 
@@ -197,34 +193,8 @@ void				Map::genRandMap()
 {
   fillMap();
   digMap(std::make_pair(1, 1));
-  for (size_t x = 0; x != _map.size(); x++)
-    for (size_t y = 0; y != _map[x].size(); y++)
-      {
-	if (_map[x][y]->what() != VOID && _map[x][y]->what() != WALL)
-	  std::cout << "error" <<_map[x][y]->what() << std::endl;
-	std::cout << x << ", " << y << ", " << _map[x][y]->what() << std::endl;
-	_map[x][y]->initialize();
-      }
+  fillMap();
 }
-
-/*
-bool						Map::initMap(char *filename)
-{
-  int						i;
-  std::stream					file;
-
-  i = 0;
-  if (filename == NULL)
-    genRandMap();
-  else
-    {
-      file.open(filename);
-      try
-	{
-	  if (!file.is_open())
-	    throw Error("The file has not been found");
-    }
-}*/
 
 void						Map::draw(gdl::BasicShader &shader, 
 							  gdl::Clock clock)
@@ -232,9 +202,7 @@ void						Map::draw(gdl::BasicShader &shader,
   for (size_t i = 0; i != _map.size(); i++)
     {
       for (size_t j = 0; j != _map[i].size(); j++)
-	{
-	  _map[i][j]->draw(shader, clock);
-	}
+	_map[i][j]->draw(shader, clock);
     }
 }
 
