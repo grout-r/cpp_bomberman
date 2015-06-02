@@ -20,7 +20,6 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
 
 Bomb::~Bomb()
 {
-  std::cout << "BOOOM!!!!!!!!!!!!!" << std::endl;
 }
 
 bool		Bomb::explose()
@@ -30,31 +29,19 @@ bool		Bomb::explose()
 
   time(&now);
   if ((diff = difftime(now, (this->timer) + 3)) == 0)
-    {
-      std::cout << "bomb explose" << std::endl;
-      return (true);
-    }
+    return (true);
   return (false);
 }
 
 bool		Bomb::initialize()
 {
-  try
-    {
-      if (!_bombModel.load("./assets/bomb.fbx"))
-	throw (Error("cannot load assets for bomb model"));
-      return (true);
-    }
-  catch (Error e)
-    {
-      std::cerr << e.what() << std::endl;
-    }
-  return (false);
+  _bombModel = AssetsController::getBombModel();
+  return (true);
 }
 
 void		Bomb::draw(gdl::BasicShader& shader, gdl::Clock & clock)
 {
-  _bombModel.draw(shader, calcTransformation(), clock.getElapsed());
+  _bombModel->draw(shader, calcTransformation(), clock.getElapsed());
   _floor->draw(shader, clock);
 }
 

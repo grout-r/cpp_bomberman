@@ -1,4 +1,4 @@
-# ifndef AOBJ_HPP
+#ifndef AOBJ_HPP
 # define AOBJ_HPP
 
 # include <iostream>
@@ -18,6 +18,7 @@
 # include "glm/ext.hpp"
 
 # include "Definition.hh"
+# include "AssetsController.hh"
 
 class				AObject
 {

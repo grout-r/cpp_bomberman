@@ -16,7 +16,8 @@
 # include <vector>
 # include <map>
 # include "glm/ext.hpp"
-
+# include <SDL/SDL.h>
+# include <SDL/SDL_mixer.h>
 # include "AObject.hh"
 # include "Map.hh"
 # include "Definition.hh"

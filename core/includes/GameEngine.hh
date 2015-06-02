@@ -14,6 +14,7 @@
 # include "Player.hh"
 # include "Map.hh"
 # include "Definition.hh"
+# include "AssetsController.hh"
 # include "IA.hh"
 
 class GameEngine;
@@ -30,7 +31,6 @@ private:
   std::map<t_input, inputFuncptr>		_funcptrBind;
   Map						*_map;
   IA						*_iaManager;
-
 public:
   GameEngine();
   ~GameEngine();

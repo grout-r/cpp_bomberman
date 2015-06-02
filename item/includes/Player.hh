@@ -28,7 +28,7 @@ private:
   int			humanId;
 
 private:
-  gdl::Model		_playerModel;
+  gdl::Model		*_playerModel;
   int			_frameCounter;
 
 private:

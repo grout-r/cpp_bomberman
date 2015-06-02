@@ -14,7 +14,6 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
-  _map = new Map(std::make_pair(10, 10));
   _map = new Map(std::make_pair(20, 20));
   _iaManager = new IA;
 }
@@ -27,12 +26,11 @@ bool					GameEngine::initialize()
 {
   if (_screen.init() == false)
     return (false);
+  AssetsController::initAssetsController();
   _map->genRandMap();
-  //_map->init();
-  _map->init();
-  _map->newPlayer(1);  
-  //  _map->newPlayer(2);  
-  //  _map->newPlayer(0);  
+  _map->newPlayer(1);
+  //  _AssetsController = new AssetsController();
+  //  _AssetsController->load();
   return (true);
 }
  
@@ -53,21 +51,21 @@ bool					GameEngine::update()
 
 void					GameEngine::updateIA()
 {
-  std::vector<Player*>			*playerSet;
-  t_input				input;
+  // std::vector<Player*>			*playerSet;
+  // t_input				input;
 
-  playerSet = _map->getPlayerSet();
-  for (size_t i = 0; i != playerSet->size(); i++)
-    {
-      if ( (*playerSet)[i]->getHumanId() == 0 ) 
-	{
-	  std::cout << "JAPPELLE MON IA" << std::endl;
-	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
-	  std::cout << "FIN DE LIA" << std::endl;
-	  (*playerSet)[i]->move(input);
-	}
-    } 
-  std::cout << "PU DE IA A EXEC" << std::endl;
+  // playerSet = _map->getPlayerSet();
+  // for (size_t i = 0; i != playerSet->size(); i++)
+  //   {
+  //     if ( (*playerSet)[i]->getHumanId() == 0 ) 
+  // 	{
+  // 	  std::cout << "JAPPELLE MON IA" << std::endl;
+  // 	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
+  // 	  std::cout << "FIN DE LIA" << std::endl;
+  // 	  (*playerSet)[i]->move(input);
+  // 	}
+  //   } 
+  // std::cout << "PU DE IA A EXEC" << std::endl;
 }
 
 void					GameEngine::draw()
@@ -103,9 +101,9 @@ void					GameEngine::movePlayer(int pid, t_input input)
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
-      std::cout << "player move " <<"x: " << newPos.first << " y: " << 
-	newPos.second << " is " << _map->getItemAtPos(newPos)->what() <<std::
-	endl;
+      // std::cout << "player move " <<"x: " << newPos.first << " y: " << 
+      // 	newPos.second << " is " << _map->getItemAtPos(newPos)->what() <<std::
+      // 	endl;
       // if (_map->getItemAtPos(newPos)->what() == VOID 
       // 	|| _map->getItemAtPos(newPos)->what() == BOMB)
       tmp->move(input);

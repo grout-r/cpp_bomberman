@@ -31,7 +31,8 @@ typedef enum			e_what
     WALL,
     PLAYER,
     BOMB,
-    BONUS
+    BONUS,
+    FIRE
   }				t_what;
 
 enum e_action

@@ -1,6 +1,6 @@
 NAME		=		bomberman
 
-CC		=		g++ -g3
+CC		=		clang++ -g3
 
 RM		=		rm -f
 
@@ -13,6 +13,7 @@ GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -
 SRCS		=		core/src/main.cpp \
 				core/src/GameEngine.cpp \
 				core/src/Exception.cpp \
+				core/src/AssetsController.cpp \
 				screen/Screen.cpp \
 				item/src/Player.cpp \
 				item/src/Bomb.cpp \
@@ -20,6 +21,7 @@ SRCS		=		core/src/main.cpp \
 				item/src/AObject.cpp \
 				item/src/Map.cpp \
 				item/src/Void.cpp \
+				item/src/Fire.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp
 
