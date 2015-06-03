@@ -1,6 +1,6 @@
 NAME		=		bomberman
 
-CC		=		g++ -g3
+CC		=		clang++ -g3
 
 RM		=		rm -f
 
@@ -20,6 +20,7 @@ SRCS		=		core/src/main.cpp \
 				item/src/AObject.cpp \
 				item/src/Map.cpp \
 				item/src/Void.cpp \
+				item/src/Bonus.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp
 

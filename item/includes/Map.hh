@@ -32,7 +32,7 @@ private:
   bool						digMap(std::pair<int, int> pos);
   std::vector<bool>				check_hut(std::pair<int, int> hut);
   void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>));
-
+  void						removeWalls();
 public:
   Map(std::pair<int, int> = std::make_pair(20, 20));
   ~Map();

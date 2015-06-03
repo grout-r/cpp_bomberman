@@ -29,7 +29,7 @@ bool					GameEngine::initialize()
     return (false);
   _map->genRandMap();
   //_map->init();
-  _map->init();
+  //  _map->init();
   _map->newPlayer(1);  
   //  _map->newPlayer(2);  
   //  _map->newPlayer(0);  

@@ -34,6 +34,17 @@ typedef enum			e_what
     BONUS
   }				t_what;
 
+typedef enum			e_bonus
+  {
+    SPEED,
+    MORE_BOMB,
+    POWER,
+    NOTHING,
+    SPEED_LESS,
+    BOMB_LESS,
+    POWER_LESS,
+  }				t_bonus;
+
 enum e_action
   {
     GO_NORTH,

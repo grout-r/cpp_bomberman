@@ -189,10 +189,34 @@ bool				Map::digMap(std::pair<int, int> pos)
   return (true);
 }
 
+void				Map::removeWalls()
+{
+  int				x_rand;
+  int				y_rand;
+  int				removed_wall;
+  int				nb_remove_wall;
+
+  removed_wall = 0;
+  nb_remove_wall = (_size.first * _size.second) / 4;
+  x_rand = std::rand() % _size.first;
+  y_rand = std::rand() % _size.first;
+  while (removed_wall != nb_remove_wall)
+    {
+      while (_int_map[x_rand + 1][y_rand + 1] != 0)
+	{
+	  x_rand = std::rand() % (_size.first - 2);
+	  y_rand = std::rand() % (_size.second - 2);
+	}
+      removed_wall += 1;
+      _int_map[x_rand + 1][y_rand + 1] = 1;
+    }
+}
+
 void				Map::genRandMap()
 {
   fillMap();
   digMap(std::make_pair(1, 1));
+  removeWalls();
   fillMap();
 }
 
