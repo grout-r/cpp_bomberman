@@ -221,13 +221,13 @@ void				Map::genRandMap()
 }
 
 void						Map::draw(gdl::BasicShader &shader, 
-							  gdl::Clock clock)
+							  gdl::Clock &clock)
 {
   for (size_t i = 0; i != _map.size(); i++)
-    {
-      for (size_t j = 0; j != _map[i].size(); j++)
-	_map[i][j]->draw(shader, clock);
-    }
+    for (size_t j = 0; j != _map[i].size(); j++)
+      _map[i][j]->draw(shader, clock);
+  for (size_t i = 0; i != _player.size(); i++)
+    _player[i]->draw(shader, clock);
 }
 
 void						Map::newPlayer(int human)
@@ -240,10 +240,8 @@ void						Map::newPlayer(int human)
 	{
 	  if (_map[i][j]->what() == VOID)
 	    {
-	      //Michel = new Player(std::make_pair(i, j), human);
-	       Michel = new Player(std::make_pair(5, 5), human);
+	      Michel = new Player(std::make_pair(i, j), human);
   	      Michel->initialize();
-	      _map[i][j] = Michel;
 	      _player.push_back(Michel);
 	      return ;
 	    }
@@ -289,7 +287,8 @@ AObject*					Map::getItemAtPos(std::pair<int, int> pos)
 
 void						Map::fireSomeHut(std::pair<int, int> pos)
 {
-  (void)pos;  
+  _map[pos.first][pos.second] = new Fire(pos);
+  _map[pos.first][pos.second]->initialize();  
 }
 
 void						Map::update()
@@ -302,9 +301,8 @@ void						Map::update()
 	{
 	  pos = _bomb[i]->getPos();
 	  delete _map[pos.first][pos.second];
-	  _map[pos.first][pos.second] = new Void(pos);
-	  _map[pos.first][pos.second]->initialize();
-	  //_bomb.erase(_bomb.begin() + i - 1);
+	  // _map[pos.first][pos.second] = new Void(pos);
+	  // _map[pos.first][pos.second]->initialize();
 	  fireSomeHut(pos);
 	}
     }

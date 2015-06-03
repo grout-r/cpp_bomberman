@@ -46,7 +46,6 @@ bool					Screen::init()
 {
   try
     {
-
       if (!_context.start(800, 600, "Bomberbitch"))
 	throw Error("Can't initialize context.");
       glEnable(GL_DEPTH_TEST);
@@ -60,6 +59,15 @@ bool					Screen::init()
       _shader.bind();
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
+
+      
+      // if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+      // 	{
+      // 	  printf("%s", Mix_GetError());
+      // 	}
+      // Mix_Music *musique; //Création du pointeur de type Mix_Music
+      // musique = Mix_LoadMUS("./assets/bo.waw"); //Chargement de la musique
+      // Mix_PlayMusic(musique, -1); //Jouer infiniment la musique
       return (true);
     }
   catch (Error e)

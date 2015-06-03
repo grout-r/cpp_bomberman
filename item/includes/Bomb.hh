@@ -3,6 +3,7 @@
 
 #include <time.h>
 #include <unistd.h>
+# include <iostream>
 
 #include "AObject.hh"
 #include "Player.hh"
@@ -22,12 +23,11 @@ private:
   int			player_id;
   std::pair<int, int>	pos;
   int			bomb_power;
-  //j'ai mis un int sinon ca compile pas ca m'a soulé
   int			color;
   time_t		timer;
 
 private:
-  gdl::Model		_bombModel;
+  gdl::Model		*_bombModel;
   Void			*_floor;
 
 public:

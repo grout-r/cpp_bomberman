@@ -9,6 +9,8 @@
 # include "Wall.hh"
 # include "Player.hh"
 # include "Void.hh"
+# include "Fire.hh"
+# include "AssetsController.hh"
 
 class Bomb;
 class Player;
@@ -34,7 +36,7 @@ private:
   void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>));
   void						removeWalls();
 public:
-  Map(std::pair<int, int> = std::make_pair(20, 20));
+  Map (std::pair<int, int> = std::make_pair(20, 20));
   ~Map();
   void						genRandMap();
 
@@ -45,7 +47,7 @@ public:
   void						init();
   void						newPlayer(int human);
   void						draw(gdl::BasicShader &shader, 
-							  gdl::Clock clock);
+							  gdl::Clock &clock);
   Player					*getHumanById(int id);
   std::pair<int, int>				getSize();
   AObject					*getItemAtPos(std::pair<int, int>);

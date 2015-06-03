@@ -85,30 +85,20 @@ void		Player::setBombColor(t_color color)
 
 bool		Player::initialize()
 {
-  try
-    {
-      if (!_playerModel.load("./assets/player.fbx") ||
-	  !_texture.load("./assets/player.tga"))
-	throw (Error("Error while loading player ressources"));
-      return (true);
-    }
-  catch (Error &e)
-    {
-      std::cerr << e.what() << std::endl;
-    }
-  return (false);
+  _playerModel = AssetsController::getPlayerModel();
+  return (true);
 }
 
 void		Player::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
   if (_frameCounter != 0)
     {
-      if (_frameCounter == _playerModel.getAnimationFrameNumber(0))
+      if (_frameCounter == _playerModel->getAnimationFrameNumber(0))
 	_frameCounter = 0;
       else
 	_frameCounter++;
     }
-  _playerModel.draw(shader, calcTransformation(), clock.getElapsed());
+  _playerModel->draw(shader, calcTransformation(), clock.getElapsed());
 }
 
 void		Player::update()
@@ -126,7 +116,7 @@ void		Player::move(t_input input)
 {
   if (_frameCounter == 0)
     {
-      _playerModel.setCurrentAnim(0, false);
+      _playerModel->setCurrentAnim(0, false);
       _frameCounter++;
     }
   _position += _movePlayerBind[input];
