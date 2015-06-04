@@ -26,7 +26,7 @@ protected:
   glm::vec3			_position;
   glm::vec3			_rotation;
   glm::vec3			_scale;
-  gdl::Texture			_texture;
+  gdl::Texture			*_texture;
   gdl::Geometry			_geometry;
   int				_smell;
   

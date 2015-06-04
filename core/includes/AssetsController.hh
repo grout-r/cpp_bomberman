@@ -26,7 +26,10 @@ private:
 private:
   gdl::Model			*_bombModel;
   gdl::Model			*_playerModel;
-  
+  gdl::Texture			*_wallTexture;
+  gdl::Texture			*_voidTexture;
+  gdl::Texture			*_fireTexture;
+
 public:
   static void				initAssetsController();
   static void				destroyAssetsController();
@@ -34,6 +37,9 @@ public:
 public:
   static gdl::Model*			getBombModel();
   static gdl::Model*			getPlayerModel();
+  static gdl::Texture*			getWallTexture();
+  static gdl::Texture*			getVoidTexture();
+  static gdl::Texture*			getFireTexture();
 };
 
 #endif

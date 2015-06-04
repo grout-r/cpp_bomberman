@@ -33,7 +33,7 @@ bool				AObject::initialize()
 void				AObject::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
   (void)clock;
-  _texture.bind();
+  _texture->bind();
   _geometry.draw(shader, calcTransformation(), GL_QUADS); 
 }
 

@@ -12,8 +12,7 @@ bool			Void::initialize()
   _scale = glm::vec3(100, 100 ,100);
   try
     {
-      if (_texture.load("./assets/lava.tga") == false)
-        throw (Error("Cannot load the wall texture"));
+      _texture = AssetsController::getVoidTexture();
       _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
       _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
       _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));
