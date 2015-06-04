@@ -226,14 +226,14 @@ void						Map::draw(gdl::BasicShader &shader,
   for (size_t i = 0; i != _map.size(); i++)
     for (size_t j = 0; j != _map[i].size(); j++)
       _map[i][j]->draw(shader, clock);
-  for (size_t i = 0; i != _player.size(); i++)
-    _player[i]->draw(shader, clock);
+  for (size_t k = 0; k != _player.size(); k++)
+    _player[k]->draw(shader, clock);
 }
 
 void						Map::newPlayer(int human)
 {
   Player *Michel;
-  
+
   for (size_t i = 0; i != _map.size(); i++)
     {
       for (size_t j = 0; j != _map[i].size(); j++)
@@ -253,7 +253,8 @@ void						Map::newBomb(Player *player,
 							     std::pair<int, int> pos)
 {
   Bomb	*Michel;
-
+  (void)Michel;
+  (void)player;
   if (_map[pos.first][pos.second]->what() == VOID)
     {
       Michel = new Bomb (player, pos);
@@ -287,23 +288,63 @@ AObject*					Map::getItemAtPos(std::pair<int, int> pos)
 
 void						Map::fireSomeHut(std::pair<int, int> pos)
 {
-  _map[pos.first][pos.second] = new Fire(pos);
-  _map[pos.first][pos.second]->initialize();  
+  for (int i = 0; i != 3; i++)
+    {
+      if (_map[pos.first + i][pos.second]->what() == VOID)
+      	{
+      	  delete _map[pos.first + i][pos.second];
+	  _map[pos.first + i][pos.second] = new Fire(pos);
+	  _map[pos.first + i][pos.second]->initialize();
+      	}
+      else
+      	break;
+    }
+  for (int i = 0; i != 3; i++)
+    {
+      if (_map[pos.first - i][pos.second]->what() == VOID)
+      	{
+      	  delete _map[pos.first + i][pos.second];
+	  _map[pos.first - i][pos.second] = new Fire(pos);
+	  _map[pos.first - i][pos.second]->initialize();
+      	}
+      else
+      	break;
+    }
+  for (int i = 0; i != 3; i++)
+    {
+      if (_map[pos.first][pos.second]->what() == VOID)
+      	{
+      	  delete _map[pos.first + i][pos.second];
+	  _map[pos.first][pos.second + 1] = new Fire(pos);
+	  _map[pos.first][pos.second + 1]->initialize();
+      	}
+      else
+      	break;
+    }
+  for (int i = 0; i != 3; i++)
+    {
+      if (_map[pos.first][pos.second]->what() == VOID)
+      	{
+      	  delete _map[pos.first - i][pos.second];
+	  _map[pos.first][pos.second - 1] = new Fire(pos);
+	  _map[pos.first][pos.second - 1]->initialize();
+      	}
+      else
+      	break;
+    }
 }
 
 void						Map::update()
 {
   std::pair<int, int>				pos;
-  
+  std::cout << "b size " << _bomb.size() << std::endl;
   for (size_t i = 0; i != _bomb.size(); i++)
     {
       if (_bomb[i]->explose() == true)
 	{
 	  pos = _bomb[i]->getPos();
-	  delete _map[pos.first][pos.second];
-	  // _map[pos.first][pos.second] = new Void(pos);
-	  // _map[pos.first][pos.second]->initialize();
 	  fireSomeHut(pos);
+	  //  _bomb.erase(_bomb.begin() + i - 1);
 	}
     }
 }

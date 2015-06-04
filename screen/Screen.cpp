@@ -116,8 +116,7 @@ void					Screen::updateCam(Map *map)
 {
   //std::pair<int, int> size = map->getSize();
   glm::vec3 player = map->getHumanById(1)->getVecPos();
- 
-  
+   
   _camTarget = player;
   _camPosition = glm::vec3(player.x , 800, player.z + 500);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
