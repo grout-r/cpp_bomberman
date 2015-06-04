@@ -81,20 +81,20 @@ void				Map::fillMap()
   if (last_fill == true)
     {
       _map.resize(_size.second);
-      for (int y = 0; y != _size.second; y++)
+      for (int x = 0; x != _size.second; x++)
 	{
-	  _map[y].resize(_size.first);
-	  for (int x = 0; x != _size.first; x++)
+	  _map[x].resize(_size.first);
+	  for (int y = 0; y != _size.first; y++)
 	    {
-	      if (_int_map[y][x] == 0)
+	      if (_int_map[x][y] == 0)
 		{
-		  _map[y][x] = new Wall(std::make_pair(x, y));
-		  _map[y][x]->initialize();
+		  _map[x][y] = new Wall(std::make_pair(x, y));
+		  _map[x][y]->initialize();
 		}	      
 	      else
 		{
-		  _map[y][x] = new Void(std::make_pair(x, y));
-		  _map[y][x]->initialize();
+		  _map[x][y] = new Void(std::make_pair(x, y));
+		  _map[x][y]->initialize();
 		}
 	    }
 	}
@@ -102,11 +102,11 @@ void				Map::fillMap()
   else
     {
       _int_map.resize(_size.second);
-      for (int y = 0; y != _size.second; y++)
+      for (int x = 0; x != _size.second; x++)
 	{
-	  _int_map[y].resize(_size.first);
-	  for (int x = 0; x != _size.first; x++)
-	    _int_map[y][x] = 0;
+	  _int_map[x].resize(_size.first);
+	  for (int y = 0; y != _size.first; y++)
+	    _int_map[x][y] = 0;
 	}
     }
   last_fill = true;
