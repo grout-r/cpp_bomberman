@@ -9,7 +9,6 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
   std::cout << "bomb posée en :" << std::endl;
   _position = glm::vec3(pos.first * 100, 0, pos.second * 100);
   this->player_id = player->getPlayerId();
-  this->pos = player->getPos();
   this->bomb_power = player->getBombPower();
   this->color = player->getBombColor();
   this->_smell = -10;
