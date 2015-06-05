@@ -1,7 +1,7 @@
 #include "Player.hh"
 
 Player::Player(std::pair<int, int> pos, int humanId) :
-  bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE)
+  bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE), _alive(true)
 {
   static int	id = 0;
   
@@ -103,6 +103,7 @@ void		Player::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 
 void		Player::update()
 {
+  
 }
 
 std::pair<int, int>	Player::getNewPos(t_input input)
@@ -121,4 +122,14 @@ void		Player::move(t_input input)
     }
   _position += _movePlayerBind[input];
   _rotation = _rotatePlayerBind[input];
+}
+
+void	       Player::die()
+{
+  _alive = !_alive;
+}
+
+bool	      Player::isAlive() const
+{
+  return (_alive);
 }

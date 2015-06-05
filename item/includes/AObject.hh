@@ -49,6 +49,9 @@ public:
   int				getSmell() const;
   std::pair<int, int>		getPos() const;
   glm::vec3			getVecPos();
+ 
+public:
+  void				die();
 };
 
 #endif //!AOBJ_HPP

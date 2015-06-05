@@ -5,6 +5,18 @@ Fire::Fire(std::pair<int, int> pos)
   this->_smell = 0;
   _what = FIRE;
   _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
+  time(&_timer);
+}
+
+bool			Fire::stillBurn()
+{
+  time_t		now;
+
+  time(&now);
+  if (difftime(now, _timer) > 2)
+    return (false);
+  return (true);
+    
 }
 
 bool			Fire::initialize()

@@ -55,3 +55,8 @@ glm::vec3			AObject::getVecPos()
 int				AObject::getSmell() const{
   return (this->_smell);
 }
+
+void				AObject::die()
+{
+  return ;
+}

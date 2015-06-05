@@ -1,12 +1,12 @@
 NAME		=		bomberman
 
-CC		=		clang++ -g3
+CC		=		clang++ 
 
 RM		=		rm -f
 
 INCLUDES	=		-Icore/includes -Iscreen  -I./libgdl/includes/ -Iitem/includes/ -IIA
 
-CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror 
+CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror -g3 -g -ggdb
 
 GDL_LDFLAGS	=		-L./libgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
@@ -43,4 +43,8 @@ fclean:				clean
 
 re:				fclean all
 
+.ccp.o:
+				$(CC) -c $< -o $@ $(CXXFLAGS) $(INCLUDES)
+
 .PHONY:				all clean fclean re
+
