@@ -30,10 +30,14 @@ SRCS		=		core/src/main.cpp \
 
 OBJS		=		$(SRCS:.cpp=.o)
 
+EXPORT		=		"\n\nDon't forget to export library with:\n\
+				export LD_LIBRARY_PATH=$$PWD/libgdl/libs/\n\n"
+
 all:				$(NAME)
 
 $(NAME):			$(OBJS)
 				$(CC) -o $(NAME) $(OBJS) $(GDL_LDFLAGS)
+				@echo $(EXPORT)
 
 clean:
 				$(RM) $(OBJS)
