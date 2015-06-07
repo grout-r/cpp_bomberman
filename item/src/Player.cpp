@@ -106,11 +106,17 @@ void		Player::update()
   
 }
 
-std::pair<int, int>	Player::getNewPos(t_input input)
+std::vector<std::pair<int, int>	>	Player::getNewPos(t_input input)
 {
-  glm::vec3		newPos = _position + _movePlayerBind[input];
-  
-  return (std::make_pair(newPos.x / 100, newPos.z / 100));
+  std::vector<std::pair<int, int> >	pos;
+  glm::vec3				newPos = _position + _movePlayerBind[input];
+
+  pos.push_back(std::make_pair((newPos.x + 20) / 100, (newPos.z + 10) / 100));
+  pos.push_back(std::make_pair((newPos.x + 70) / 100, (newPos.z + 10) / 100));
+  pos.push_back(std::make_pair((newPos.x + 20) / 100, (newPos.z + 40) / 100));
+  pos.push_back(std::make_pair((newPos.x + 70) / 100, (newPos.z + 40) / 100));
+
+  return (pos);
 }
 
 void		Player::move(t_input input)

@@ -94,18 +94,21 @@ void					GameEngine::lockCam(int pid, t_input input)
 void					GameEngine::movePlayer(int pid, t_input input)
 {
   Player				*tmp;
-  std::pair<int, int>			newPos;
+  std::vector<std::pair<int, int> >	newPos;
+  bool					toto = true;
 
   tmp = _map->getHumanById(pid);
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
-      // std::cout << "player move " <<"x: " << newPos.first << " y: " << 
-      // 	newPos.second << " is " << _map->getItemAtPos(newPos)->what() <<std::
-      // 	endl;
-      // if (_map->getItemAtPos(newPos)->what() == VOID 
-      // 	|| _map->getItemAtPos(newPos)->what() == BOMB)
-      tmp->move(input);
+      for (unsigned int i = 0; i != newPos.size(); ++i)
+	{
+	  if (_map->getItemAtPos(newPos[i])->what() == WALL
+	      || _map->getItemAtPos(newPos[i])->what() == BONUS)
+	    toto = false;
+	}
+      if (toto == true)
+	tmp->move(input);
     }
 }
 
