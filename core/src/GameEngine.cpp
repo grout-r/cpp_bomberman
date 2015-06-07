@@ -95,7 +95,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
 {
   Player				*tmp;
   std::vector<std::pair<int, int> >	newPos;
-  bool					toto = true;
+  bool					canMove = true;
 
   tmp = _map->getHumanById(pid);
   if (tmp != NULL)
@@ -105,9 +105,9 @@ void					GameEngine::movePlayer(int pid, t_input input)
 	{
 	  if (_map->getItemAtPos(newPos[i])->what() == WALL
 	      || _map->getItemAtPos(newPos[i])->what() == BONUS)
-	    toto = false;
+	    canMove = false;
 	}
-      if (toto == true)
+      if (canMove == true)
 	tmp->move(input);
     }
 }
