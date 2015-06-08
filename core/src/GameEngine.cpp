@@ -58,13 +58,10 @@ void					GameEngine::updateIA()
     {
       if ( (*playerSet)[i]->getHumanId() == 0 ) 
   	{
-  	  std::cout << "JAPPELLE MON IA" << std::endl;
   	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
-  	  std::cout << "FIN DE LIA" << std::endl;
   	  (*playerSet)[i]->move(input);
   	}
     } 
-  std::cout << "PU DE IA A EXEC" << std::endl;
 }
 
 void					GameEngine::draw()
