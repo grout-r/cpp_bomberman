@@ -82,22 +82,22 @@ void				Map::fillMap()
     {
       _map.resize(_size.second);
       for (int x = 0; x != _size.second; x++)
-	{
-	  _map[x].resize(_size.first);
-	  for (int y = 0; y != _size.first; y++)
-	    {
-	      if (_int_map[x][y] == 0)
-		{
-		  _map[x][y] = new Wall(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}	      
-	      else
-		{
-		  _map[x][y] = new Void(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}
-	    }
-	}
+  	{
+  	  _map[x].resize(_size.first);
+  	  for (int y = 0; y != _size.first; y++)
+  	    {
+  	      if (_int_map[x][y] == 0)
+  		{
+  		  _map[x][y] = new Wall(std::make_pair(x, y));
+  		  _map[x][y]->initialize();
+  		}	      
+  	      else
+  		{
+  		  _map[x][y] = new Void(std::make_pair(x, y));
+  		  _map[x][y]->initialize();
+  		}
+  	    }
+  	}
     }
   else
     {
@@ -191,24 +191,21 @@ bool				Map::digMap(std::pair<int, int> pos)
 
 void				Map::removeWalls()
 {
-  int				x_rand;
-  int				y_rand;
-  int				removed_wall;
-  int				nb_remove_wall;
+  int				xRand;
+  int				yRand;
+  int				nbRemoveWall;
 
-  removed_wall = 0;
-  nb_remove_wall = (_size.first * _size.second) / 4;
-  x_rand = std::rand() % _size.first;
-  y_rand = std::rand() % _size.first;
-  while (removed_wall != nb_remove_wall)
+  nbRemoveWall = (_size.first * _size.second) / 4;
+  xRand = std::rand() % (_size.first - 2);
+  yRand = std::rand() % (_size.first - 2);
+  for (int removedWall = 0; removedWall != nbRemoveWall; ++removedWall)
     {
-      while (_int_map[x_rand + 1][y_rand + 1] != 0)
+      while (_int_map[xRand + 1][yRand + 1] != 0)
 	{
-	  x_rand = std::rand() % (_size.first - 2);
-	  y_rand = std::rand() % (_size.second - 2);
+	  xRand = std::rand() % (_size.first - 2);
+	  yRand = std::rand() % (_size.second - 2);
 	}
-      removed_wall += 1;
-      _int_map[x_rand + 1][y_rand + 1] = 1;
+      _int_map[xRand + 1][yRand + 1] = 1;
     }
 }
 
@@ -365,7 +362,6 @@ void						Map::update()
 	  delete _map[pos.first][pos.second];
 	  _map[pos.first][pos.second] = new Void(pos);
 	  _map[pos.first][pos.second]->initialize();
-	  std::cout << " size " << _fire.size() << std::endl;
 	}
       else
 	++i;
