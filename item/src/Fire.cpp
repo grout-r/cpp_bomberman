@@ -24,8 +24,7 @@ bool			Fire::initialize()
   _scale = glm::vec3(100, 100 ,100);
   try
     {
-      if (_texture.load("./assets/fire.tga") == false)
-        throw (Error("Cannot load the wall texture"));
+      _texture = AssetsController::getFireTexture();
       _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
       _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
       _geometry.pushVertex(glm::vec3(0, 0.5, 0));
@@ -70,6 +69,6 @@ bool			Fire::initialize()
 void				Fire::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 {
   (void)clock;
-  _texture.bind();
+  _texture->bind();
   _geometry.draw(shader, calcTransformation(), GL_TRIANGLES); 
 }
