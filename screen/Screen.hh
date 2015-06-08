@@ -48,6 +48,7 @@ private:
 public:
   Screen();
   ~Screen();
+  double			getTime() const;
   bool				init();
   void				updateInputs(std::vector<t_event>*);
   void			        updateScreen(Map*);

@@ -77,6 +77,11 @@ bool					Screen::init()
   return (false);
 }
 
+double				Screen::getTime() const
+{
+  return (_clock.getElapsed());
+}
+
 void					Screen::updateInputs(std::vector<t_event> *events)
 {
   t_event				tmp;

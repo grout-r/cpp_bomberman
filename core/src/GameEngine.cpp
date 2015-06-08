@@ -29,7 +29,7 @@ bool					GameEngine::initialize()
   AssetsController::initAssetsController();
   _map->genRandMap();
   _map->newPlayer(1);
-  _map->newPlayer(2);
+  _map->newPlayer(0);
   return (true);
 }
  
@@ -41,7 +41,7 @@ bool					GameEngine::update()
   for (size_t i = 0; _events.size() != i; i++)
     {
       if (_funcptrBind.count(_events[i].input))
-	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
+      	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
   this->updateIA();
   _map->update();
@@ -59,7 +59,9 @@ void					GameEngine::updateIA()
       if ( (*playerSet)[i]->getHumanId() == 0 ) 
   	{
   	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
-  	  (*playerSet)[i]->move(input);
+	  if (_funcptrBind.count(input))
+	    (this->*_funcptrBind[input])((*playerSet)[i]->getHumanId(), input);
+	  //  	  (*playerSet)[i]->move(input, _screen.getTime());
   	}
     } 
 }
@@ -105,7 +107,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
 	    canMove = false;
 	}
       if (canMove == true)
-	tmp->move(input);
+	tmp->move(input, _screen.getTime());
     }
 }
 

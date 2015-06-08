@@ -53,7 +53,7 @@ public:
   bool					initialize();
   void					update();
   void					draw(gdl::BasicShader& shader, gdl::Clock &);
-  void					move(t_input input);
+  void					move(t_input input, double);
   std::vector<std::pair<int, int> >	getNewPos(t_input input);
 
 public:
