@@ -6,8 +6,6 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
   _floor = new Void(pos);
   _floor->initialize();
   _scale = glm::vec3(0.3, 0.3, 0.3);
-  std::cout << "bomb posée en :" << std::endl;
-  std::cout << this->pos.first << ";" << this->pos.second << std::endl;
   _position = glm::vec3(pos.first * 100, 0, pos.second * 100);
   this->player_id = player->getPlayerId();
   this->bomb_power = player->getBombPower();
