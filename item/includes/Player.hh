@@ -7,7 +7,6 @@
 # include "Model.hh"
 # include "Bomb.hh"
 # include "Exception.hh"
-# include "Screen.hh"
 # include "Definition.hh"
 # include "Map.hh"
 

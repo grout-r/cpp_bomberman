@@ -53,6 +53,8 @@ public:
   void			        updateScreen(Map*);
   void				moveCam(t_input);
   void				lockCam();
+  glm::vec3			getMediumPos(Player *, Player *);
+  int				getHeight(Player *, Player *);
 };
 
 #endif
