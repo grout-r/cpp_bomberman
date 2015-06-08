@@ -1,7 +1,7 @@
 #include "Player.hh"
 
 Player::Player(std::pair<int, int> pos, int humanId) :
-  bomb_nb(1), bomb_power(1), p_speed(1), bomb_color(ORANGE), _alive(true)
+  bomb_nb(1), bomb_power(1), p_speed(25), bomb_color(ORANGE), _alive(true)
 {
   static int	id = 0;
   
@@ -119,14 +119,14 @@ std::vector<std::pair<int, int>	>	Player::getNewPos(t_input input)
   return (pos);
 }
 
-void		Player::move(t_input input)
-{
+void		Player::move(t_input input, double elapsedTime)
+{  
   if (_frameCounter == 0)
     {
       _playerModel->setCurrentAnim(0, false);
       _frameCounter++;
     }
-  _position += _movePlayerBind[input];
+  _position += _movePlayerBind[input] * (p_speed * static_cast<float>(elapsedTime));
   _rotation = _rotatePlayerBind[input];
 }
 
