@@ -45,6 +45,8 @@ bool					GameEngine::update()
     }
   this->updateIA();
   _map->update();
+  if (!_map->isTherePlayers())
+    return (false);
   return (true);
 }
 
@@ -73,6 +75,7 @@ void					GameEngine::draw()
 
 bool					GameEngine::gameOver()
 {
+  
   return (true);
 }
 

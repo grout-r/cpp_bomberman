@@ -144,13 +144,12 @@ int					Screen::getHeightCam(Player *p1, Player *p2,
       return (mapsize.second * 100);
     }
   if (p1 == NULL || p2 == NULL)
-    return (500);
+    return (800);
   ponepos = p1->getVecPos();
   ptwopos = p2->getVecPos();
-
   segment = sqrt(pow(ponepos.x - ptwopos.x, 2) + pow(ponepos.z - ptwopos.z, 2));
-  if (segment < 500)
-    return (500);
+  if (segment < 800)
+    return (800);
   return (segment);
 }
 
