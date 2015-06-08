@@ -93,7 +93,7 @@ void					Screen::updateInputs(std::vector<t_event> *events)
     }
   for (size_t i = 0; _input_mapping.size() != i; i++)
     {
-      if (_input.getKey(_input_mapping[i].first, true) == true)
+      if (_input.getKey(_input_mapping[i].first) == true)
 	{
 	  tmp.input = _input_mapping[i].second.first;
 	  tmp.pid = _input_mapping[i].second.second;
