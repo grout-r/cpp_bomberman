@@ -39,7 +39,7 @@ all:				$(NAME)
 
 $(NAME):			$(OBJS)
 				$(CC) -o $(NAME) $(OBJS) $(GDL_LDFLAGS)
-				@if test "$$LD_LIBRARY_PATH" != "$$PWD/libgdl/libs/"; then echo $(EXPORT); fi
+				@if test "$$LD_LIBRARY_PATH" != "$$PWD/libgdl/libs/"; then echo -e $(EXPORT); fi
 
 clean:
 				$(RM) $(OBJS)
