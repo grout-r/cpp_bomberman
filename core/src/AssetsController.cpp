@@ -8,7 +8,7 @@ AssetsController::AssetsController()
   _bombModel = new gdl::Model();
   _playerModel = new gdl::Model();
   assert(_bombModel->load("./assets/bomb.fbx"));
-  assert(_playerModel->load("./assets/toto.fbx"));
+  assert(_playerModel->load("./assets/player.fbx"));
 }
 
 AssetsController::~AssetsController()
