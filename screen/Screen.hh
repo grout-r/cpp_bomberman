@@ -55,7 +55,8 @@ public:
   void				moveCam(t_input);
   void				lockCam();
   glm::vec3			getMediumPos(Player *, Player *);
-  int				getHeight(Player *, Player *);
+  int				getHeightCam(Player *, Player *, Map *map);
+  glm::vec3			getCentralPoint(Map *map);
 };
 
 #endif

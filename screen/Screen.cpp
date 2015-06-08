@@ -128,18 +128,41 @@ glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
   return (medium);
 }
 
-int					Screen::getHeight(Player *p1, Player *p2)
+int					Screen::getHeightCam(Player *p1, Player *p2, 
+							     Map *map)
 {
   int					segment;
-  glm::vec3				ponepos = p1->getVecPos() ;
-  glm::vec3				ptwopos = p2->getVecPos();
-  
+  glm::vec3				ponepos;
+  glm::vec3				ptwopos;
+  std::pair<int, int>			mapsize;
+
+  if (p1 == NULL && p2 == NULL)
+    {
+      mapsize = map->getSize();
+      if (mapsize.first > mapsize.second)  
+	return (mapsize.first * 100);
+      return (mapsize.second * 100);
+    }
   if (p1 == NULL || p2 == NULL)
     return (500);
+  ponepos = p1->getVecPos();
+  ptwopos = p2->getVecPos();
+
   segment = sqrt(pow(ponepos.x - ptwopos.x, 2) + pow(ponepos.z - ptwopos.z, 2));
   if (segment < 500)
     return (500);
   return (segment);
+}
+
+glm::vec3				Screen::getCentralPoint(Map *map)
+{
+  glm::vec3			        centralPoint(0, 0, 0);
+  std::pair<int, int>			size;
+  
+  size = map->getSize();
+  centralPoint.x = (size.first / 2) * 100;
+  centralPoint.z = (size.second / 2) * 100;
+  return (centralPoint);
 }
 
 void					Screen::updateCam(Map *map)
@@ -149,7 +172,7 @@ void					Screen::updateCam(Map *map)
   glm::vec3				lookAt; 
   
   if (playerone == NULL && playertwo == NULL)
-    lookAt = glm::vec3(0, 0, 0);
+    lookAt = getCentralPoint(map);
   else if (playertwo == NULL)
     lookAt = playerone->getVecPos();
   else if (playerone == NULL)
@@ -158,7 +181,8 @@ void					Screen::updateCam(Map *map)
     lookAt = getMediumPos(playerone, playertwo);
 
   _camTarget = lookAt;
-  _camPosition = glm::vec3(lookAt.x , getHeight(playerone, playertwo), lookAt.z + 500);
+  _camPosition = glm::vec3(lookAt.x , getHeightCam(playerone, playertwo, map),
+			   lookAt.z + 500);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
   _camTransformation = 
     glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
