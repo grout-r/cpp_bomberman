@@ -93,7 +93,7 @@ void					Screen::updateInputs(std::vector<t_event> *events)
     }
   for (size_t i = 0; _input_mapping.size() != i; i++)
     {
-      if (_input.getKey(_input_mapping[i].first, true) == true)
+      if (_input.getKey(_input_mapping[i].first) == true)
 	{
 	  tmp.input = _input_mapping[i].second.first;
 	  tmp.pid = _input_mapping[i].second.second;
@@ -114,9 +114,15 @@ void					Screen::updateScreen(Map *map)
 
 void					Screen::updateCam(Map *map)
 {
-  //std::pair<int, int> size = map->getSize();
-  glm::vec3 player = map->getHumanById(1)->getVecPos();
-   
+  Player	*playerptr = map->getHumanById(1);
+  glm::vec3	player; 
+  
+  if (playerptr == NULL)
+    playerptr = map->getHumanById(2);
+  if (playerptr == NULL)
+    player = glm::vec3(0, 0, 0);
+  else
+    player = playerptr->getVecPos();
   _camTarget = player;
   _camPosition = glm::vec3(player.x , 800, player.z + 500);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);

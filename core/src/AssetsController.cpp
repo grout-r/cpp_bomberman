@@ -15,6 +15,7 @@ AssetsController::AssetsController()
   assert(_wallTexture->load("./assets/wall.tga"));
   assert(_voidTexture->load("./assets/lava.tga"));
   assert(_fireTexture->load("./assets/fire.tga"));
+  assert(_playerModel->load("./assets/toto.fbx"));
 }
 
 AssetsController::~AssetsController()

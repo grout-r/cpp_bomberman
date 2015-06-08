@@ -50,21 +50,18 @@ bool					GameEngine::update()
 
 void					GameEngine::updateIA()
 {
-  // std::vector<Player*>			*playerSet;
-  // t_input				input;
+  std::vector<Player*>			*playerSet;
+  t_input				input;
 
-  // playerSet = _map->getPlayerSet();
-  // for (size_t i = 0; i != playerSet->size(); i++)
-  //   {
-  //     if ( (*playerSet)[i]->getHumanId() == 0 ) 
-  // 	{
-  // 	  std::cout << "JAPPELLE MON IA" << std::endl;
-  // 	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
-  // 	  std::cout << "FIN DE LIA" << std::endl;
-  // 	  (*playerSet)[i]->move(input);
-  // 	}
-  //   } 
-  // std::cout << "PU DE IA A EXEC" << std::endl;
+  playerSet = _map->getPlayerSet();
+  for (size_t i = 0; i != playerSet->size(); i++)
+    {
+      if ( (*playerSet)[i]->getHumanId() == 0 ) 
+  	{
+  	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
+  	  (*playerSet)[i]->move(input);
+  	}
+    } 
 }
 
 void					GameEngine::draw()
@@ -94,18 +91,21 @@ void					GameEngine::lockCam(int pid, t_input input)
 void					GameEngine::movePlayer(int pid, t_input input)
 {
   Player				*tmp;
-  std::pair<int, int>			newPos;
+  std::vector<std::pair<int, int> >	newPos;
+  bool					canMove = true;
 
   tmp = _map->getHumanById(pid);
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
-      // std::cout << "player move " <<"x: " << newPos.first << " y: " << 
-      // 	newPos.second << " is " << _map->getItemAtPos(newPos)->what() <<std::
-      // 	endl;
-      // if (_map->getItemAtPos(newPos)->what() == VOID 
-      // 	|| _map->getItemAtPos(newPos)->what() == BOMB)
-      tmp->move(input);
+      for (unsigned int i = 0; i != newPos.size(); ++i)
+	{
+	  if (_map->getItemAtPos(newPos[i])->what() == WALL
+	      || _map->getItemAtPos(newPos[i])->what() == BONUS)
+	    canMove = false;
+	}
+      if (canMove == true)
+	tmp->move(input);
     }
 }
 
@@ -113,6 +113,6 @@ void					GameEngine::placeBomb(int pid, t_input input)
 {
   (void)input;
   Player *tmp = _map->getHumanById(pid);
-  std::pair<int, int> pos =  tmp->getPos();
+  std::pair<int, int> pos = tmp->getPos();
   _map->newBomb(tmp, pos);
 }

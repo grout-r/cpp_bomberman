@@ -22,8 +22,7 @@ private:
   std::vector<std::vector<int> >		_int_map;
   std::vector<Bomb*>				_bomb;
   std::vector<Player*>				_player;
-  std::vector<Wall*>				_wall;
-  std::vector<Void*>				_void;
+  std::vector<Fire*>				_fire;
   std::pair<int, int>				_size;
 
   bool						up(std::pair<int, int> pos);

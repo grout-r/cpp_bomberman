@@ -82,22 +82,22 @@ void				Map::fillMap()
     {
       _map.resize(_size.second);
       for (int x = 0; x != _size.second; x++)
-	{
-	  _map[x].resize(_size.first);
-	  for (int y = 0; y != _size.first; y++)
-	    {
-	      if (_int_map[x][y] == 0)
-		{
-		  _map[x][y] = new Wall(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}	      
-	      else
-		{
-		  _map[x][y] = new Void(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}
-	    }
-	}
+  	{
+  	  _map[x].resize(_size.first);
+  	  for (int y = 0; y != _size.first; y++)
+  	    {
+  	      if (_int_map[x][y] == 0)
+  		{
+  		  _map[x][y] = new Wall(std::make_pair(x, y));
+  		  _map[x][y]->initialize();
+  		}	      
+  	      else
+  		{
+  		  _map[x][y] = new Void(std::make_pair(x, y));
+  		  _map[x][y]->initialize();
+  		}
+  	    }
+  	}
     }
   else
     {
@@ -191,24 +191,21 @@ bool				Map::digMap(std::pair<int, int> pos)
 
 void				Map::removeWalls()
 {
-  int				x_rand;
-  int				y_rand;
-  int				removed_wall;
-  int				nb_remove_wall;
+  int				xRand;
+  int				yRand;
+  int				nbRemoveWall;
 
-  removed_wall = 0;
-  nb_remove_wall = (_size.first * _size.second) / 4;
-  x_rand = std::rand() % _size.first;
-  y_rand = std::rand() % _size.first;
-  while (removed_wall != nb_remove_wall)
+  nbRemoveWall = (_size.first * _size.second) / 4;
+  xRand = std::rand() % (_size.first - 2);
+  yRand = std::rand() % (_size.first - 2);
+  for (int removedWall = 0; removedWall != nbRemoveWall; ++removedWall)
     {
-      while (_int_map[x_rand + 1][y_rand + 1] != 0)
+      while (_int_map[xRand + 1][yRand + 1] != 0)
 	{
-	  x_rand = std::rand() % (_size.first - 2);
-	  y_rand = std::rand() % (_size.second - 2);
+	  xRand = std::rand() % (_size.first - 2);
+	  yRand = std::rand() % (_size.second - 2);
 	}
-      removed_wall += 1;
-      _int_map[x_rand + 1][y_rand + 1] = 1;
+      _int_map[xRand + 1][yRand + 1] = 1;
     }
 }
 
@@ -288,18 +285,22 @@ AObject*					Map::getItemAtPos(std::pair<int, int> pos)
 
 void						Map::fireSomeHut(std::pair<int, int> pos)
 {
+  _map[pos.first][pos.second]->die();
   delete _map[pos.first][pos.second];
   _map[pos.first][pos.second] = new Fire(pos);
   _map[pos.first][pos.second]->initialize();
+  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second]));
 
   for (int i = 1; i != 3; i++)
     {
       if (_map[pos.first + i][pos.second]->what() == VOID)
       	{
+	  _map[pos.first + i][pos.second]->die();
 	  delete _map[pos.first + i][pos.second];
 	  _map[pos.first + i][pos.second] = 
 	    new Fire(std::make_pair(pos.first + i, pos.second));
 	  _map[pos.first + i][pos.second]->initialize();
+	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first + i][pos.second]));
       	}
       else
       	break;
@@ -308,10 +309,12 @@ void						Map::fireSomeHut(std::pair<int, int> pos)
     {
       if (_map[pos.first - i][pos.second]->what() == VOID)
       	{
+	  _map[pos.first - i][pos.second]->die();
 	  delete _map[pos.first - i][pos.second];
 	  _map[pos.first - i][pos.second] = 
 	    new Fire(std::make_pair(pos.first - i, pos.second));
 	  _map[pos.first - i][pos.second]->initialize();
+	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first - i][pos.second]));
       	}
       else
       	break;
@@ -320,10 +323,12 @@ void						Map::fireSomeHut(std::pair<int, int> pos)
     {
       if (_map[pos.first][pos.second + i]->what() == VOID)
       	{
+	  _map[pos.first][pos.second + i]->die();
 	  delete _map[pos.first][pos.second + i];
 	  _map[pos.first][pos.second + i] = 
 	    new Fire(std::make_pair(pos.first, pos.second + i));
 	  _map[pos.first][pos.second + i]->initialize();
+	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second + i]));
       	}
       else
       	break;
@@ -332,10 +337,12 @@ void						Map::fireSomeHut(std::pair<int, int> pos)
     {
       if (_map[pos.first][pos.second - i]->what() == VOID)
       	{
+	  _map[pos.first][pos.second - i]->die();
 	  delete _map[pos.first][pos.second - i];
 	  _map[pos.first][pos.second - i] = 
 	    new Fire(std::make_pair(pos.first, pos.second - i));
 	  _map[pos.first][pos.second - i]->initialize();
+	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second - i]));
       	}
       else
       	break;
@@ -346,16 +353,43 @@ void						Map::update()
 {
   std::pair<int, int>				pos;
 
-  for (std::vector<Bomb*>::iterator i = _bomb.begin() ; i != _bomb.end(); ++i)
+  for (std::vector<Fire*>::iterator i = _fire.begin() ; i != _fire.end();)
+    {
+      if ((*i)->stillBurn() == false)
+	{
+	  pos = (*i)->getPos();
+	  i = _fire.erase(i);
+	  delete _map[pos.first][pos.second];
+	  _map[pos.first][pos.second] = new Void(pos);
+	  _map[pos.first][pos.second]->initialize();
+	}
+      else
+	++i;
+    }
+ 
+  for (std::vector<Bomb*>::iterator i = _bomb.begin() ; i != _bomb.end();)
     {
       if ((*i)->explose() == true)
 	{
 	  pos = (*i)->getPos();
 	  fireSomeHut(pos);
-	  _bomb.erase(i);
-	  if (_bomb.size() == 0)
-	    break;
+	  i = _bomb.erase(i);
 	}
+      else
+	++i;
+    }
+  for (std::vector<Player*>::iterator i = _player.begin() ; i != _player.end();)
+    {
+      std::pair<int, int>		pos;
+      
+      pos = (*i)->getPos();
+      if (_map[pos.first][pos.second]->what() == FIRE)
+	{
+	  //delete (*i);
+	  i = _player.erase(i);
+	}
+      else
+	i++;
     }
 }
 
