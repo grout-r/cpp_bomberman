@@ -9,6 +9,13 @@ Param::Param(char **arg, int ac)
 {
   std::stringstream     ss;
 
+  if (ac == 1)
+    {
+      _nbHuman = 2;
+      _nbIA = 0;
+      _XY = std::make_pair(20, 20);
+      return;
+    }
   if (ac != 5)
     {
       std::cerr << "Usage: " << arg[0] << " [nbHuman] [nbIA] [size x] [size y]" << std::endl;

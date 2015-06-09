@@ -61,17 +61,17 @@ bool					Screen::init()
       _shader.setUniform("projection", _camProjection);
 
 
-      if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
-      	{
-      	  std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
-      	}
-      Mix_Music *musique;
-      musique = Mix_LoadMUS("./assets/bo.mp3");
-      if (musique == NULL)
-      	std::cout << "error on loading the assets" << std::endl;
-      std::cout << Mix_PlayMusic(musique, -1) << std::endl;
-      std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
-      std::cout << "salut" << std::endl;
+      // if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
+      // 	{
+      // 	  std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
+      // 	}
+      // Mix_Music *musique;
+      // musique = Mix_LoadMUS("./assets/bo.mp3");
+      // if (musique == NULL)
+      // 	std::cout << "error on loading the assets" << std::endl;
+      // std::cout << Mix_PlayMusic(musique, -1) << std::endl;
+      // std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
+      // std::cout << "salut" << std::endl;
       return (true);
     }
   catch (Error e)
