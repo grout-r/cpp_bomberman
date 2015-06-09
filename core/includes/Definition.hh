@@ -32,7 +32,8 @@ typedef enum			e_what
     PLAYER,
     BOMB,
     BONUS,
-    FIRE
+    FIRE,
+    GAMEOVER
   }				t_what;
 
 typedef enum			e_bonus

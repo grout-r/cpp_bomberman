@@ -21,6 +21,7 @@
 # include "AObject.hh"
 # include "Map.hh"
 # include "Definition.hh"
+# include "GameOver.hh"
 
 class Map;
 
@@ -48,11 +49,16 @@ private:
 public:
   Screen();
   ~Screen();
+  double			getTime() const;
   bool				init();
   void				updateInputs(std::vector<t_event>*);
   void			        updateScreen(Map*);
   void				moveCam(t_input);
   void				lockCam();
+  glm::vec3			getMediumPos(Player *, Player *);
+  int				getHeightCam(Player *, Player *, Map *map);
+  glm::vec3			getCentralPoint(Map *map);
+  void				gameOver();
 };
 
 #endif

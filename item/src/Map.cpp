@@ -227,6 +227,13 @@ void						Map::draw(gdl::BasicShader &shader,
     _player[k]->draw(shader, clock);
 }
 
+bool						Map::isTherePlayers()
+{
+  if (_player.size() <= 1)
+    return (false);
+  return (true);
+}
+
 void						Map::newPlayer(int human)
 {
   Player *Michel;
@@ -396,4 +403,11 @@ void						Map::update()
 std::vector<Player*>*			       Map::getPlayerSet()
 {
   return (&_player);
+}
+
+void					      Map::gameOver()
+{
+  _map.clear();
+  _player.clear();
+  
 }

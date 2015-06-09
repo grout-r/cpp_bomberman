@@ -7,7 +7,6 @@
 # include "Model.hh"
 # include "Bomb.hh"
 # include "Exception.hh"
-# include "Screen.hh"
 # include "Definition.hh"
 # include "Map.hh"
 
@@ -53,7 +52,7 @@ public:
   bool					initialize();
   void					update();
   void					draw(gdl::BasicShader& shader, gdl::Clock &);
-  void					move(t_input input);
+  void					move(t_input input, double);
   std::vector<std::pair<int, int> >	getNewPos(t_input input);
 
 public:

@@ -77,6 +77,11 @@ bool					Screen::init()
   return (false);
 }
 
+double				Screen::getTime() const
+{
+  return (_clock.getElapsed());
+}
+
 void					Screen::updateInputs(std::vector<t_event> *events)
 {
   t_event				tmp;
@@ -112,19 +117,71 @@ void					Screen::updateScreen(Map *map)
     updateCam(map);
 }
 
+glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
+{
+  glm::vec3				medium(0 ,0 ,0);  
+  glm::vec3				ponepos = p1->getVecPos() ;
+  glm::vec3				ptwopos = p2->getVecPos();
+    
+  medium.x = (ponepos.x + ptwopos.x) / 2;
+  medium.z = (ponepos.z + ptwopos.z) / 2;
+  return (medium);
+}
+
+int					Screen::getHeightCam(Player *p1, Player *p2, 
+							     Map *map)
+{
+  int					segment;
+  glm::vec3				ponepos;
+  glm::vec3				ptwopos;
+  std::pair<int, int>			mapsize;
+
+  if (p1 == NULL && p2 == NULL)
+    {
+      mapsize = map->getSize();
+      if (mapsize.first > mapsize.second)  
+	return (mapsize.first * 100);
+      return (mapsize.second * 100);
+    }
+  if (p1 == NULL || p2 == NULL)
+    return (800);
+  ponepos = p1->getVecPos();
+  ptwopos = p2->getVecPos();
+  segment = sqrt(pow(ponepos.x - ptwopos.x, 2) + pow(ponepos.z - ptwopos.z, 2));
+  if (segment < 800)
+    return (800);
+  return (segment);
+}
+
+glm::vec3				Screen::getCentralPoint(Map *map)
+{
+  glm::vec3			        centralPoint(0, 0, 0);
+  std::pair<int, int>			size;
+  
+  size = map->getSize();
+  centralPoint.x = (size.first / 2) * 100;
+  centralPoint.z = (size.second / 2) * 100;
+  return (centralPoint);
+}
+
 void					Screen::updateCam(Map *map)
 {
-  Player	*playerptr = map->getHumanById(1);
-  glm::vec3	player; 
+  Player				*playerone = map->getHumanById(1);
+  Player				*playertwo = map->getHumanById(2);	
+  glm::vec3				lookAt; 
   
-  if (playerptr == NULL)
-    playerptr = map->getHumanById(2);
-  if (playerptr == NULL)
-    player = glm::vec3(0, 0, 0);
+  if (playerone == NULL && playertwo == NULL)
+    lookAt = getCentralPoint(map);
+  else if (playertwo == NULL)
+    lookAt = playerone->getVecPos();
+  else if (playerone == NULL)
+    lookAt = playertwo->getVecPos();
   else
-    player = playerptr->getVecPos();
-  _camTarget = player;
-  _camPosition = glm::vec3(player.x , 800, player.z + 500);
+    lookAt = getMediumPos(playerone, playertwo);
+
+  _camTarget = lookAt;
+  _camPosition = glm::vec3(lookAt.x , getHeightCam(playerone, playertwo, map),
+			   lookAt.z + 500);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
   _camTransformation = 
     glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
@@ -146,6 +203,25 @@ void					Screen::moveCam(t_input input)
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
     }
+}
+
+void					Screen::gameOver()
+{
+  GameOver				go;
+
+  go.initialize();
+  _camPosition = glm::vec3(0, 0, -100);
+  _camTarget = glm::vec3(0, 0, 0);
+  _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
+  _camTransformation = 
+    glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
+  //  _shader.bind();
+  _shader.setUniform("view", _camTransformation);
+  _shader.setUniform("projection", _camProjection);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  _shader.bind();
+  go.draw(_shader, _clock);
+  _context.flush();
 }
 
 void					Screen::lockCam()

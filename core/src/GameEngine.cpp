@@ -1,6 +1,7 @@
 #include "GameEngine.hh"
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(Param const &params):
+  _nbHuman(params.getNbHuman()), _nbIA(params.getNbIA())
 {
   _funcptrBind[CAM_XPLUS] = &GameEngine::moveCam;  
   _funcptrBind[CAM_XMINUS] = &GameEngine::moveCam;  
@@ -14,7 +15,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
-  _map = new Map(std::make_pair(20, 20));
+  _map = new Map(params.getXY());
   _iaManager = new IA;
 }
 
@@ -30,6 +31,10 @@ bool					GameEngine::initialize()
   _map->genRandMap();
   _map->newPlayer(1);
   //  _map->newPlayer(2);
+  for (int i = 0; i != _nbHuman; ++i)
+    _map->newPlayer(i + 1);
+  for (int i = 0; i != _nbIA; ++i)
+    _map->newPlayer(0);
   return (true);
 }
  
@@ -41,10 +46,12 @@ bool					GameEngine::update()
   for (size_t i = 0; _events.size() != i; i++)
     {
       if (_funcptrBind.count(_events[i].input))
-	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
+      	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
   this->updateIA();
   _map->update();
+  if (!_map->isTherePlayers())
+    return (false);
   return (true);
 }
 
@@ -59,7 +66,9 @@ void					GameEngine::updateIA()
       if ( (*playerSet)[i]->getHumanId() == 0 ) 
   	{
   	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
-  	  (*playerSet)[i]->move(input);
+	  if (_funcptrBind.count(input))
+	    (this->*_funcptrBind[input])((*playerSet)[i]->getHumanId(), input);
+	  //  	  (*playerSet)[i]->move(input, _screen.getTime());
   	}
     } 
 }
@@ -71,6 +80,10 @@ void					GameEngine::draw()
 
 bool					GameEngine::gameOver()
 {
+  _map->gameOver();
+  _screen.updateScreen(_map);
+  _screen.gameOver();
+  sleep(2);
   return (true);
 }
 
@@ -105,7 +118,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
 	    canMove = false;
 	}
       if (canMove == true)
-	tmp->move(input);
+	tmp->move(input, _screen.getTime());
     }
 }
 

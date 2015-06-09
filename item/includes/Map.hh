@@ -34,6 +34,7 @@ private:
   std::vector<bool>				check_hut(std::pair<int, int> hut);
   void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>));
   void						removeWalls();
+
 public:
   Map (std::pair<int, int> = std::make_pair(20, 20));
   ~Map();
@@ -53,6 +54,8 @@ public:
   void						newBomb(Player *, std::pair<int, int> pos);
   void						update();
   std::vector<Player*>*				getPlayerSet();
+  bool						isTherePlayers();
+  void						gameOver();
 };
 
 #endif /* !MAP_HH_ */

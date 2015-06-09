@@ -8,6 +8,7 @@
 
 # include <iostream>
 
+# include "Param.hh"
 # include "Screen.hh"
 # include "AObject.hh"
 # include "Wall.hh"
@@ -24,15 +25,15 @@ typedef void (GameEngine::*inputFuncptr)(int player, t_input input);
 class						GameEngine : public gdl::Game 
 {
 private:
-  
-private:
+  int						_nbHuman;
+  int						_nbIA;
   Screen					_screen;
   std::vector<t_event>				_events;
   std::map<t_input, inputFuncptr>		_funcptrBind;
   Map						*_map;
   IA						*_iaManager;
 public:
-  GameEngine();
+  GameEngine(Param const &);
   ~GameEngine();
   
 public:

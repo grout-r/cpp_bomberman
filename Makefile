@@ -10,7 +10,8 @@ CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror -g3 -g -ggdb
 
 GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
-SRCS		=		core/src/main.cpp \
+SRCS		=		core/src/Param.cpp \
+				core/src/main.cpp \
 				core/src/GameEngine.cpp \
 				core/src/Exception.cpp \
 				core/src/AssetsController.cpp \
@@ -23,8 +24,10 @@ SRCS		=		core/src/main.cpp \
 				item/src/Void.cpp \
 				item/src/Bonus.cpp \
 				item/src/Fire.cpp \
+				item/src/GameOver.cpp \
 				IA/IA.cpp \
-				IA/Check.cpp
+				IA/Check.cpp \
+				IA/PosVectorTab.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)
 
