@@ -36,6 +36,11 @@ void				Map::fillMap()
   		  _map[x][y] = new Wall(std::make_pair(x, y));
   		  _map[x][y]->initialize();
   		}	      
+	      else if (_int_map[x][y] == 2)
+		{
+		  _map[x][y] = new Bonus(std::make_pair(x, y));
+                  _map[x][y]->initialize();
+		}
   	      else
   		{
   		  _map[x][y] = new Void(std::make_pair(x, y));
@@ -139,7 +144,9 @@ void				Map::removeWalls()
   int				xRand;
   int				yRand;
   int				nbRemoveWall;
+  bool				bonus;
 
+  bonus = 0;
   nbRemoveWall = (_size.first * _size.second) / 5;
   xRand = std::rand() % (_size.first - 2);
   yRand = std::rand() % (_size.first - 2);
@@ -150,7 +157,16 @@ void				Map::removeWalls()
 	  xRand = std::rand() % (_size.first - 2);
 	  yRand = std::rand() % (_size.second - 2);
 	}
-      _int_map[xRand + 1][yRand + 1] = 1;
+      if (bonus == 0)
+	{
+	  _int_map[xRand + 1][yRand + 1] = 1;
+	  bonus = 1;
+	}
+      else
+	{
+	  _int_map[xRand + 1][yRand + 1] = 2;
+          bonus = 0;
+	}
     }
 }
 
