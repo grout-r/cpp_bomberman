@@ -79,8 +79,8 @@ void					GameEngine::draw()
 bool					GameEngine::gameOver()
 {
   _map->gameOver();
-  _screen.gameOver();
   _screen.updateScreen(_map);
+  _screen.gameOver();
   sleep(2);
   return (true);
 }

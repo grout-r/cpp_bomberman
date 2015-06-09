@@ -14,7 +14,7 @@ bool			GameOver::initialize()
   _scale = glm::vec3(100, 100 ,100);
   try
     {
-      _texture = AssetsController::getVoidTexture();
+      _texture = AssetsController::getGameOverTexture();
       _geometry.pushVertex(glm::vec3(0.5, -0.5, 0));
       _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0));
       _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0));

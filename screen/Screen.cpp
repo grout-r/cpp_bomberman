@@ -210,12 +210,12 @@ void					Screen::gameOver()
   GameOver				go;
 
   go.initialize();
-  _camPosition = glm::vec3(0, 0, 30);
+  _camPosition = glm::vec3(0, 0, -100);
   _camTarget = glm::vec3(0, 0, 0);
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
   _camTransformation = 
     glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
-  _shader.bind();
+  //  _shader.bind();
   _shader.setUniform("view", _camTransformation);
   _shader.setUniform("projection", _camProjection);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
