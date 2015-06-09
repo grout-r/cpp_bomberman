@@ -46,7 +46,7 @@ bool					Screen::init()
 {
   try
     {
-      if (!_context.start(800, 600, "Bomberbitch"))
+      if (!_context.start(1920, 1080, "Bomberbitch"))
 	throw Error("Can't initialize context.");
       glEnable(GL_DEPTH_TEST);
       if (!_shader.load("./tp/Shaders/basic.fp", GL_FRAGMENT_SHADER) 

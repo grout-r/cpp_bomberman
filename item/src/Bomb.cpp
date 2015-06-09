@@ -11,7 +11,7 @@ Bomb::Bomb(Player *player, std::pair<int, int> pos)
   this->bomb_power = player->getBombPower();
   this->color = player->getBombColor();
   this->_smell = -10;
-  time(&(this->timer));
+  timer = 3;
   _what = BOMB;
 }
 
@@ -19,12 +19,10 @@ Bomb::~Bomb()
 {
 }
 
-bool		Bomb::explose()
+bool		Bomb::explose(double elapsedTime)
 {
-  time_t	now;
-
-  time(&now);
-  if (difftime(now, (this->timer) + 3) == 0)
+  timer -= elapsedTime;
+  if (timer <= 0)
     return (true);
   return (false);
 }

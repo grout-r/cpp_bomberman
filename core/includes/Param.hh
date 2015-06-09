@@ -9,9 +9,11 @@ private:
   int			_nbHuman;
   int			_nbIA;
   std::pair<int, int>	_XY;
+
 public:
   Param(char **, int);
   ~Param();
+
 public:
   int			getNbHuman() const;
   int			getNbIA() const;

@@ -52,7 +52,7 @@ public:
   std::pair<int, int>				getSize();
   AObject					*getItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);
-  void						update();
+  void						update(double);
   std::vector<Player*>*				getPlayerSet();
   bool						isTherePlayers();
   void						gameOver();

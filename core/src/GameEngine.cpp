@@ -49,7 +49,7 @@ bool					GameEngine::update()
       	(this->*_funcptrBind[_events[i].input])(_events[i].pid, _events[i].input);
     }
   this->updateIA();
-  _map->update();
+  _map->update(_screen.getTime());
   if (!_map->isTherePlayers())
     return (false);
   return (true);
