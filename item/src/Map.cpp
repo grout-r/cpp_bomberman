@@ -404,3 +404,10 @@ std::vector<Player*>*			       Map::getPlayerSet()
 {
   return (&_player);
 }
+
+void					      Map::gameOver()
+{
+  _map.clear();
+  _player.clear();
+  
+}

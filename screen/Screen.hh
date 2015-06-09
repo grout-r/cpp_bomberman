@@ -21,6 +21,7 @@
 # include "AObject.hh"
 # include "Map.hh"
 # include "Definition.hh"
+# include "GameOver.hh"
 
 class Map;
 
@@ -57,6 +58,7 @@ public:
   glm::vec3			getMediumPos(Player *, Player *);
   int				getHeightCam(Player *, Player *, Map *map);
   glm::vec3			getCentralPoint(Map *map);
+  void				gameOver();
 };
 
 #endif

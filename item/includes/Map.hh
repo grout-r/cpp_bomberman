@@ -55,6 +55,7 @@ public:
   void						update();
   std::vector<Player*>*				getPlayerSet();
   bool						isTherePlayers();
+  void						gameOver();
 };
 
 #endif /* !MAP_HH_ */

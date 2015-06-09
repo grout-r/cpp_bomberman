@@ -26,7 +26,6 @@ glm::mat4				AObject::calcTransformation()
 
 bool				AObject::initialize()
 {
-  std::cout << "AObject init" << std::endl;
   return (true);
 }
 

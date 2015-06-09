@@ -23,6 +23,7 @@ SRCS		=		core/src/main.cpp \
 				item/src/Void.cpp \
 				item/src/Bonus.cpp \
 				item/src/Fire.cpp \
+				item/src/GameOver.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp
 
