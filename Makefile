@@ -27,6 +27,7 @@ SRCS		=		core/src/Param.cpp \
 				item/src/GameOver.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp \
+				IA/Random.cpp \
 				IA/PosVectorTab.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)

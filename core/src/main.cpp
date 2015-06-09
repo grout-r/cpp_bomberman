@@ -8,6 +8,8 @@ int			main(int ac, char **av)
   Param			params(av, ac);
   GameEngine		engine(params);
 
+  (void)ac;
+  (void)av;
   if (engine.initialize() == false)
     return (-1);
   while (engine.update() != false)

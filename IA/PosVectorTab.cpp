@@ -1,48 +1,41 @@
-#include "IA.hh"
+# include "IA.hh"
 
-t_input				IA::checkPos(std::vector<int>::iterator ite, Map &map, Player *player, std::vector<int> tab){
-  std::vector<int>::iterator	it;
+t_input	      	IA::checkPos(int low, Map &map, Player *player, std::vector<int> const &tab){
   (void) player;
   (void) map;
+  int  		i = 0;
+  bool		(IA::*funcptr[4])(std::vector<int> const &, int);
 
-  for (it = this->down.begin(); it != down.end(); ++it)
-    if (ite == it)
-      if (tab[17] >= 0)
-	return (MOVE_DOWN);
-  for (it = this->up.begin(); it != up.end(); ++it)
-    if (ite == it)
-      if (tab[7] >=0)
-	return (MOVE_UP);
-  for (it = this->left.begin(); it != left.end(); ++it)
-    if (ite == it)
-      if (tab[11] >= 0)
-	return (MOVE_LEFT);
-  for (it = this->right.begin(); it != right.end(); ++it)
-    if (ite == it)
-      if (tab[13] >= 0)
-	return (MOVE_RIGHT);
-  return (MOVE_RIGHT);
+  funcptr[0] = &IA::dangerLeft;
+  funcptr[1] = &IA::dangerRight;
+  funcptr[2] = &IA::dangerDown;
+  funcptr[3] = &IA::dangerUp;
+  for (i = 0; i != 4; ++i){
+    if ((this->*funcptr[i])(tab, low) == true)
+      return ((t_input) i);
+  }
+  return (PLACE_BOMB);
 }
 
-void		IA::CreateVectorPos(){
+void		IA::CreateVectorPos(std::vector<int> const &tab){
   this->up.clear();
   this->down.clear();
   this->left.clear();
   this->right.clear();
   for (int i = 0; i != 10; ++i)
-    this->up.push_back(i);
-    for (int i = 15; i != 25; ++i)
-      this->down.push_back(i);
+    this->up.push_back(tab[i]);
+  for (int i = 15; i != 25; ++i)
+    this->down.push_back(tab[i]);
   for (int i = 0; i <= 22; ++i){
     for (int inc = 0 ; inc < 2 ; ++inc){
-      this->left.push_back(i);
+      this->left.push_back(tab[i]);
       ++i;
     }
     i += 2;
   }
   for (int i = 3; i <= 25; ++i){
     for (int inc = 0 ; inc < 2; ++inc){
-      this->right.push_back(i);
+      this->right.push_back(tab[i]);
       ++i;
     }
     i += 2;
