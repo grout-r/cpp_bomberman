@@ -8,7 +8,7 @@ INCLUDES	=		-Icore/includes -Iscreen  -Ilibgdl/includes/ -Iitem/includes/ -IIA
 
 CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror -g3 -g -ggdb
 
-GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
+GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread -lSDL_mixer
 
 SRCS		=		core/src/Param.cpp \
 				core/src/main.cpp \
