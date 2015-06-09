@@ -1,10 +1,12 @@
+#include	"Param.hh"
 #include	"GameEngine.hh"
 #include	"Wall.hh"
 #include	"Map.hh"
 	 
-int			main()
+int			main(int ac, char **av)
 {
-  GameEngine		engine;
+  Param			params(av, ac);
+  GameEngine		engine(params);
 
   if (engine.initialize() == false)
     return (-1);

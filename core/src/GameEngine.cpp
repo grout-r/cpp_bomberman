@@ -1,6 +1,7 @@
 #include "GameEngine.hh"
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(Param const &params):
+  _nbHuman(params.getNbHuman()), _nbIA(params.getNbIA())
 {
   _funcptrBind[CAM_XPLUS] = &GameEngine::moveCam;  
   _funcptrBind[CAM_XMINUS] = &GameEngine::moveCam;  
@@ -14,7 +15,7 @@ GameEngine::GameEngine()
   _funcptrBind[MOVE_DOWN] = &GameEngine::movePlayer;
   _funcptrBind[CAM_LOCK] = &GameEngine::lockCam;
   _funcptrBind[PLACE_BOMB] = &GameEngine::placeBomb;
-  _map = new Map(std::make_pair(20, 20));
+  _map = new Map(params.getXY());
   _iaManager = new IA;
 }
 
@@ -28,8 +29,10 @@ bool					GameEngine::initialize()
     return (false);
   AssetsController::initAssetsController();
   _map->genRandMap();
-  _map->newPlayer(1);
-  _map->newPlayer(2);
+  for (int i = 0; i != _nbHuman; ++i)
+    _map->newPlayer(i + 1);
+  for (int i = 0; i != _nbIA; ++i)
+    _map->newPlayer(0);
   return (true);
 }
  
