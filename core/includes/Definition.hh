@@ -3,10 +3,10 @@
 
 typedef enum			e_input
   {
+    MOVE_UP = 0,
     MOVE_RIGHT,
-    MOVE_LEFT,
-    MOVE_UP,
     MOVE_DOWN,
+    MOVE_LEFT,
     PLACE_BOMB,
     MENU,
     EXIT,
