@@ -11,12 +11,14 @@ AssetsController::AssetsController()
   _voidTexture = new gdl::Texture();
   _fireTexture = new gdl::Texture();
   _gameOverTexture = new gdl::Texture();
+  _bonusTexture = new gdl::Texture();
   assert(_bombModel->load("./assets/bomb.fbx"));
   assert(_playerModel->load("./assets/player.fbx"));
   assert(_wallTexture->load("./assets/wall.tga"));
   assert(_voidTexture->load("./assets/lava.tga"));
   assert(_fireTexture->load("./assets/fire.tga"));
   assert(_gameOverTexture->load("./assets/go.tga"));
+  assert(_bonusTexture->load("./assets/bonus.tga"));
 }
 
 AssetsController::~AssetsController()
@@ -27,6 +29,11 @@ AssetsController::~AssetsController()
 gdl::Texture*				AssetsController::getFireTexture()
 {
   return (AssetsControllerInstance->_fireTexture);
+}
+
+gdl::Texture*				AssetsController::getBonusTexture()
+{
+  return (AssetsControllerInstance->_bonusTexture);
 }
 
 gdl::Texture*				AssetsController::getVoidTexture()

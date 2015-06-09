@@ -46,7 +46,7 @@ bool					Screen::init()
 {
   try
     {
-      if (!_context.start(1920, 1080, "Bomberbitch"))
+      if (!_context.start(1820, 980, "Bomberbitch"))
 	throw Error("Can't initialize context.");
       glEnable(GL_DEPTH_TEST);
       if (!_shader.load("./tp/Shaders/basic.fp", GL_FRAGMENT_SHADER) 
@@ -60,14 +60,18 @@ bool					Screen::init()
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
 
-      
-      // if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
-      // 	{
-      // 	  printf("%s", Mix_GetError());
-      // 	}
-      // Mix_Music *musique; //Création du pointeur de type Mix_Music
-      // musique = Mix_LoadMUS("./assets/bo.waw"); //Chargement de la musique
-      // Mix_PlayMusic(musique, -1); //Jouer infiniment la musique
+
+      if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
+      	{
+      	  std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
+      	}
+      Mix_Music *musique;
+      musique = Mix_LoadMUS("./assets/bo.mp3");
+      if (musique == NULL)
+      	std::cout << "error on loading the assets" << std::endl;
+      std::cout << Mix_PlayMusic(musique, -1) << std::endl;
+      std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
+      std::cout << "salut" << std::endl;
       return (true);
     }
   catch (Error e)

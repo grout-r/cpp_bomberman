@@ -8,7 +8,7 @@ INCLUDES	=		-Icore/includes -Iscreen  -Ilibgdl/includes/ -Iitem/includes/ -IIA
 
 CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror -g3 -g -ggdb
 
-GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
+GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread -lSDL_mixer
 
 SRCS		=		core/src/Param.cpp \
 				core/src/main.cpp \
@@ -27,6 +27,7 @@ SRCS		=		core/src/Param.cpp \
 				item/src/GameOver.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp \
+				IA/Random.cpp \
 				IA/PosVectorTab.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)

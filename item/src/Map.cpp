@@ -18,61 +18,6 @@ Map::~Map()
 {
   
 }
-
-void				Map::init()
-{
-  bool		      		wall;
-
-  wall = false;
-  _map.resize(_size.first);
-  for (int x = 0; x != _size.first; x++)
-    {
-      if (wall == false)
-	{
-	  _map[x].resize(_size.second);
-	  for (int y = 0; y != _size.second; y++)
-	    {
-	      if (x == 0 || x == (_size.first - 1) || y == 0 || y == (_size.second -1))
-		{
-		  _map[x][y] = new Wall(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}
-	      else
-		{
-		  _map[x][y] = new Void(std::make_pair(x, y));
-		  _map[x][y]->initialize();
-		}
-	    }
-	  wall = true;
-	}
-      else
-	{
-	  _map[x].resize(_size.second);
-	  for (int y = 0; y != _size.second; y++)
-	    {
-	      if (x == 0 || x == (_size.first - 1) || y == 0 || y == (_size.second - 1))
-		{
-                  _map[x][y] = new Wall(std::make_pair(x, y));
-                  _map[x][y]->initialize();
-		}
-	      else
-		{
-		  if (y % 2 == 0)
-		    {
-		      _map[x][y] = new Void(std::make_pair(x, y));
-		      _map[x][y]->initialize();
-		    }
-		  else
-		    {
-		      _map[x][y] = new Wall(std::make_pair(x, y));
-		      _map[x][y]->initialize();
-		    }
-		}
-	    }
-	  wall = false;
-	}
-    }
-}
  
 void				Map::fillMap()
 {
@@ -195,7 +140,7 @@ void				Map::removeWalls()
   int				yRand;
   int				nbRemoveWall;
 
-  nbRemoveWall = (_size.first * _size.second) / 4;
+  nbRemoveWall = (_size.first * _size.second) / 5;
   xRand = std::rand() % (_size.first - 2);
   yRand = std::rand() % (_size.first - 2);
   for (int removedWall = 0; removedWall != nbRemoveWall; ++removedWall)

@@ -23,15 +23,15 @@ t_input			IA::doAction(Map &map, Player *player){
   return (Move(tab, map, player));
 }
 
-t_input				IA::Move(std::vector<int> tab, Map &map, Player *player){
-  int				high = 0;
+t_input				IA::Move(std::vector<int> &tab, Map &map, Player *player){
+  int				low = 0;
   std::vector<int>::iterator	it;
 
-  CreateVectorPos();
+  CreateVectorPos(tab);
   for (it = tab.begin(); it != tab.end(); ++it)
-    if (*it > high)
-      high = *it;
-  return (checkPos(it, map, player, tab));
+    if (*it < low)
+      low = *it;
+  return (checkPos(low, map, player, tab));
 }
 
 std::vector<int>		IA::CreateTable(Map &map, Player *player){
@@ -42,7 +42,7 @@ std::vector<int>		IA::CreateTable(Map &map, Player *player){
     int				i = 0;
 
     for(int i = 0; i != 25; ++i)
-      tab.push_back(-1000);
+      tab.push_back(0);
     posPlayer = player->getPos();
     tmp.first = posPlayer.first - 2;
     tmp.second = posPlayer.second - 2;

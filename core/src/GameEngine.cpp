@@ -29,6 +29,8 @@ bool					GameEngine::initialize()
     return (false);
   AssetsController::initAssetsController();
   _map->genRandMap();
+  _map->newPlayer(1);
+  //  _map->newPlayer(2);
   for (int i = 0; i != _nbHuman; ++i)
     _map->newPlayer(i + 1);
   for (int i = 0; i != _nbIA; ++i)

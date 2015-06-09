@@ -10,10 +10,11 @@ private:
   bool		_is_exploded;
 
 public:
-  Bonus();
+  Bonus(std::pair<int, int>);
   ~Bonus();
   bool		getExploded() const;
   void		setExploded(bool exploded);
+  bool		initialize();
 };
 
 #endif /* !BONUS_HH_ */

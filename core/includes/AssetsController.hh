@@ -30,7 +30,7 @@ private:
   gdl::Texture			*_voidTexture;
   gdl::Texture			*_fireTexture;
   gdl::Texture			*_gameOverTexture;
-
+  gdl::Texture			*_bonusTexture;
 public:
   static void				initAssetsController();
   static void				destroyAssetsController();
@@ -42,6 +42,7 @@ public:
   static gdl::Texture*			getVoidTexture();
   static gdl::Texture*			getFireTexture();
   static gdl::Texture*			getGameOverTexture();
+  static gdl::Texture*			getBonusTexture();
 };
 
 #endif
