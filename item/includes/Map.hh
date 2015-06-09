@@ -6,6 +6,7 @@
 
 # include "AObject.hh"
 # include "Bomb.hh"
+# include "Bonus.hh"
 # include "Wall.hh"
 # include "Player.hh"
 # include "Void.hh"
