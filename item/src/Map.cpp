@@ -356,13 +356,13 @@ void						Map::fireSomeHut(std::pair<int, int> pos)
     }
 }
 
-void						Map::update()
+void						Map::update(double elapsedTime)
 {
   std::pair<int, int>				pos;
 
   for (std::vector<Fire*>::iterator i = _fire.begin() ; i != _fire.end();)
     {
-      if ((*i)->stillBurn() == false)
+      if ((*i)->stillBurn(elapsedTime) == false)
 	{
 	  pos = (*i)->getPos();
 	  i = _fire.erase(i);
@@ -376,7 +376,7 @@ void						Map::update()
  
   for (std::vector<Bomb*>::iterator i = _bomb.begin() ; i != _bomb.end();)
     {
-      if ((*i)->explose() == true)
+      if ((*i)->explose(elapsedTime) == true)
 	{
 	  pos = (*i)->getPos();
 	  fireSomeHut(pos);
