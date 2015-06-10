@@ -20,14 +20,14 @@ AssetsController::AssetsController()
   assert(_bombModel->load("./assets/bomb.fbx"));
   assert(_playerModel->load("./assets/player.fbx"));
   assert(_wallTexture->load("./assets/wall.tga"));
-  assert(_voidTexture->load("./assets/lava.tga"));
+  assert(_voidTexture->load("./assets/void.tga"));
   assert(_fireTexture->load("./assets/fire.tga"));
   assert(_gameOverTexture->load("./assets/go.tga"));
-  assert(_boxTexture->load("./assets/bonus.tga")); 
+  assert(_boxTexture->load("./assets/box.tga")); 
   assert(_playerIndicatorIa->load("./assets/pia.tga"));
   assert(_playerIndicatorOne->load("./assets/p1.tga"));
   assert(_playerIndicatorTwo->load("./assets/p2.tga"));
-  assert(_bonusTexture[0]->load("./assets/bonusbomb.tga"));
+  assert(_bonusTexture[0]->load("./assets/bbomb.tga"));
 }
 
 AssetsController::~AssetsController()
