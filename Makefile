@@ -28,7 +28,7 @@ SRCS		=		core/src/Param.cpp \
 				item/src/PlayerIndicator.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp \
-				IA/Random.cpp \
+				IA/Move.cpp \
 				IA/PosVectorTab.cpp
 
 OBJS		=		$(SRCS:.cpp=.o)
