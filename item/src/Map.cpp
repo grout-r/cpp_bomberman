@@ -199,19 +199,34 @@ void						Map::newPlayer(int human)
 {
   Player *player;
 
-  for (size_t i = 0; i != _map.size(); i++)
+  size_t	i;
+  size_t	j;
+
+  while (42)
     {
-      for (size_t j = 0; j != _map[i].size(); j++)
-	{
-	  if (_map[i][j]->what() == VOID)
-	    {
-	      player = new Player(std::make_pair(i, j), human);
+  i = std::rand() % _map.size();
+  j = std::rand() % _map[i].size();
+  	  if (_map[i][j]->what() == VOID)
+  	    {
+  	      player = new Player(std::make_pair(i, j), human);
   	      player->initialize();
-	      _player.push_back(player);
-	      return ;
-	    }
-	}
+  	      _player.push_back(player);
+  	      return ;
+  	    }
     }
+  // for (size_t i = 0; i != _map.size(); i++)
+  //   {
+  //     for (size_t j = 0; j != _map[i].size(); j++)
+  // 	{
+  // 	  if (_map[i][j]->what() == VOID)
+  // 	    {
+  // 	      player = new Player(std::make_pair(i, j), human);
+  // 	      player->initialize();
+  // 	      _player.push_back(player);
+  // 	      return ;
+  // 	    }
+  // 	}
+  //   }
 }
 
 void						Map::newBomb(Player *player,
