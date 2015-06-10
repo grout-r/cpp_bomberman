@@ -10,17 +10,12 @@
 
 #include "AObject.hh"
 #include "Bonus.hh"
-#include <ctime>
 
 Bonus::Bonus(std::pair<int, int> pos)
 {
-  int		nbr_rand;
-
-  nbr_rand = std::rand() % 7;
-  std::srand(std::time(0));
   this->_smell = 10;
   _what = BONUS;
-  _bonus = (t_bonus)nbr_rand;
+  _bonus = (t_bonus)(std::rand() % 7);
   _is_exploded = false;
   _what = BONUS;
   _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
@@ -99,13 +94,13 @@ bool		Bonus::getExploded() const
   return (this->_is_exploded);
 }
 
-void		Bonus::setExploded(bool exploded)
-{
-  this->_is_exploded = exploded;
-}
-
 void		Bonus::die()
 {
   _is_exploded = true;
   _texture = AssetsController::getBonusTexture(0);
+}
+
+t_bonus		Bonus::getBonus()
+{
+  return (_bonus);
 }

@@ -18,6 +18,12 @@ Player::Player(std::pair<int, int> pos, int humanId) :
   _rotatePlayerBind[MOVE_LEFT] = glm::vec3(0, -90, 0);
   _rotatePlayerBind[MOVE_UP] = glm::vec3(0, 180, 0);
   _rotatePlayerBind[MOVE_DOWN] = glm::vec3(0, 0, 0);
+  _fptrBonus[SPEED_MORE] = &Player::speedMore;
+  _fptrBonus[BOMB_MORE] = &Player::bombMore;
+  _fptrBonus[POWER_MORE] = &Player::powerMore;
+  _fptrBonus[SPEED_LESS] = &Player::speedLess;
+  _fptrBonus[BOMB_LESS] = &Player::bombLess;
+  _fptrBonus[POWER_LESS] = &Player::powerLess;
   _frameCounter = 0;
   _what = PLAYER;
   _scale = glm::vec3(0.2, 0.2, 0.2);
@@ -135,4 +141,53 @@ void		Player::addBomb()
   ++bomb_nbCur;
   if (bomb_nbCur >= bomb_nbMax)
     bomb_nbCur = bomb_nbMax;
+}
+
+void					Player::speedMore()
+{
+  p_speed += 5;
+  if (p_speed >= 50)
+    p_speed = 50;
+}
+
+void					Player::bombMore()
+{
+  bomb_nbMax += 1;
+  bomb_nbCur += 1;
+  if (bomb_nbMax >= 6)
+    bomb_nbMax = 6;
+}
+
+void					Player::powerMore()
+{
+  bomb_power += 1;
+  if (bomb_power >= 10)
+    bomb_power = 10;
+}
+
+void					Player::speedLess()
+{
+  p_speed -= 5;
+  if (p_speed <= 10)
+    p_speed = 10;
+}
+
+void					Player::bombLess()
+{
+  bomb_nbMax -= 1;
+  bomb_nbCur += 1;
+  if (bomb_nbMax <= 1)
+    bomb_nbMax = 1;
+}
+
+void					Player::powerLess()
+{
+  bomb_power -= 1;
+  if (bomb_power <= 1)
+    bomb_power = 1;
+}
+
+void					Player::takeBonus(t_bonus bonus)
+{
+  (this->*_fptrBonus[bonus])();
 }

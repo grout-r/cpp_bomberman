@@ -38,6 +38,9 @@ private:
   std::map<t_input, glm::vec3>		_movePlayerBind;
   std::map<t_input, glm::vec3>		_rotatePlayerBind;
 
+private:
+  std::map<t_bonus, void (Player::*)()>	_fptrBonus;
+
 public:
   Player(std::pair<int, int>, int humanId = 0);
   ~Player();
@@ -62,6 +65,19 @@ public:
 public:
   bool					decBomb();
   void					addBomb();
+
+private:
+  void					speedMore();
+  void					bombMore();
+  void					powerMore();
+
+private:
+  void					speedLess();
+  void					bombLess();
+  void					powerLess();
+
+public:
+  void					takeBonus(t_bonus);
 };
 
 #endif /* !PLAYER_HH_ */

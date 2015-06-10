@@ -42,6 +42,7 @@ public:
   void						genRandMap();
 
 private:
+  void						VOUSAIMEZJOUEZAVECLEFEU(std::pair<int, int>, std::pair<int, int>, int);
   void						fireSomeHut(std::pair<int, int>, int);
 
 public:
@@ -53,6 +54,7 @@ public:
   Player					*getPlayerById(int id);
   std::pair<int, int>				getSize();
   AObject					*getItemAtPos(std::pair<int, int>);
+  void						delItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);
   void						update(double);
   std::vector<Player*>*				getPlayerSet();

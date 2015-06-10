@@ -275,6 +275,45 @@ AObject*					Map::getItemAtPos(std::pair<int, int> pos)
   return (_map[pos.first][pos.second]);
 }
 
+void		Map::delItemAtPos(std::pair<int, int> pos)
+{
+  delete _map[pos.first][pos.second];
+  _map[pos.first][pos.second] = 
+    new Void(std::make_pair(pos.first, pos.second));
+  _map[pos.first][pos.second]->initialize();
+}
+
+void		Map::VOUSAIMEZJOUEZAVECLEFEU(std::pair<int, int> pos,
+					     std::pair<int, int> inc, int r)
+{
+  for (int i = 1; i != r + 1; i++)
+    {
+      bool	hole = false;
+      _map[pos.first + i * inc.first][pos.second + i * inc.second]->die();
+      if (_map[pos.first + i * inc.first][pos.second + i * inc.second]->what() == BONUS &&
+	  reinterpret_cast<Bonus*>(_map[pos.first + i * inc.first]
+				   [pos.second + i * inc.second])->getBonus() == NOTHING)
+	{
+	  delete _map[pos.first + i * inc.first][pos.second + i * inc.second];
+	  _map[pos.first + i * inc.first][pos.second + i * inc.second] = 
+	    new Void(std::make_pair(pos.first + i * inc.first, pos.second + i * inc.second));
+	  _map[pos.first + i * inc.first][pos.second + i * inc.second]->initialize();
+	}
+      if (_map[pos.first + i * inc.first][pos.second + i * inc.second]->what() == VOID)
+	{
+	  hole = true;
+	  delete _map[pos.first + i * inc.first][pos.second + i * inc.second];
+	  _map[pos.first + i * inc.first][pos.second + i * inc.second] = 
+	    new Fire(std::make_pair(pos.first + i * inc.first, pos.second + i * inc.second));
+	  _map[pos.first + i * inc.first][pos.second + i * inc.second]->initialize();
+	  _fire.push_back(reinterpret_cast<Fire*>
+			  (_map[pos.first + i * inc.first][pos.second + i * inc.second]));
+	}
+      if (hole == false)
+      	break;
+    }
+}
+
 void						Map::fireSomeHut(std::pair<int, int> pos, int r)
 {
   _map[pos.first][pos.second]->die();
@@ -283,70 +322,10 @@ void						Map::fireSomeHut(std::pair<int, int> pos, int r)
   _map[pos.first][pos.second]->initialize();
   _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second]));
 
-  for (int i = 1; i != r + 1; i++)
-    {
-      bool	hole = false;
-      _map[pos.first + i][pos.second]->die();
-      if (_map[pos.first + i][pos.second]->what() == VOID)
-	{
-	  hole = true;
-	  delete _map[pos.first + i][pos.second];
-	  _map[pos.first + i][pos.second] = 
-	    new Fire(std::make_pair(pos.first + i, pos.second));
-	  _map[pos.first + i][pos.second]->initialize();
-	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first + i][pos.second]));
-	}
-      if (hole == false)
-      	break;
-    }
-  for (int i = 1; i != r + 1; i++)
-    {
-      bool	hole = false;
-      _map[pos.first - i][pos.second]->die();
-      if (_map[pos.first - i][pos.second]->what() == VOID)
-	{
-	  hole = true;
-	  delete _map[pos.first - i][pos.second];
-	  _map[pos.first - i][pos.second] = 
-	    new Fire(std::make_pair(pos.first - i, pos.second));
-	  _map[pos.first - i][pos.second]->initialize();
-	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first - i][pos.second]));
-	}
-      if (hole == false)
-      	break;
-    }
-  for (int i = 1; i != r + 1; i++)
-    {
-      bool	hole = false;
-      _map[pos.first][pos.second + i]->die();
-      if (_map[pos.first][pos.second + i]->what() == VOID)
-	{
-	  hole = true;
-	  delete _map[pos.first][pos.second + i];
-	  _map[pos.first][pos.second + i] = 
-	    new Fire(std::make_pair(pos.first, pos.second + i));
-	  _map[pos.first][pos.second + i]->initialize();
-	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second + i]));
-      	}
-      if (hole == false)
-	break;
-    }
-  for (int i = 1; i != r + 1; i++)
-    {
-      bool	hole = false;
-      _map[pos.first][pos.second - i]->die();
-      if (_map[pos.first][pos.second - i]->what() == VOID)
-	{
-	  hole = true;
-	  delete _map[pos.first][pos.second - i];
-	  _map[pos.first][pos.second - i] = 
-	    new Fire(std::make_pair(pos.first, pos.second - i));
-	  _map[pos.first][pos.second - i]->initialize();
-	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second - i]));
-	}
-      if (hole == false)
-	break;
-    }
+  VOUSAIMEZJOUEZAVECLEFEU(pos, std::make_pair(1, 0), r);
+  VOUSAIMEZJOUEZAVECLEFEU(pos, std::make_pair(-1, 0), r);
+  VOUSAIMEZJOUEZAVECLEFEU(pos, std::make_pair(0, -1), r);
+  VOUSAIMEZJOUEZAVECLEFEU(pos, std::make_pair(0, 1), r);
 }
 
 void						Map::update(double elapsedTime)

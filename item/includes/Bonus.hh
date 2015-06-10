@@ -16,6 +16,7 @@ public:
   void		setExploded(bool exploded);
   bool		initialize();
   virtual void	die();
+  t_bonus	getBonus();
 };
 
 #endif /* !BONUS_HH_ */

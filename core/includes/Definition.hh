@@ -38,13 +38,13 @@ typedef enum			e_what
 
 typedef enum			e_bonus
   {
-    SPEED,
-    MORE_BOMB,
-    POWER,
-    NOTHING,
+    SPEED_MORE = 0,
+    BOMB_MORE,
+    POWER_MORE,
     SPEED_LESS,
     BOMB_LESS,
     POWER_LESS,
+    NOTHING
   }				t_bonus;
 
 enum e_action

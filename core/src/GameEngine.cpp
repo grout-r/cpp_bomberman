@@ -116,7 +116,17 @@ void					GameEngine::movePlayer(int pid, t_input input)
 	    canMove = false;
 	}
       if (canMove == true)
-	tmp->move(input, _screen.getTime());
+	{
+	  tmp->move(input, _screen.getTime());
+	  for (unsigned int i = 0; i != newPos.size(); ++i)
+	    if (_map->getItemAtPos(newPos[i])->what() == BONUS
+		&& reinterpret_cast<Bonus*>(_map->getItemAtPos(newPos[i]))->getExploded())
+	      {
+		tmp->takeBonus(reinterpret_cast<Bonus*>(_map->getItemAtPos(newPos[i]))->getBonus());
+		_map->delItemAtPos(newPos[i]);
+		break;
+	      }
+	}
     }
 }
 
