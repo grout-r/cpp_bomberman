@@ -91,7 +91,9 @@ int			IA::checkLeft(Map &map, Player *player){
   for (; posPlayer.first != 0; --posPlayer.first){
     tmp = map.getItemAtPos(posPlayer);
     if (tmp->what() == BOMB){
+      std::cout << "c est une bomb" << std::endl;
       if (bomb->getBombPower() <= count){
+	std::cout << "return 1" << std::endl;
 	return (1);
       }
     }

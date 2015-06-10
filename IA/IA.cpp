@@ -19,51 +19,61 @@ IA::~IA(){
 t_input			IA::doAction(Map &map, Player *player){
   std::vector<int>	tab;
 
-  tab = CreateTable(map, player);
-  return (Move(tab, map, player));
+  tab = createTable(map, player);
+  return (move(tab, map, player));
 }
 
-t_input				IA::Move(std::vector<int> &tab, Map &map, Player *player){
-  int				low = 0;
+
+
+t_input				IA::move(std::vector<int> &tab, Map &map, Player *player){
+  int				high = 0;
   std::vector<int>::iterator	it;
 
-  CreateVectorPos(tab);
-  for (it = tab.begin(); it != tab.end(); ++it)
-    if (*it < low)
-      low = *it;
-  return (checkPos(low, map, player, tab));
-}
-
-std::vector<int>		IA::CreateTable(Map &map, Player *player){
-    std::vector<int>		tab;
-    std::pair<int, int>		posPlayer;
-    std::pair<int, int>		tmp;
-    AObject			*obj;
-    int				i = 0;
-
-    for(int i = 0; i != 25; ++i)
-      tab.push_back(0);
-    posPlayer = player->getPos();
-    tmp.first = posPlayer.first - 2;
-    tmp.second = posPlayer.second - 2;
-    for (unsigned int y = 0; y != 5; ++y){
-      if (tmp.second >= 0 && tmp.second < map.getSize().second){
-	for (unsigned int x = 0; x != 5; ++x){
-	  if (tmp.first >= 0 && tmp.first < map.getSize().first){
-	    obj = map.getItemAtPos(tmp);
-	    tab[i] = obj->getSmell();
-	    ++i;
-	    ++tmp.first;
-	  }
-	}
-      }
-      tmp.first = posPlayer.first - 2;
-      ++tmp.second;
+  /*  if (checkBomb(map, player) == 0){
+    return (saveMyLife());
     }
-    return (tab);
+    else{*/
+    createVectorPos(tab);
+    for (it = tab.begin(); it != tab.end(); ++it)
+      if (*it > high)
+      high = *it;
+    return (checkPos(high, map, player, tab));
+    //  }
+}
+std::vector<int>		IA::createTable(Map &map, Player *player){
+  std::vector<int>		tab;
+  std::pair<int, int>		posPlayer;
+  std::pair<int, int>		tmp;
+  AObject			*obj;
+  int				i = 0;
+
+  for(int i = 0; i != 25; ++i)
+    tab.push_back(-5);
+  posPlayer = player->getPos();
+  tmp.first = posPlayer.first - 2;
+  tmp.second = posPlayer.second - 2;
+  for (unsigned int y = 0; y != 5; ++y){
+    if (tmp.second >= 0 && tmp.second < map.getSize().second){
+      for (unsigned int x = 0; x != 5; ++x){
+	if (tmp.first >= 0 && tmp.first < map.getSize().first){
+	  obj = map.getItemAtPos(tmp);
+	  tab[i] = obj->getSmell();
+	  ++i;
+	}
+	else
+	  ++i;
+	++tmp.first;
+      }
+    }
+    else
+      ++i;
+    tmp.first = posPlayer.first - 2;
+    ++tmp.second;
+  }
+  return (tab);
 }
 
-int			IA::CheckBomb(Map &map, Player *player){
+int			IA::checkBomb(Map &map, Player *player){
   int			i = 0;
   
   if ((i = checkBottom(map, player)) == 1 
