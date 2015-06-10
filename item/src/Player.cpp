@@ -21,6 +21,8 @@ Player::Player(std::pair<int, int> pos, int humanId) :
   _frameCounter = 0;
   _what = PLAYER;
   _scale = glm::vec3(0.2, 0.2, 0.2);
+  _indicator = new PlayerIndicator(_position, humanId);
+  _indicator->initialize();
 }
 
 Player::~Player()
@@ -99,6 +101,7 @@ void		Player::draw(gdl::BasicShader& shader, gdl::Clock &clock)
 	_frameCounter++;
     }
   _playerModel->draw(shader, calcTransformation(), clock.getElapsed());
+  _indicator->draw(shader, clock);
 }
 
 void		Player::update()
@@ -128,6 +131,7 @@ void		Player::move(t_input input, double elapsedTime)
     }
   _position += _movePlayerBind[input] * (p_speed * static_cast<float>(elapsedTime));
   _rotation = _rotatePlayerBind[input];
+  _indicator->updatePosition(_position);
 }
 
 void	       Player::die()

@@ -50,7 +50,6 @@ bool			Fire::initialize()
       _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
       _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
       _geometry.pushVertex(glm::vec3(0, 0.5, 0));
-
       _geometry.pushUv(glm::vec2(0.0f, 0.0f));
       _geometry.pushUv(glm::vec2(1.0f, 0.0f));
       _geometry.pushUv(glm::vec2(1.0f, 1.0f));

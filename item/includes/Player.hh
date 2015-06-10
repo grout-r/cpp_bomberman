@@ -9,6 +9,7 @@
 # include "Exception.hh"
 # include "Definition.hh"
 # include "Map.hh"
+# include "PlayerIndicator.hh"
 
 typedef enum				e_color
   {
@@ -29,6 +30,7 @@ private:
 private:
   gdl::Model				*_playerModel;
   int					_frameCounter;
+  PlayerIndicator			*_indicator;
 
 private:
   std::map<t_input, glm::vec3>		_movePlayerBind;

@@ -25,6 +25,7 @@ SRCS		=		core/src/Param.cpp \
 				item/src/Bonus.cpp \
 				item/src/Fire.cpp \
 				item/src/GameOver.cpp \
+				item/src/PlayerIndicator.cpp \
 				IA/IA.cpp \
 				IA/Check.cpp \
 				IA/Random.cpp \
