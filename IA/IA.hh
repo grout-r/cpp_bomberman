@@ -23,9 +23,9 @@ public:
   t_input		doAction(Map &map, Player *player);
 
 private:
-  t_input		Move(std::vector<int> &tab, Map &map, Player *player);
-  int			CheckBomb(Map &map, Player *player);
-  std::vector<int> 	CreateTable(Map &map, Player *player);
+  t_input		move(std::vector<int> &tab, Map &map, Player *player);
+  int			checkBomb(Map &map, Player *player);
+  std::vector<int> 	createTable(Map &map, Player *player);
 
   // Check.cpp
 private:
@@ -36,15 +36,16 @@ private:
 
   // PosVectorTab.cpp
 private:
-  void			CreateVectorPos(std::vector<int> const &tab);
-  t_input      		checkPos(int low, Map &map, Player *player, std::vector<int> const &tab);
+  void			createVectorPos(std::vector<int> const &tab);
+  t_input      		checkPos(int high, Map &map, Player *player, std::vector<int> const &tab);
 
-  // Random.cpp
+  // Move.cpp
 private:
-  bool			dangerDown(std::vector<int> const &tab, int low);
-  bool			dangerUp(std::vector<int> const &tab, int low);
-  bool			dangerLeft(std::vector<int> const &tab, int low);
-  bool			dangerRight(std::vector<int> const &tab, int low);
+  bool			moveDown(std::vector<int> const &tab, int high);
+  bool			moveUp(std::vector<int> const &tab, int high);
+  bool			moveLeft(std::vector<int> const &tab, int high);
+  bool			moveRight(std::vector<int> const &tab, int high);
+  t_input		saveMyLife();
 };
 
 #endif // !IA_HH_

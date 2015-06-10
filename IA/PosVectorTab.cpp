@@ -1,23 +1,25 @@
 # include "IA.hh"
 
-t_input	      	IA::checkPos(int low, Map &map, Player *player, std::vector<int> const &tab){
+t_input	      	IA::checkPos(int high, Map &map, Player *player, std::vector<int> const &tab){
   (void) player;
   (void) map;
   int  		i = 0;
   bool		(IA::*funcptr[4])(std::vector<int> const &, int);
 
-  funcptr[0] = &IA::dangerLeft;
-  funcptr[1] = &IA::dangerRight;
-  funcptr[2] = &IA::dangerDown;
-  funcptr[3] = &IA::dangerUp;
+  funcptr[0] = &IA::moveRight;
+  funcptr[1] = &IA::moveLeft;
+  funcptr[2] = &IA::moveUp;
+  funcptr[3] = &IA::moveDown;
   for (i = 0; i != 4; ++i){
-    if ((this->*funcptr[i])(tab, low) == true)
+    if ((this->*funcptr[i])(tab, high) == true){
+      //      std::cout << "CA RETURN TRUE     " << i << std::endl;
       return ((t_input) i);
+    }
   }
   return (PLACE_BOMB);
 }
 
-void		IA::CreateVectorPos(std::vector<int> const &tab){
+void		IA::createVectorPos(std::vector<int> const &tab){
   this->up.clear();
   this->down.clear();
   this->left.clear();
