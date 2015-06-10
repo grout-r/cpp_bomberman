@@ -15,6 +15,7 @@ public:
   bool		getExploded() const;
   void		setExploded(bool exploded);
   bool		initialize();
+  virtual void	die();
 };
 
 #endif /* !BONUS_HH_ */

@@ -30,11 +30,12 @@ private:
   gdl::Texture			*_voidTexture;
   gdl::Texture			*_fireTexture;
   gdl::Texture			*_gameOverTexture;
-  gdl::Texture			*_bonusTexture;
+  gdl::Texture			*_boxTexture;
   gdl::Texture			*_playerIndicatorOne;
   gdl::Texture			*_playerIndicatorTwo;
   gdl::Texture			*_playerIndicatorIa;
-  
+  gdl::Texture			*_bonusTexture[5];
+
 public:
   static void				initAssetsController();
   static void				destroyAssetsController();
@@ -46,8 +47,9 @@ public:
   static gdl::Texture*			getVoidTexture();
   static gdl::Texture*			getFireTexture();
   static gdl::Texture*			getGameOverTexture();
-  static gdl::Texture*			getBonusTexture();
+  static gdl::Texture*			getBoxTexture();
   static gdl::Texture*			getPlayerIndicatorTexture(int);
+  static gdl::Texture*			getBonusTexture(int);
 };
 
 #endif

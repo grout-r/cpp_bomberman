@@ -1,7 +1,7 @@
 #include "Player.hh"
 
 Player::Player(std::pair<int, int> pos, int humanId) :
-  bomb_nb(1), bomb_power(1), p_speed(25), bomb_color(ORANGE), _alive(true)
+  bomb_nbMax(1), bomb_nbCur(1), bomb_power(1), p_speed(25), bomb_color(ORANGE), _alive(true)
 {
   static int	id = 0;
   
@@ -30,24 +30,9 @@ Player::~Player()
   std::cout << "Player " << this->player_id << " is dead" << std::endl;
 }
 
-void		Player::putBomb()
-{
-
-}
-
 int	        Player::getHumanId()
 {
   return (this->humanId);
-}
-
-int		Player::getBombNb() const
-{
-  return (this->bomb_nb);
-}
-
-void		Player::setBombNb(int nb)
-{
-  this->bomb_nb = nb;
 }
 
 int		Player::getBombPower() const
@@ -58,16 +43,6 @@ int		Player::getBombPower() const
 void		Player::setBombPower(int power)
 {
   this->bomb_power = power;
-}
-
-int		Player::getPSpeed() const
-{
-  return (this->p_speed);
-}
-
-void		Player::setPSpeed(int speed)
-{
-  this->p_speed = speed;
 }
 
 int		Player::getPlayerId() const
@@ -142,4 +117,22 @@ void	       Player::die()
 bool	      Player::isAlive() const
 {
   return (_alive);
+}
+
+bool		Player::decBomb()
+{
+  if (bomb_nbCur <= 0)
+    {
+      bomb_nbCur = 0;
+      return false;
+    }
+  --bomb_nbCur;
+  return true;
+}
+
+void		Player::addBomb()
+{
+  ++bomb_nbCur;
+  if (bomb_nbCur >= bomb_nbMax)
+    bomb_nbCur = bomb_nbMax;
 }

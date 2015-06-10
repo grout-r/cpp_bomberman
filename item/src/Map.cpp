@@ -197,7 +197,7 @@ bool						Map::isTherePlayers()
 
 void						Map::newPlayer(int human)
 {
-  Player *Michel;
+  Player *player;
 
   for (size_t i = 0; i != _map.size(); i++)
     {
@@ -205,9 +205,9 @@ void						Map::newPlayer(int human)
 	{
 	  if (_map[i][j]->what() == VOID)
 	    {
-	      Michel = new Player(std::make_pair(i, j), human);
-  	      Michel->initialize();
-	      _player.push_back(Michel);
+	      player = new Player(std::make_pair(i, j), human);
+  	      player->initialize();
+	      _player.push_back(player);
 	      return ;
 	    }
 	}
@@ -217,18 +217,17 @@ void						Map::newPlayer(int human)
 void						Map::newBomb(Player *player,
 							     std::pair<int, int> pos)
 {
-  Bomb	*Michel;
-  (void)Michel;
-  (void)player;
+  Bomb	*bomb;
   if (_map[pos.first][pos.second]->what() == VOID)
-    {
-      Michel = new Bomb (player, pos);
-      Michel->initialize();
-      delete _map[pos.first][pos.second];
-      _map[pos.first][pos.second] = Michel;
-      _bomb.push_back(Michel);
-      return ;
-    }
+    if (player->decBomb())
+      {
+	bomb = new Bomb (player, pos);
+	bomb->initialize();
+	delete _map[pos.first][pos.second];
+	_map[pos.first][pos.second] = bomb;
+	_bomb.push_back(bomb);
+	return ;
+      }
 }
 
 Player*						Map::getHumanById(int id)
@@ -236,6 +235,16 @@ Player*						Map::getHumanById(int id)
   for (size_t i = 0; i != _player.size(); i++)
     {
       if (_player[i]->getHumanId() == id)
+	return _player[i];
+    }
+  return (NULL);
+}
+
+Player*						Map::getPlayerById(int id)
+{
+  for (size_t i = 0; i != _player.size(); i++)
+    {
+      if (_player[i]->getPlayerId() == id)
 	return _player[i];
     }
   return (NULL);
@@ -251,7 +260,7 @@ AObject*					Map::getItemAtPos(std::pair<int, int> pos)
   return (_map[pos.first][pos.second]);
 }
 
-void						Map::fireSomeHut(std::pair<int, int> pos)
+void						Map::fireSomeHut(std::pair<int, int> pos, int r)
 {
   _map[pos.first][pos.second]->die();
   delete _map[pos.first][pos.second];
@@ -259,66 +268,75 @@ void						Map::fireSomeHut(std::pair<int, int> pos)
   _map[pos.first][pos.second]->initialize();
   _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second]));
 
-  for (int i = 1; i != 3; i++)
+  for (int i = 1; i != r + 1; i++)
     {
+      bool	hole = false;
+      _map[pos.first + i][pos.second]->die();
       if (_map[pos.first + i][pos.second]->what() == VOID)
-      	{
-	  _map[pos.first + i][pos.second]->die();
+	{
+	  hole = true;
 	  delete _map[pos.first + i][pos.second];
 	  _map[pos.first + i][pos.second] = 
 	    new Fire(std::make_pair(pos.first + i, pos.second));
 	  _map[pos.first + i][pos.second]->initialize();
 	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first + i][pos.second]));
-      	}
-      else
+	}
+      if (hole == false)
       	break;
     }
-  for (int i = 1; i != 3; i++)
+  for (int i = 1; i != r + 1; i++)
     {
+      bool	hole = false;
+      _map[pos.first - i][pos.second]->die();
       if (_map[pos.first - i][pos.second]->what() == VOID)
-      	{
-	  _map[pos.first - i][pos.second]->die();
+	{
+	  hole = true;
 	  delete _map[pos.first - i][pos.second];
 	  _map[pos.first - i][pos.second] = 
 	    new Fire(std::make_pair(pos.first - i, pos.second));
 	  _map[pos.first - i][pos.second]->initialize();
 	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first - i][pos.second]));
-      	}
-      else
+	}
+      if (hole == false)
       	break;
     }
-  for (int i = 1; i != 3; i++)
+  for (int i = 1; i != r + 1; i++)
     {
+      bool	hole = false;
+      _map[pos.first][pos.second + i]->die();
       if (_map[pos.first][pos.second + i]->what() == VOID)
-      	{
-	  _map[pos.first][pos.second + i]->die();
+	{
+	  hole = true;
 	  delete _map[pos.first][pos.second + i];
 	  _map[pos.first][pos.second + i] = 
 	    new Fire(std::make_pair(pos.first, pos.second + i));
 	  _map[pos.first][pos.second + i]->initialize();
 	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second + i]));
       	}
-      else
-      	break;
+      if (hole == false)
+	break;
     }
-  for (int i = 1; i != 3; i++)
+  for (int i = 1; i != r + 1; i++)
     {
+      bool	hole = false;
+      _map[pos.first][pos.second - i]->die();
       if (_map[pos.first][pos.second - i]->what() == VOID)
-      	{
-	  _map[pos.first][pos.second - i]->die();
+	{
+	  hole = true;
 	  delete _map[pos.first][pos.second - i];
 	  _map[pos.first][pos.second - i] = 
 	    new Fire(std::make_pair(pos.first, pos.second - i));
 	  _map[pos.first][pos.second - i]->initialize();
 	  _fire.push_back(reinterpret_cast<Fire*>(_map[pos.first][pos.second - i]));
-      	}
-      else
-      	break;
+	}
+      if (hole == false)
+	break;
     }
 }
 
 void						Map::update(double elapsedTime)
 {
+  Player					*player;
   std::pair<int, int>				pos;
 
   for (std::vector<Fire*>::iterator i = _fire.begin() ; i != _fire.end();)
@@ -340,7 +358,9 @@ void						Map::update(double elapsedTime)
       if ((*i)->explose(elapsedTime) == true)
 	{
 	  pos = (*i)->getPos();
-	  fireSomeHut(pos);
+	  if ((player = getPlayerById((*i)->getPlayerId())))
+	    player->addBomb();
+	  fireSomeHut(pos, (*i)->getBombPower());
 	  i = _bomb.erase(i);
 	}
       else
@@ -353,8 +373,8 @@ void						Map::update(double elapsedTime)
       pos = (*i)->getPos();
       if (_map[pos.first][pos.second]->what() == FIRE)
 	{
-	  //delete (*i);
 	  i = _player.erase(i);
+	  //delete (*i);
 	}
       else
 	i++;

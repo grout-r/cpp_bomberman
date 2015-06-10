@@ -36,7 +36,7 @@ bool			Bonus::initialize()
   _scale = glm::vec3(100, 100 ,100);
   try
     {
-      _texture = AssetsController::getBonusTexture();
+      _texture = AssetsController::getBoxTexture();
       _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
       _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
       _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
@@ -102,4 +102,10 @@ bool		Bonus::getExploded() const
 void		Bonus::setExploded(bool exploded)
 {
   this->_is_exploded = exploded;
+}
+
+void		Bonus::die()
+{
+  _is_exploded = true;
+  _texture = AssetsController::getBonusTexture(0);
 }

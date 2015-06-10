@@ -42,7 +42,7 @@ public:
   void						genRandMap();
 
 private:
-  void						fireSomeHut(std::pair<int, int>);
+  void						fireSomeHut(std::pair<int, int>, int);
 
 public:
   void						init();
@@ -50,6 +50,7 @@ public:
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock &clock);
   Player					*getHumanById(int id);
+  Player					*getPlayerById(int id);
   std::pair<int, int>				getSize();
   AObject					*getItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);

@@ -51,7 +51,7 @@ public:
   glm::vec3			getVecPos();
  
 public:
-  void				die();
+  virtual void			die();
 };
 
 #endif //!AOBJ_HPP

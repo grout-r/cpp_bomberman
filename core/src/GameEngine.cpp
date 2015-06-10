@@ -66,7 +66,6 @@ void					GameEngine::updateIA()
   	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
 	  if (_funcptrBind.count(input))
 	    (this->*_funcptrBind[input])((*playerSet)[i]->getHumanId(), input);
-	  //  	  (*playerSet)[i]->move(input, _screen.getTime());
   	}
     } 
 }
@@ -112,7 +111,8 @@ void					GameEngine::movePlayer(int pid, t_input input)
       for (unsigned int i = 0; i != newPos.size(); ++i)
 	{
 	  if (_map->getItemAtPos(newPos[i])->what() == WALL
-	      || _map->getItemAtPos(newPos[i])->what() == BONUS)
+	      || (_map->getItemAtPos(newPos[i])->what() == BONUS
+		  && !reinterpret_cast<Bonus*>(_map->getItemAtPos(newPos[i]))->getExploded()))
 	    canMove = false;
 	}
       if (canMove == true)
@@ -125,5 +125,6 @@ void					GameEngine::placeBomb(int pid, t_input input)
   (void)input;
   Player *tmp = _map->getHumanById(pid);
   std::pair<int, int> pos = tmp->getPos();
-  _map->newBomb(tmp, pos);
+  if (_map->getItemAtPos(pos)->what() != BOMB)
+    _map->newBomb(tmp, pos);
 }

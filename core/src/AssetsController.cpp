@@ -11,20 +11,23 @@ AssetsController::AssetsController()
   _voidTexture = new gdl::Texture();
   _fireTexture = new gdl::Texture();
   _gameOverTexture = new gdl::Texture();
-  _bonusTexture = new gdl::Texture();
+  _boxTexture = new gdl::Texture();
   _playerIndicatorOne = new gdl::Texture();
   _playerIndicatorTwo = new gdl::Texture();
   _playerIndicatorIa = new gdl::Texture();
+  for (int i = 0; i != 5; ++i)
+    _bonusTexture[i] = new gdl::Texture();
   assert(_bombModel->load("./assets/bomb.fbx"));
   assert(_playerModel->load("./assets/player.fbx"));
   assert(_wallTexture->load("./assets/wall.tga"));
   assert(_voidTexture->load("./assets/lava.tga"));
   assert(_fireTexture->load("./assets/fire.tga"));
   assert(_gameOverTexture->load("./assets/go.tga"));
-  assert(_bonusTexture->load("./assets/bonus.tga"));
+  assert(_boxTexture->load("./assets/bonus.tga")); 
   assert(_playerIndicatorIa->load("./assets/pia.tga"));
   assert(_playerIndicatorOne->load("./assets/p1.tga"));
   assert(_playerIndicatorTwo->load("./assets/p2.tga"));
+  assert(_bonusTexture[0]->load("./assets/bonusbomb.tga"));
 }
 
 AssetsController::~AssetsController()
@@ -35,6 +38,11 @@ AssetsController::~AssetsController()
 gdl::Texture*				AssetsController::getFireTexture()
 {
   return (AssetsControllerInstance->_fireTexture);
+}
+
+gdl::Texture*				AssetsController::getBonusTexture(int n)
+{
+  return (AssetsControllerInstance->_bonusTexture[n]);
 }
 
 gdl::Texture*				AssetsController::getPlayerIndicatorTexture(int who)
@@ -52,9 +60,9 @@ gdl::Texture*				AssetsController::getPlayerIndicatorTexture(int who)
     }
 }
 
-gdl::Texture*				AssetsController::getBonusTexture()
+gdl::Texture*				AssetsController::getBoxTexture()
 {
-  return (AssetsControllerInstance->_bonusTexture);
+  return (AssetsControllerInstance->_boxTexture);
 }
 
 gdl::Texture*				AssetsController::getVoidTexture()

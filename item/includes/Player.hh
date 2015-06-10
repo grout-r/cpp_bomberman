@@ -20,13 +20,15 @@ typedef enum				e_color
 class Player :	public AObject
 {
 private:
-  int					bomb_nb;
+  int					bomb_nbMax;
+  int					bomb_nbCur;
   int					bomb_power;
   int					p_speed;
   t_color				bomb_color;
   int					player_id;
   int					humanId;
   bool					_alive;
+
 private:
   gdl::Model				*_playerModel;
   int					_frameCounter;
@@ -35,20 +37,16 @@ private:
 private:
   std::map<t_input, glm::vec3>		_movePlayerBind;
   std::map<t_input, glm::vec3>		_rotatePlayerBind;
+
 public:
   Player(std::pair<int, int>, int humanId = 0);
   ~Player();
-  int					getBombNb() const;
-  void					setBombNb(int nb);
   int					getBombPower() const;
   void					setBombPower(int power);
-  int					getPSpeed() const;
-  void					setPSpeed(int speed);
   int					getPlayerId() const;
   t_color				getBombColor() const;
   void					setBombColor(t_color color);
   int					getHumanId();
-  void					putBomb();
 
 public:
   bool					initialize();
@@ -60,6 +58,10 @@ public:
 public:
   void					die();
   bool					isAlive() const;
+
+public:
+  bool					decBomb();
+  void					addBomb();
 };
 
 #endif /* !PLAYER_HH_ */

@@ -28,11 +28,14 @@ public:
   ~Bomb();
 
   bool			explose(double);
+
 public:
+  int			getPlayerId() const;
   int			getBombPower() const;
   bool			initialize();
   void			update();
   void			draw(gdl::BasicShader&, gdl::Clock &);
+  virtual void		die();
 };
 
 #endif /* !BOMB_HH */
