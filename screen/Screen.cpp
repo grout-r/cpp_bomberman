@@ -121,7 +121,7 @@ void					Screen::updateScreen(Map *map)
     updateCam(map);
 }
 
-glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
+glm::vec3				Screen::getMediumPos(Player *p1, Player *p2) const
 {
   glm::vec3				medium(0 ,0 ,0);  
   glm::vec3				ponepos = p1->getVecPos() ;
@@ -133,7 +133,7 @@ glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
 }
 
 int					Screen::getHeightCam(Player *p1, Player *p2, 
-							     Map *map)
+							     Map *map) const
 {
   int					segment;
   glm::vec3				ponepos;
@@ -157,7 +157,7 @@ int					Screen::getHeightCam(Player *p1, Player *p2,
   return (segment);
 }
 
-glm::vec3				Screen::getCentralPoint(Map *map)
+glm::vec3				Screen::getCentralPoint(Map *map) const
 {
   glm::vec3			        centralPoint(0, 0, 0);
   std::pair<int, int>			size;
