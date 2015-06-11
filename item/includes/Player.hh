@@ -49,7 +49,7 @@ public:
   int					getPlayerId() const;
   t_color				getBombColor() const;
   void					setBombColor(t_color color);
-  int					getHumanId();
+  int					getHumanId() const;
 
 public:
   bool					initialize();

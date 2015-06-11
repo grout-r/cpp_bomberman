@@ -100,7 +100,7 @@ void		Bonus::die()
   _texture = AssetsController::getBonusTexture(0);
 }
 
-t_bonus		Bonus::getBonus()
+t_bonus		Bonus::getBonus() const
 {
   return (_bonus);
 }

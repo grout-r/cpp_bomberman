@@ -32,8 +32,8 @@ private:
   bool						left(std::pair<int, int> pos);
   void						fillMap();
   bool						digMap(std::pair<int, int> pos);
-  std::vector<bool>				check_hut(std::pair<int, int> hut);
-  void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>));
+  std::vector<bool>				check_hut(std::pair<int, int> hut) const;
+  void						initDirection(bool (Map::*function_ptr[])(std::pair<int, int>)) const;
   void						removeWalls();
 
 public:
@@ -50,15 +50,15 @@ public:
   void						newPlayer(int human);
   void						draw(gdl::BasicShader &shader, 
 							  gdl::Clock &clock);
-  Player					*getHumanById(int id);
-  Player					*getPlayerById(int id);
-  std::pair<int, int>				getSize();
-  AObject					*getItemAtPos(std::pair<int, int>);
+  Player					*getHumanById(int id) const;
+  Player					*getPlayerById(int id) const;
+  std::pair<int, int>				getSize() const;
+  AObject					*getItemAtPos(std::pair<int, int>) const;
   void						delItemAtPos(std::pair<int, int>);
   void						newBomb(Player *, std::pair<int, int> pos);
   void						update(double);
   std::vector<Player*>*				getPlayerSet();
-  bool						isTherePlayers();
+  bool						isTherePlayers() const;
   void						gameOver();
 };
 

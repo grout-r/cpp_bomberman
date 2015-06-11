@@ -6,7 +6,7 @@ RM		=		rm -f
 
 INCLUDES	=		-Icore/includes -Iscreen  -Ilibgdl/includes/ -Iitem/includes/ -IIA
 
-CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror -g3 -g -ggdb
+CXXFLAGS	=		 $(INCLUDES) -Wall -Wextra -Werror
 
 GDL_LDFLAGS	=		-Llibgdl/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread -lSDL_mixer
 
@@ -53,9 +53,6 @@ fclean:				clean
 				$(RM) $(NAME)
 
 re:				fclean all
-
-.ccp.o:
-				$(CC) -c $< -o $@ $(CXXFLAGS) $(INCLUDES)
 
 .PHONY:				all clean fclean re
 

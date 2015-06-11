@@ -8,15 +8,6 @@ Fire::Fire(std::pair<int, int> pos)
   _position = glm::vec3(pos.first * 100 , 0 , pos.second * 100);
 }
 
-bool			Fire::stillBurn(double elapsedTime)
-{
-  _timer -= elapsedTime;
-  if (_timer <= 0)
-    return (false);
-  return (true);
-    
-}
-
 bool			Fire::initialize()
 {
   _scale = glm::vec3(100, 100 ,100);
@@ -68,4 +59,13 @@ void				Fire::draw(gdl::BasicShader& shader, gdl::Clock &clock)
   (void)clock;
   _texture->bind();
   _geometry.draw(shader, calcTransformation(), GL_TRIANGLES); 
+}
+
+bool			Fire::stillBurn(double elapsedTime)
+{
+  _timer -= elapsedTime;
+  if (_timer <= 0)
+    return (false);
+  return (true);
+    
 }

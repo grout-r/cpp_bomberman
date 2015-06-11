@@ -48,7 +48,7 @@ public:
   t_what			what();
   int				getSmell() const;
   std::pair<int, int>		getPos() const;
-  glm::vec3			getVecPos();
+  glm::vec3			getVecPos() const;
  
 public:
   virtual void			die();
