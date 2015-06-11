@@ -65,7 +65,7 @@ void					GameEngine::updateIA()
   	{
   	  input = _iaManager->doAction(*_map, (*playerSet)[i]);
 	  if (_funcptrBind.count(input))
-	    (this->*_funcptrBind[input])((*playerSet)[i]->getHumanId(), input);
+	    (this->*_funcptrBind[input])((*playerSet)[i]->getPlayerId(), input);
   	}
     } 
 }
@@ -104,7 +104,7 @@ void					GameEngine::movePlayer(int pid, t_input input)
   std::vector<std::pair<int, int> >	newPos;
   bool					canMove = true;
 
-  tmp = _map->getHumanById(pid);
+  tmp = _map->getPlayerById(pid);
   if (tmp != NULL)
     {
       newPos = tmp->getNewPos(input);
@@ -133,8 +133,11 @@ void					GameEngine::movePlayer(int pid, t_input input)
 void					GameEngine::placeBomb(int pid, t_input input)
 {
   (void)input;
-  Player *tmp = _map->getHumanById(pid);
-  std::pair<int, int> pos = tmp->getPos();
-  if (_map->getItemAtPos(pos)->what() != BOMB)
-    _map->newBomb(tmp, pos);
+  Player *tmp = _map->getPlayerById(pid);
+  if (tmp != NULL)
+    {
+      std::pair<int, int> pos = tmp->getPos();
+      if (_map->getItemAtPos(pos)->what() != BOMB)
+	_map->newBomb(tmp, pos);
+    }
 }

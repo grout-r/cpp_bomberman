@@ -62,7 +62,7 @@ void				Map::fillMap()
   last_fill = true;
 }
 
-std::vector<bool>		Map::check_hut(std::pair<int, int> hut)
+std::vector<bool>		Map::check_hut(std::pair<int, int> hut) const
 {
   bool				tmp[] = {false, false, false, false};
   std::vector<bool>		tab(tmp, tmp + sizeof(tmp) / sizeof(tmp[0]));
@@ -78,7 +78,7 @@ std::vector<bool>		Map::check_hut(std::pair<int, int> hut)
   return (tab);
 }
 
-void				Map::initDirection(bool (Map::*function_ptr[])(std::pair<int, int>))
+void				Map::initDirection(bool (Map::*function_ptr[])(std::pair<int, int>)) const
 {
   function_ptr[0] = &Map::up;
   function_ptr[1] = &Map::down;
@@ -188,7 +188,7 @@ void						Map::draw(gdl::BasicShader &shader,
     _player[k]->draw(shader, clock);
 }
 
-bool						Map::isTherePlayers()
+bool						Map::isTherePlayers() const
 {
   if (_player.size() <= 1)
     return (false);
@@ -204,29 +204,16 @@ void						Map::newPlayer(int human)
 
   while (42)
     {
-  i = std::rand() % _map.size();
-  j = std::rand() % _map[i].size();
-  	  if (_map[i][j]->what() == VOID)
-  	    {
-  	      player = new Player(std::make_pair(i, j), human);
-  	      player->initialize();
-  	      _player.push_back(player);
-  	      return ;
-  	    }
+      i = std::rand() % _map.size();
+      j = std::rand() % _map[i].size();
+      if (_map[i][j]->what() == VOID)
+	{
+	  player = new Player(std::make_pair(i, j), human);
+	  player->initialize();
+	  _player.push_back(player);
+	  return ;
+	}
     }
-  // for (size_t i = 0; i != _map.size(); i++)
-  //   {
-  //     for (size_t j = 0; j != _map[i].size(); j++)
-  // 	{
-  // 	  if (_map[i][j]->what() == VOID)
-  // 	    {
-  // 	      player = new Player(std::make_pair(i, j), human);
-  // 	      player->initialize();
-  // 	      _player.push_back(player);
-  // 	      return ;
-  // 	    }
-  // 	}
-  //   }
 }
 
 void						Map::newBomb(Player *player,
@@ -245,7 +232,7 @@ void						Map::newBomb(Player *player,
       }
 }
 
-Player*						Map::getHumanById(int id)
+Player*						Map::getHumanById(int id) const
 {
   for (size_t i = 0; i != _player.size(); i++)
     {
@@ -255,7 +242,7 @@ Player*						Map::getHumanById(int id)
   return (NULL);
 }
 
-Player*						Map::getPlayerById(int id)
+Player*						Map::getPlayerById(int id) const
 {
   for (size_t i = 0; i != _player.size(); i++)
     {
@@ -265,12 +252,12 @@ Player*						Map::getPlayerById(int id)
   return (NULL);
 }
 
-std::pair<int, int>				Map::getSize()
+std::pair<int, int>				Map::getSize() const
 {
   return (_size);
 }
 
-AObject*					Map::getItemAtPos(std::pair<int, int> pos)
+AObject*					Map::getItemAtPos(std::pair<int, int> pos) const
 {
   return (_map[pos.first][pos.second]);
 }
@@ -368,7 +355,7 @@ void						Map::update(double elapsedTime)
       if (_map[pos.first][pos.second]->what() == FIRE)
 	{
 	  i = _player.erase(i);
-	  //delete (*i);
+	  //	  delete (*i);
 	}
       else
 	i++;
@@ -384,5 +371,4 @@ void					      Map::gameOver()
 {
   _map.clear();
   _player.clear();
-  
 }

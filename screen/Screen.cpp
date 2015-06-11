@@ -6,17 +6,17 @@ Screen::Screen()
   _lockCam = true;
   _input_mapping.push_back( std::make_pair((int)SDLK_ESCAPE, std::make_pair(MENU, 0)));
 
-  _input_mapping.push_back( std::make_pair((int)SDLK_UP, std::make_pair(MOVE_UP, 1)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_DOWN, std::make_pair(MOVE_DOWN, 1)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_LEFT, std::make_pair(MOVE_LEFT, 1)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_RIGHT, std::make_pair(MOVE_RIGHT, 1)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_RSHIFT, std::make_pair(PLACE_BOMB, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_UP, std::make_pair(MOVE_UP, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_DOWN, std::make_pair(MOVE_DOWN, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_LEFT, std::make_pair(MOVE_LEFT, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_RIGHT, std::make_pair(MOVE_RIGHT, 0)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_RSHIFT, std::make_pair(PLACE_BOMB, 0)));
 
-  _input_mapping.push_back( std::make_pair((int)SDLK_z, std::make_pair(MOVE_UP, 2)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_s, std::make_pair(MOVE_DOWN, 2)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_q, std::make_pair(MOVE_LEFT, 2)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_d, std::make_pair(MOVE_RIGHT, 2)));
-  _input_mapping.push_back( std::make_pair((int)SDLK_a, std::make_pair(PLACE_BOMB, 2)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_z, std::make_pair(MOVE_UP, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_s, std::make_pair(MOVE_DOWN, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_q, std::make_pair(MOVE_LEFT, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_d, std::make_pair(MOVE_RIGHT, 1)));
+  _input_mapping.push_back( std::make_pair((int)SDLK_a, std::make_pair(PLACE_BOMB, 1)));
 
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_6, std::make_pair(CAM_XPLUS, 0)));
   _input_mapping.push_back( std::make_pair((int)SDLK_KP_4, std::make_pair(CAM_XMINUS, 0)));
@@ -121,7 +121,7 @@ void					Screen::updateScreen(Map *map)
     updateCam(map);
 }
 
-glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
+glm::vec3				Screen::getMediumPos(Player *p1, Player *p2) const
 {
   glm::vec3				medium(0 ,0 ,0);  
   glm::vec3				ponepos = p1->getVecPos() ;
@@ -133,7 +133,7 @@ glm::vec3				Screen::getMediumPos(Player *p1, Player *p2)
 }
 
 int					Screen::getHeightCam(Player *p1, Player *p2, 
-							     Map *map)
+							     Map *map) const
 {
   int					segment;
   glm::vec3				ponepos;
@@ -157,7 +157,7 @@ int					Screen::getHeightCam(Player *p1, Player *p2,
   return (segment);
 }
 
-glm::vec3				Screen::getCentralPoint(Map *map)
+glm::vec3				Screen::getCentralPoint(Map *map) const
 {
   glm::vec3			        centralPoint(0, 0, 0);
   std::pair<int, int>			size;

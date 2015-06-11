@@ -33,10 +33,10 @@ Player::Player(std::pair<int, int> pos, int humanId) :
 
 Player::~Player()
 {
-  std::cout << "Player " << this->player_id << " is dead" << std::endl;
+  delete _indicator;
 }
 
-int	        Player::getHumanId()
+int	        Player::getHumanId() const
 {
   return (this->humanId);
 }
