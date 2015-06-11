@@ -34,7 +34,7 @@ private:
   gdl::Texture			*_playerIndicatorOne;
   gdl::Texture			*_playerIndicatorTwo;
   gdl::Texture			*_playerIndicatorIa;
-  gdl::Texture			*_bonusTexture[5];
+  gdl::Texture			*_bonusTexture[6];
 
 public:
   static void				initAssetsController();

@@ -97,7 +97,8 @@ bool		Bonus::getExploded() const
 void		Bonus::die()
 {
   _is_exploded = true;
-  _texture = AssetsController::getBonusTexture(0);
+  if (_bonus != NOTHING)
+    _texture = AssetsController::getBonusTexture((int)_bonus);
 }
 
 t_bonus		Bonus::getBonus() const

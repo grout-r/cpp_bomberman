@@ -15,7 +15,7 @@ AssetsController::AssetsController()
   _playerIndicatorOne = new gdl::Texture();
   _playerIndicatorTwo = new gdl::Texture();
   _playerIndicatorIa = new gdl::Texture();
-  for (int i = 0; i != 5; ++i)
+  for (int i = 0; i != 6; ++i)
     _bonusTexture[i] = new gdl::Texture();
   assert(_bombModel->load("./assets/bomb.fbx"));
   assert(_playerModel->load("./assets/player.fbx"));
@@ -27,7 +27,12 @@ AssetsController::AssetsController()
   assert(_playerIndicatorIa->load("./assets/pia.tga"));
   assert(_playerIndicatorOne->load("./assets/p1.tga"));
   assert(_playerIndicatorTwo->load("./assets/p2.tga"));
-  assert(_bonusTexture[0]->load("./assets/bbomb.tga"));
+  assert(_bonusTexture[0]->load("./assets/bspeed.tga"));
+  assert(_bonusTexture[1]->load("./assets/bbomb.tga"));
+  assert(_bonusTexture[2]->load("./assets/bpower.tga"));
+  assert(_bonusTexture[3]->load("./assets/mspeed.tga"));
+  assert(_bonusTexture[4]->load("./assets/mbomb.tga"));
+  assert(_bonusTexture[5]->load("./assets/mpower.tga"));
 }
 
 AssetsController::~AssetsController()
