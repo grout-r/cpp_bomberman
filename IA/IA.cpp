@@ -29,16 +29,11 @@ t_input				IA::move(std::vector<int> &tab, Map &map, Player *player){
   int				high = 0;
   std::vector<int>::iterator	it;
 
-  /*  if (checkBomb(map, player) == 0){
-    return (saveMyLife());
-    }
-    else{*/
-    createVectorPos(tab);
-    for (it = tab.begin(); it != tab.end(); ++it)
-      if (*it > high)
+  createVectorPos(tab);
+  for (it = tab.begin(); it != tab.end(); ++it)
+    if (*it > high)
       high = *it;
-    return (checkPos(high, map, player, tab));
-    //  }
+  return (checkPos(high, map, player, tab));
 }
 std::vector<int>		IA::createTable(Map &map, Player *player){
   std::vector<int>		tab;
@@ -71,15 +66,4 @@ std::vector<int>		IA::createTable(Map &map, Player *player){
     ++tmp.second;
   }
   return (tab);
-}
-
-int			IA::checkBomb(Map &map, Player *player){
-  int			i = 0;
-  
-  if ((i = checkBottom(map, player)) == 1 
-      || (i = checkUp(map, player)) == 1
-      || (i = checkRight(map, player)) == 1 
-      || (i = checkLeft(map, player)) == 1)
-    return (1);
-  return (0);
 }

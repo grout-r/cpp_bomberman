@@ -27,7 +27,6 @@ SRCS		=		core/src/Param.cpp \
 				item/src/GameOver.cpp \
 				item/src/PlayerIndicator.cpp \
 				IA/IA.cpp \
-				IA/Check.cpp \
 				IA/Move.cpp \
 				IA/PosVectorTab.cpp
 
