@@ -37,9 +37,9 @@ public:
   ~GameEngine();
   
 public:
-  bool						initialize();
-  bool						update();
-  void						draw();
+  virtual bool					initialize();
+  virtual bool					update();
+  virtual void					draw();
   bool						gameOver();
 
 public:

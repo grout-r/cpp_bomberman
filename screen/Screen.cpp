@@ -49,8 +49,8 @@ bool					Screen::init()
       if (!_context.start(1820, 980, "Bomberbitch"))
 	throw Error("Can't initialize context.");
       glEnable(GL_DEPTH_TEST);
-      if (!_shader.load("./tp/Shaders/basic.fp", GL_FRAGMENT_SHADER) 
-	  || !_shader.load("./tp/Shaders/basic.vp", GL_VERTEX_SHADER) 
+      if (!_shader.load("./Shaders/basic.fp", GL_FRAGMENT_SHADER) 
+	  || !_shader.load("./Shaders/basic.vp", GL_VERTEX_SHADER) 
 	  || !_shader.build())
 	throw Error("Can't compile shaders.");
       _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
@@ -59,19 +59,6 @@ bool					Screen::init()
       _shader.bind();
       _shader.setUniform("view", _camTransformation);
       _shader.setUniform("projection", _camProjection);
-
-
-      // if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
-      // 	{
-      // 	  std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
-      // 	}
-      // Mix_Music *musique;
-      // musique = Mix_LoadMUS("./assets/bo.mp3");
-      // if (musique == NULL)
-      // 	std::cout << "error on loading the assets" << std::endl;
-      // std::cout << Mix_PlayMusic(musique, -1) << std::endl;
-      // std::cout << "SDLMIXER ERROR : " << Mix_GetError() << std::endl;
-      // std::cout << "salut" << std::endl;
       return (true);
     }
   catch (Error e)
@@ -219,7 +206,6 @@ void					Screen::gameOver()
   _camProjection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 5000.0f);
   _camTransformation = 
     glm::lookAt(_camPosition, _camTarget, glm::vec3(0, 1, 0));
-  //  _shader.bind();
   _shader.setUniform("view", _camTransformation);
   _shader.setUniform("projection", _camProjection);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

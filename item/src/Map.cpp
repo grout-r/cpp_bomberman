@@ -16,9 +16,18 @@ Map::Map(std::pair<int, int> size)
 
 Map::~Map()
 {
-  
+  for (int x = 0; x != _size.second; x++)
+    {
+      for (int y = 0; y != _size.first; y++)
+	  delete _map[x][y];
+    }
+  for (std::vector<Player*>::iterator i = _player.begin() ; i != _player.end();)
+    {
+      delete (*i);
+      i = _player.erase(i);
+    }
 }
- 
+
 void				Map::fillMap()
 {
   static bool			last_fill = false;
@@ -191,7 +200,19 @@ void						Map::draw(gdl::BasicShader &shader,
 bool						Map::isTherePlayers() const
 {
   if (_player.size() <= 1)
-    return (false);
+    {
+      if (_player.size() == 1)
+	{	
+	  if (_player[0]->getHumanId() != 0)
+	    {
+	      std::cout << "Player ";
+	    }
+	  else
+	    std::cout << "Computer ";
+	  std::cout << _player[0]->getPlayerId() + 1 << " winremains." << std::endl;
+	}
+      return (false);
+    }
   return (true);
 }
 
@@ -354,8 +375,8 @@ void						Map::update(double elapsedTime)
       pos = (*i)->getPos();
       if (_map[pos.first][pos.second]->what() == FIRE)
 	{
+	  delete (*i);
 	  i = _player.erase(i);
-	  //	  delete (*i);
 	}
       else
 	i++;
@@ -369,6 +390,4 @@ std::vector<Player*>*			       Map::getPlayerSet()
 
 void					      Map::gameOver()
 {
-  _map.clear();
-  _player.clear();
 }

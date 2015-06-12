@@ -21,6 +21,9 @@ GameEngine::GameEngine(Param const &params):
 
 GameEngine::~GameEngine()
 {
+  delete _map;
+  delete _iaManager;
+  AssetsController::destroyAssetsController();
 }
 
 bool					GameEngine::initialize()

@@ -37,7 +37,18 @@ AssetsController::AssetsController()
 
 AssetsController::~AssetsController()
 {
-  
+  delete _bombModel;
+  delete _playerModel;
+  delete _wallTexture;
+  delete _voidTexture;
+  delete _fireTexture;
+  delete _gameOverTexture;
+  delete _boxTexture;
+  delete _playerIndicatorOne;
+  delete _playerIndicatorTwo;
+  delete _playerIndicatorIa;
+  for (int i = 0; i != 6; ++i)
+    delete _bonusTexture[i];  
 }
 
 gdl::Texture*				AssetsController::getFireTexture()
