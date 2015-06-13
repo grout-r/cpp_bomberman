@@ -16,9 +16,9 @@ Param::Param(char **arg, int ac)
       _XY = std::make_pair(20, 20);
       return;
     }
-  if (ac != 5)
+  if (ac != 4)
     {
-      std::cerr << "Usage: " << arg[0] << " [nbHuman] [nbIA] [size x] [size y]" << std::endl;
+      std::cerr << "Usage: " << arg[0] << " [nbHuman] [nbIA] [size map]" << std::endl;
       exit(-1);
     }
   ss << arg[1];
@@ -39,10 +39,8 @@ Param::Param(char **arg, int ac)
   ss.clear();
   ss << arg[3];
   ss >> _XY.first;
-  ss.clear();
-  ss << arg[4];
-  ss >> _XY.second;
-  if (_XY.first < 10 || _XY.second < 10 || _XY.first > 50 || _XY.second > 50)
+  _XY.second = _XY.first;
+  if (_XY.first < 10 || _XY.first > 50)
     {
       std::cerr << "coords must be between 10 and 50" << std::endl;
       exit(-1);

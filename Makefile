@@ -41,7 +41,7 @@ EXPORT		=		$(RED_COLOR)"\n\nDon't forget to export library with:\n\
 
 all:				$(NAME)
 
-$(NAME):			$(OBJS)
+$(NAME):		 	$(OBJS)
 				$(CC) -o $(NAME) $(OBJS) $(GDL_LDFLAGS)
 				@if test "$$LD_LIBRARY_PATH" != "$$PWD/libgdl/libs/"; then echo -e $(EXPORT); fi
 

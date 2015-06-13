@@ -209,7 +209,7 @@ bool						Map::isTherePlayers() const
 	    }
 	  else
 	    std::cout << "Computer ";
-	  std::cout << _player[0]->getPlayerId() + 1 << " winremains." << std::endl;
+	  std::cout << _player[0]->getPlayerId() + 1 << " win." << std::endl;
 	}
       return (false);
     }
