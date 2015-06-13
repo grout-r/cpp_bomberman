@@ -31,18 +31,18 @@ Param::Param(char **arg, int ac)
   ss.clear();
   ss << arg[2];
   ss >> _nbIA;
-  if (_nbIA < 0 || _nbIA > 45)
+  if (_nbIA < 0 || _nbIA > 10)
     {
-      std::cerr << "nbIA must be between 0 and 45" << std::endl;
+      std::cerr << "nbIA must be between 0 and 10" << std::endl;
       exit(-1);
     }
   ss.clear();
   ss << arg[3];
   ss >> _XY.first;
   _XY.second = _XY.first;
-  if (_XY.first < 10 || _XY.first > 50)
+  if (_XY.first < 10 || _XY.first > 75)
     {
-      std::cerr << "coords must be between 10 and 50" << std::endl;
+      std::cerr << "coords must be between 10 and 75" << std::endl;
       exit(-1);
     }
 }
